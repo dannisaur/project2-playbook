@@ -7,10 +7,8 @@ import com.revature.kkoders.beans.UserImpl;
 import com.revature.kkoders.dao.UserDAO;
 import com.revature.kkoders.dao.UserDAOImpl;
 
-@Component
 public class UserService {
 	
-	@Autowired
 	UserDAO userDao;
     
     public void addUser(){
