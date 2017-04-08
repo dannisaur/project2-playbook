@@ -9,6 +9,7 @@ public interface GameLibraryDao {
 	/*
 	ArrayList<GameImpl> getGamesByUser(UserImpl user);
 	ArrayList<UserImpl> getUsersByGame(GameImpl game);
-	*/
 	
+	void addGameToUser(GameImpl game, UserImpl user);
+	*/
 }
