@@ -43,7 +43,8 @@ public class LoginController
 		//RETURN LOGIN TO TAKE US TO PREFIX: WEB-INF
 		//LOGIN
 		//SUFFIX: .jsp
-		return "login";
+//		return "login";
+		return "index";
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
@@ -52,7 +53,8 @@ public class LoginController
 		System.out.println("This was a post request");
 		if(bindingResult.hasErrors())
 		{
-			return "login";
+//			return "login";
+			return "index";
 		}
 	/*	User authUser = userService.auth(user);
 		if (authUser != null)
@@ -68,6 +70,6 @@ public class LoginController
 			modelMap.addAttribute("errorMessage", "Username/password incorrect");
 			return "login";
 		}*/
-		return "login";
+		return "index";
 	}
 }
