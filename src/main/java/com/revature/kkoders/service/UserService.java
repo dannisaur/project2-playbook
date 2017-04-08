@@ -9,12 +9,9 @@ import com.revature.kkoders.beans.UserImpl;
 import com.revature.kkoders.dao.UserDAO;
 import com.revature.kkoders.dao.UserDAOImpl;
 
-//@Component
-//@Transactional
 public class UserService {
 	
-	
-	//UserDAO userDao;
+	UserDAO userDao;
     
     public void addUser(){
         String firstname = "Danni";
@@ -28,7 +25,7 @@ public class UserService {
         dummyUser.setFirstName(firstname);
         dummyUser.setLastName(lastname);
         dummyUser.setUserName(username);
-        dummyUser.setPW(password);
+        dummyUser.setPw(password);
         dummyUser.setEmail(email);
         
         UserDAOImpl userDao = new UserDAOImpl();

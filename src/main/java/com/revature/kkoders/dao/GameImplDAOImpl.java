@@ -46,7 +46,7 @@ public class GameImplDAOImpl implements GameImplDAO {
 	@Override
 	public Set<String> getAllPlatforms() {
 		Session session = HibernateUtil.getSession();
-		
+		return null;
 	}
 
 	@Override
