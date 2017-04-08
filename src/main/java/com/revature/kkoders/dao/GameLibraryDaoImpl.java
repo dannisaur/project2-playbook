@@ -7,7 +7,7 @@ import com.revature.kkoders.util.HibernateUtil;
 
 public class GameLibraryDaoImpl implements GameLibraryDao {
 
-	/*
+	
 	@Override
 	public ArrayList<GameImpl> getGamesByUser(UserImpl user) {
 		Session session = HibernateUtil.getSession();
@@ -28,7 +28,7 @@ public class GameLibraryDaoImpl implements GameLibraryDao {
 		// TODO Auto-generated method stub
 		
 	}
-	*/
+	
 	
 
 }

@@ -47,6 +47,7 @@
 						</div>
 						<!-- Change this to a button or input when using this as a form -->
 						<a href="javascript:;" class="btn btn-sm btn-success">Login</a>
+						
 					</fieldset>
 				</form>
 			</div>

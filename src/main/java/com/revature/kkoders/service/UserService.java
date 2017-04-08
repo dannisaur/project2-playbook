@@ -1,5 +1,7 @@
 package com.revature.kkoders.service;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,7 +28,7 @@ public class UserService {
         dummyUser.setPw(password);
         dummyUser.setEmail(email);
         
-        //UserDAOImpl userDao = new UserDAOImpl();
+        UserDAOImpl userDao = new UserDAOImpl();
         
         System.out.println("service adduser");
         
