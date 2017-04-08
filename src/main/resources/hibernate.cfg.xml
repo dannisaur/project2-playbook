@@ -5,17 +5,15 @@
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.connection.driver_class">oracle.jdbc.OracleDriver</property>
-        <property name="hibernate.connection.password">revature</property>
-        <property name="hibernate.connection.url">jdbc:oracle:thin:@oracle-bear.clqfkdmbotjv.us-east-1.rds.amazonaws.com:1521:ORCL</property>
-        <property name="hibernate.connection.username">jurczakn</property>
+        <property name="hibernate.connection.password">masterkoders</property>
+        <property name="hibernate.connection.url">jdbc:oracle:thin:@project-playbook.cytep8yn5pok.us-east-1.rds.amazonaws.com:1521:ORCL</property>
+        <property name="hibernate.connection.username">kawaii</property>
         <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
         
-        <!-- <mapping resource="person.hbm.xml"/>     -->    
-        <mapping class="beans.HoneyPot"/>
-        <mapping class="beans.Cave" />
-        <mapping class="beans.Bear" />
-        
-<!--         <mapping class="cc.multivision.entity.Person"/>
- -->
+        <mapping class="com.revature.kkoders.dao.UserImpl"/>
+        <mapping class="com.revature.kkoders.dao.GamePlanImpl"/>
+        <mapping class="com.revature.kkoders.dao.GameLibraryImpl"/>
+        <mapping class="com.revature.kkoders.dao.DailySessionImpl"/>
+
     </session-factory>
 </hibernate-configuration>
