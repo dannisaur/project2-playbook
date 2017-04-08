@@ -121,12 +121,12 @@ public class UserImpl implements User {
 		return this.userName;
 	}
 
-	public void setPW(String pw) {
+	public void setPw(String pw) {
 		// TODO Auto-generated method stub
 		this.pw = pw;
 	}
 
-	public String getPW() {
+	public String getPw() {
 		// TODO Auto-generated method stub
 		return this.pw;
 	}
