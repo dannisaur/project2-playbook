@@ -10,15 +10,15 @@ public class Test {
     public static void main(String[] args) {
         // TODO Auto-generated method stub
     	
-    	ApplicationContext a = new ClassPathXmlApplicationContext("beans.xml");
+    	//ApplicationContext a = new ClassPathXmlApplicationContext("beans.xml");
 
-    	System.out.println("test main");
+    	//UserService service = (UserService)a.getBean(UserService.class);
     	
-    	UserService service = (UserService)a.getBean(UserService.class);
-    	
-        //UserService service = new UserService();
+        UserService service = new UserService();
         
         service.addUser();
+        
+        System.out.println("test main");
         
     }
 
