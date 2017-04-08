@@ -43,7 +43,7 @@ public class LoginController
 		//RETURN LOGIN TO TAKE US TO PREFIX: WEB-INF
 		//LOGIN
 		//SUFFIX: .jsp
-		return "login";
+		return "home";
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
