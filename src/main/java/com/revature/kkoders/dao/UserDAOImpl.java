@@ -25,7 +25,7 @@ public class UserDAOImpl implements UserDAO {
         Transaction currTx = currSession.beginTransaction();
         
         // in this session, we save a new user to the database
-        currSession.persist(user);
+        currSession.save(user);
         
         // then we commit the transaction
         currTx.commit();
