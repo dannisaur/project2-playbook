@@ -2,6 +2,9 @@ package com.revature.kkoders.dao;
 
 import java.util.ArrayList;
 
+import org.hibernate.Session;
+
+import com.revature.kkoders.beans.GameImpl;
 import com.revature.kkoders.beans.UserImpl;
 import com.revature.kkoders.util.HibernateUtil;
 
