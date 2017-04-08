@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,7 +22,7 @@
 <link rel="stylesheet" type="text/css"
 	href="http://fonts.googleapis.com/css?family=Source Code Pro">
 
-<link rel="stylesheet" href="css/style1.css">
+<link rel="stylesheet" href="resources/css/style1.css">
 
 </head>
 <body>
@@ -30,26 +32,22 @@
 				<h3 class="panel-title">The Playbook - Sign In</h3>
 			</div>
 			<div class="panel-body">
-				<form action="test.jsp" role="form">
+				<form:form action="login" method="POST" commandName="user">
 					<fieldset>
 						<div class="form-group">
-							<input class="form-control" placeholder="Username"
-								name="username">
+    						<form:input  class="form-control" path="userName" placeholder="Username" />
+							<form:errors path="userName" cssClass="alert alert-danger" element="div" />
 						</div>
-						<div class="form-group">
-							<input class="form-control" placeholder="Password"
-								name="password" type="password">
+					 	<div class="form-group">
+    						<form:password  class="form-control" path="pw" placeholder="Password"  />
+							<form:errors path="pw" cssClass="alert alert-danger" element="div" />
 						</div>
-						<div class="checkbox">
-							<label> <input name="remember" type="checkbox"
-								value="Remember Me">Remember Me
-							</label>
-						</div>
-						<!-- Change this to a button or input when using this as a form -->
-						<a href="javascript:;" class="btn btn-sm btn-success">Login</a>
-						
+					<input class="btn btn-sm btn-success" type="submit" value="Login" />
 					</fieldset>
-				</form>
+				</form:form>
+
+
+
 			</div>
 		</div>
 	</div>

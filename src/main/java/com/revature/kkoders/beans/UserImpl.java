@@ -14,10 +14,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Component;
 
 @Component
+@Transactional
 @Entity
 @Table(name="USERS")
 public class UserImpl implements User {
@@ -53,9 +55,9 @@ public class UserImpl implements User {
 	// ONE USER TO ONE GAME LIBRARY
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="GAME_LIB_ID")
-	private GameLibraryImpl GameLibrary;
+	private GameImpl GameLibrary;
 	
-	public GameLibraryImpl getGameLib() {
+	public GameImpl getGameLib() {
 		// TODO Auto-generated method stub
 		return GameLibrary;
 	}
@@ -121,12 +123,12 @@ public class UserImpl implements User {
 		return this.userName;
 	}
 
-	public void setPW(String pw) {
+	public void setPw(String pw) {
 		// TODO Auto-generated method stub
 		this.pw = pw;
 	}
 
-	public String getPW() {
+	public String getPw() {
 		// TODO Auto-generated method stub
 		return this.pw;
 	}
@@ -164,7 +166,7 @@ public class UserImpl implements User {
 	
 	// CONSTRUCTOR WITH FIELDS
 	public UserImpl(int userID, String firstName, String lastName, String userName, String pw, String email,
-			String picURL, String desc, GameLibraryImpl gameLibrary, List<GamePlanImpl> gamePlans) {
+			String picURL, String desc, GameImpl gameLibrary, List<GamePlanImpl> gamePlans) {
 		super();
 		this.userID = userID;
 		this.firstName = firstName;

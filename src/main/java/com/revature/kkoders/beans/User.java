@@ -1,8 +1,11 @@
 package com.revature.kkoders.beans;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Component;
 
 @Component
+@Transactional
 public interface User {
 	
 	public void setUserID(int userID);
@@ -17,8 +20,8 @@ public interface User {
 	public void setUserName(String userName);
 	public String getUserName();
 	
-	public void setPW(String pw);
-	public String getPW();
+	public void setPw(String pw);
+	public String getPw();
 	
 	public void setEmail(String email);
 	public String getEmail();
