@@ -1,8 +1,11 @@
 package com.revature.kkoders.beans;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Component;
 
 @Component
+@Transactional
 public interface User {
 	
 	public void setUserID(int userID);

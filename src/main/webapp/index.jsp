@@ -30,7 +30,7 @@
 				<h3 class="panel-title">The Playbook - Sign In</h3>
 			</div>
 			<div class="panel-body">
-				<form role="form">
+				<form action="test.jsp" role="form">
 					<fieldset>
 						<div class="form-group">
 							<input class="form-control" placeholder="Username"
@@ -47,6 +47,7 @@
 						</div>
 						<!-- Change this to a button or input when using this as a form -->
 						<a href="javascript:;" class="btn btn-sm btn-success">Login</a>
+						
 					</fieldset>
 				</form>
 			</div>

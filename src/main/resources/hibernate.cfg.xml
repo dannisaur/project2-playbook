@@ -10,10 +10,10 @@
         <property name="hibernate.connection.username">kawaii</property>
         <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
         
-        <mapping class="com.revature.kkoders.dao.UserImpl"/>
-        <mapping class="com.revature.kkoders.dao.GamePlanImpl"/>
-        <mapping class="com.revature.kkoders.dao.GameLibraryImpl"/>
-        <mapping class="com.revature.kkoders.dao.DailySessionImpl"/>
+        <mapping class="com.revature.kkoders.beans.UserImpl"/>
+        <mapping class="com.revature.kkoders.beans.GamePlanImpl"/>
+        <mapping class="com.revature.kkoders.beans.GameImpl"/>
+        <mapping class="com.revature.kkoders.beans.DailySessionImpl"/>
 
     </session-factory>
 </hibernate-configuration>
