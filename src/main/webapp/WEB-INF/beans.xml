@@ -21,7 +21,7 @@
 	<tx:annotation-driven></tx:annotation-driven>
 	
 	<!--  SPECIFY A RESOURCES FOLDER SO MVC DOENST THINK ITS A REQUEST -->
-	<mvc:resources location="/static" mapping="/**"></mvc:resources>
+	<mvc:resources location="/resources" mapping="/**"></mvc:resources>
 
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">

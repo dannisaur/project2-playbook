@@ -3,7 +3,7 @@ package com.revature.kkoders.beans;
 import org.springframework.stereotype.Component;
 
 @Component
-public interface GameLibrary {
+public interface Game {
 	
 	public void setGameLibID(int gameLibID);
 	public int getGameLibID();

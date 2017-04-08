@@ -13,12 +13,12 @@ import org.springframework.stereotype.Component;
 @Component
 @Entity
 @Table(name="GAME_LIBRARY")
-public class GameLibraryImpl implements GameLibrary {
+public class GameImpl implements Game {
 	
 	@Id
-	@Column(name="GAME_LIB_ID")
-	@SequenceGenerator(name="GAMELIBID_SEQ", sequenceName="GAMELIBID_SEQ")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="GAMELIBID_SEQ")
+	@Column(name="GAME_ID")
+	@SequenceGenerator(name="GAMEID_SEQ", sequenceName="GAMEID_SEQ")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="GAMEID_SEQ")
 	private int gameLibID;
 	
 	@Column(name="GAME_TITLE")
@@ -97,7 +97,7 @@ public class GameLibraryImpl implements GameLibrary {
 	}
 
 	//	CONSTRUCTOR WITH FIELDS
-	public GameLibraryImpl(int gameLibID, String gameTitle, int steamGameID, int igdbID, String releaseDate,
+	public GameImpl(int gameLibID, String gameTitle, int steamGameID, int igdbID, String releaseDate,
 			String platform) {
 		super();
 		this.gameLibID = gameLibID;
@@ -109,7 +109,7 @@ public class GameLibraryImpl implements GameLibrary {
 	}
 	
 	// NO ARGS CONSTRUCTOR
-	public GameLibraryImpl(){}
+	public GameImpl(){}
 
 	@Override
 	public String toString() {
