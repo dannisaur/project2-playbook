@@ -12,9 +12,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.springframework.stereotype.Component;
+//import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 @Entity
 @Table(name="DAILY_SESSION")
 public class DailySessionImpl implements DailySession {

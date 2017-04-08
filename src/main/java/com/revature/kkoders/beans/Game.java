@@ -1,9 +1,9 @@
 package com.revature.kkoders.beans;
 
-import org.springframework.stereotype.Component;
+//import org.springframework.stereotype.Component;
 
-@Component
-public interface GameLibrary {
+//@Component
+public interface Game {
 	
 	public void setGameLibID(int gameLibID);
 	public int getGameLibID();
