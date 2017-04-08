@@ -5,13 +5,13 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.revature.kkoders.beans.User;
 import com.revature.kkoders.beans.UserImpl;
 import com.revature.kkoders.dao.UserDAO;
 import com.revature.kkoders.dao.UserDAOImpl;
 
 public class UserService {
-	
-	UserDAO userDao;
+	static UserDAOImpl userDao = new UserDAOImpl();
     
     public void addUser(){
         String firstname = "Danni";
@@ -34,6 +34,12 @@ public class UserService {
         
         // DAO method
         userDao.addOrUpdateUser(dummyUser);
+    }
+    
+    public UserImpl auth(UserImpl usr)
+    {
+    	
+    	return null;
     }
 
 

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.revature.kkoders.beans.UserImpl;
+import com.revature.kkoders.service.UserService;
 
 //KNOWS IT SHOULD HANDLE LOGIN REQUESTS
 @Controller
@@ -21,8 +22,8 @@ public class LoginController
 	@Autowired
 	UserImpl emptyUser;
 	
-	//@Autowired
-	//UserService userService;
+	@Autowired
+	UserService userService;
 	
 	//PARAMETER NAME IS CALLED someInfo
 		//REQUEST.GETPARAM('someInfo')
@@ -54,10 +55,10 @@ public class LoginController
 		{
 			return "login";
 		}
-	/*	User authUser = userService.auth(user);
+		UserImpl authUser = userService.auth(user);
 		if (authUser != null)
 		{
-			System.out.println(user.getUsername());
+			System.out.println(user.getUserName());
 			modelMap.addAttribute("user", user);
 			seesion.setAttribute("alsoUser", user);
 			//NEW VIEW
@@ -67,7 +68,6 @@ public class LoginController
 		{
 			modelMap.addAttribute("errorMessage", "Username/password incorrect");
 			return "login";
-		}*/
-		return "home";
+		}
 	}
 }
