@@ -15,7 +15,7 @@ import com.revature.kkoders.beans.User;
 
 //KNOWS IT SHOULD HANDLE LOGIN REQUESTS
 @Controller
-@RequestMapping(value="/login")
+@RequestMapping(value="/index")
 public class LoginController
 {
 	@Autowired
