@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.revature.kkoders.beans.User;
+import com.revature.kkoders.beans.UserImpl;
 
 //KNOWS IT SHOULD HANDLE LOGIN REQUESTS
 @Controller
@@ -19,7 +19,7 @@ import com.revature.kkoders.beans.User;
 public class LoginController
 {
 	@Autowired
-	User emptyUser;
+	UserImpl emptyUser;
 	
 	//@Autowired
 	//UserService userService;
@@ -47,7 +47,7 @@ public class LoginController
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public String doLogin(@Valid User user, BindingResult bindingResult, ModelMap modelMap, HttpSession seesion)
+	public String doLogin(@Valid UserImpl user, BindingResult bindingResult, ModelMap modelMap, HttpSession seesion)
 	{
 		System.out.println("This was a post request");
 		if(bindingResult.hasErrors())
@@ -68,6 +68,6 @@ public class LoginController
 			modelMap.addAttribute("errorMessage", "Username/password incorrect");
 			return "login";
 		}*/
-		return "index";
+		return "home";
 	}
 }
