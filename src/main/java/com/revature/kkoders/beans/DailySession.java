@@ -1,8 +1,8 @@
 package com.revature.kkoders.beans;
 
-//import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Component;
 
-//@Component
+@Component
 public interface DailySession {
 	
 	public void setDailySessionID(int dailySessionID);

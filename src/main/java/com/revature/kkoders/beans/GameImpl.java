@@ -8,9 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-//import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Component;
 
-//@Component
+@Component
 @Entity
 @Table(name="GAME_LIBRARY")
 public class GameImpl implements Game {
