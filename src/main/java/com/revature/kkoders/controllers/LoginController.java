@@ -38,12 +38,12 @@ public class LoginController
 	{
 		System.out.println(modelMap.get("someInfo"));
 		System.out.println("This was a get request");
-	//	modelMap.addAttribute("user", emptyuser); 
+		modelMap.addAttribute("user", emptyUser); 
 		
 		//RETURN LOGIN TO TAKE US TO PREFIX: WEB-INF
 		//LOGIN
 		//SUFFIX: .jsp
-		return "home";
+		return "login";
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
