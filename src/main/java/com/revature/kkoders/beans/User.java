@@ -17,8 +17,8 @@ public interface User {
 	public void setUserName(String userName);
 	public String getUserName();
 	
-	public void setPW(String pw);
-	public String getPW();
+	public void setPw(String pw);
+	public String getPw();
 	
 	public void setEmail(String email);
 	public String getEmail();
