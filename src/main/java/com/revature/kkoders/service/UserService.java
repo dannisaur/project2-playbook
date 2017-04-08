@@ -9,7 +9,7 @@ import com.revature.kkoders.beans.UserImpl;
 import com.revature.kkoders.dao.UserDAO;
 import com.revature.kkoders.dao.UserDAOImpl;
 
-@Component
+//@Component
 //@Transactional
 public class UserService {
 	
