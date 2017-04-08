@@ -92,7 +92,7 @@ public class UserImplDAOImpl implements UserImplDAO {
 		newUser.setFirstName(fn);
 		newUser.setLastName(ln);
 		newUser.setUserName(un);
-		newUser.setPW(p);
+		newUser.setPw(p);
 		newUser.setEmail(em);
 		newUser.setPicture(picurl);
 		newUser.setDesc(d);
