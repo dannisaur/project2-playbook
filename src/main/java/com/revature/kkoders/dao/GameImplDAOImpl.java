@@ -1,5 +1,6 @@
 package com.revature.kkoders.dao;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.hibernate.Session;
@@ -46,31 +47,54 @@ public class GameImplDAOImpl implements GameImplDAO {
 	@Override
 	public Set<String> getAllPlatforms() {
 		Session session = HibernateUtil.getSession();
+		String hql = "SELECT plt.platform from GameImpl as plt";
+		Query query = session.createQuery(hql);
+		
+		Set<String> result = (Set<String>) query.list();
+		session.close();
+		return result;
+		
+		
 		
 	}
 
 	@Override
 	public Set<Integer> getSteamIds() {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = HibernateUtil.getSession();
+		String hql = "SELECT stid.steamGameID from GameImpl as stid";
+		Query query = session.createQuery(hql);
+		
+		Set<Integer> result = (Set<Integer>) query.list();
+		session.close();
+		return result;
 	}
 
 	@Override
 	public Set<Integer> getIgdbIds() {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = HibernateUtil.getSession();
+		String hql = "SELECT IGDB.igdbID from GameImpl as IGDB";
+		Query query = session.createQuery(hql);
+		
+		Set<Integer> result = (Set<Integer>) query.list();
+		session.close();
+		return result;
 	}
 
 	@Override
 	public Set<String> getAllGameTitles() {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = HibernateUtil.getSession();
+		String hql = "SELECT gt.gameTitle from GameImpl as gt";
+		Query query = session.createQuery(hql);
+		
+		Set<String> result = (Set<String>) query.list();
+		session.close();
+		return result;
 	}
 
 	@Override
 	public void RemoveGameTtle(String gm) {
-		// TODO Auto-generated method stub
-
+		Session session = HibernateUtil.getSession();
+		//String hql = "DELETE "
 	}
 
 	@Override
