@@ -25,7 +25,7 @@ public class UserService {
         dummyUser.setFirstName(firstname);
         dummyUser.setLastName(lastname);
         dummyUser.setUserName(username);
-        dummyUser.setPW(password);
+        dummyUser.setPw(password);
         dummyUser.setEmail(email);
         
         //UserDAOImpl userDao = new UserDAOImpl();
