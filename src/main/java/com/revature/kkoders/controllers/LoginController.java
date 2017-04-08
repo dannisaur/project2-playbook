@@ -15,7 +15,7 @@ import com.revature.kkoders.beans.User;
 
 //KNOWS IT SHOULD HANDLE LOGIN REQUESTS
 @Controller
-@RequestMapping(value="/index")
+@RequestMapping(value="/login")
 public class LoginController
 {
 	@Autowired
@@ -43,8 +43,7 @@ public class LoginController
 		//RETURN LOGIN TO TAKE US TO PREFIX: WEB-INF
 		//LOGIN
 		//SUFFIX: .jsp
-//		return "login";
-		return "index";
+		return "login";
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
@@ -53,8 +52,7 @@ public class LoginController
 		System.out.println("This was a post request");
 		if(bindingResult.hasErrors())
 		{
-//			return "login";
-			return "index";
+			return "login";
 		}
 	/*	User authUser = userService.auth(user);
 		if (authUser != null)
