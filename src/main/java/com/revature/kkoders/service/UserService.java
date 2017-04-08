@@ -1,5 +1,7 @@
 package com.revature.kkoders.service;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -8,10 +10,11 @@ import com.revature.kkoders.dao.UserDAO;
 import com.revature.kkoders.dao.UserDAOImpl;
 
 @Component
+//@Transactional
 public class UserService {
 	
-	@Autowired
-	UserDAO userDao;
+	
+	//UserDAO userDao;
     
     public void addUser(){
         String firstname = "Danni";
@@ -28,7 +31,7 @@ public class UserService {
         dummyUser.setPW(password);
         dummyUser.setEmail(email);
         
-        //UserDAOImpl userDao = new UserDAOImpl();
+        UserDAOImpl userDao = new UserDAOImpl();
         
         System.out.println("service adduser");
         

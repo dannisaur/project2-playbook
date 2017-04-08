@@ -2,6 +2,8 @@ package com.revature.kkoders.dao;
 
 import java.util.ArrayList;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
