@@ -48,17 +48,17 @@ public class LoginController
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public String doLogin(@Valid UserImpl user, BindingResult bindingResult, ModelMap modelMap, HttpSession seesion)
+	public String doLogin( UserImpl user, BindingResult bindingResult, ModelMap modelMap, HttpSession seesion)
 	{
 		System.out.println("This was a post request");
 		if(bindingResult.hasErrors())
 		{
+			System.out.println("errrors");
 			return "login";
 		}
 		UserImpl authUser = userService.auth(user);
 		if (authUser != null)
 		{
-			System.out.println(user.getUserName());
 			modelMap.addAttribute("user", user);
 			seesion.setAttribute("alsoUser", user);
 			//NEW VIEW
@@ -67,6 +67,7 @@ public class LoginController
 		else
 		{
 			modelMap.addAttribute("errorMessage", "Username/password incorrect");
+			modelMap.addAttribute("user", emptyUser); 
 			return "login";
 		}
 	}

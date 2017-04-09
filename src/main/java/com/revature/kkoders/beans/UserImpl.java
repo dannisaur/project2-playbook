@@ -1,5 +1,6 @@
 package com.revature.kkoders.beans;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -24,8 +25,13 @@ import org.springframework.stereotype.Component;
 @Transactional
 @Entity
 @Table(name="USERS")
-public class UserImpl implements User {
+public class UserImpl implements Serializable, User {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2859080913261480623L;
+
 	@Id
 	@Column(name="USER_ID")
 	@SequenceGenerator(name="USERID_SEQ", sequenceName="USERID_SEQ")

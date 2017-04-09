@@ -39,8 +39,7 @@ public class UserService {
     
     public UserImpl auth(UserImpl usr)
     {
-    	
-    	return null;
+    	return userDao.validate(usr.getUserName(), usr.getPw());
     }
 
 

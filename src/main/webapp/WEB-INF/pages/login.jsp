@@ -27,6 +27,10 @@
 </head>
 <body>
 	<div class="col-md-4" id="loginPanel">
+	<c:if test="${errorMessage != null}">
+		<div class="alert alert-danger">${errorMessage}</div>
+	</c:if>
+	
 		<div class="login-panel panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title">The Playbook - Sign In</h3>
@@ -36,11 +40,9 @@
 					<fieldset>
 						<div class="form-group">
     						<form:input  class="form-control" path="userName" placeholder="Username" />
-							<form:errors path="userName" cssClass="alert alert-danger" element="div" />
 						</div>
 					 	<div class="form-group">
     						<form:password  class="form-control" path="pw" placeholder="Password"  />
-							<form:errors path="pw" cssClass="alert alert-danger" element="div" />
 						</div>
 					<input class="btn btn-sm btn-success" type="submit" value="Login" />
 					</fieldset>
