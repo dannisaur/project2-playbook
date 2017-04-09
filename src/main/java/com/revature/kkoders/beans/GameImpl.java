@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Entity
-@Table(name="GAME_LIBRARY")
+@Table(name="GAME")
 public class GameImpl implements Game {
 	
 	@Id

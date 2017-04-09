@@ -53,9 +53,6 @@ public class GameImplDAOImpl implements GameImplDAO {
 		Set<String> result = (Set<String>) query.list();
 		session.close();
 		return result;
-		
-		
-		
 	}
 
 	@Override

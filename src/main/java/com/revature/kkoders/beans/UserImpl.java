@@ -10,14 +10,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Component;
 
 @Component
+@Transactional
 @Entity
 @Table(name="USERS")
 public class UserImpl implements User {
@@ -49,18 +53,20 @@ public class UserImpl implements User {
 	@Column(name="DESCRIPTION")
 	private String desc;
 	
-	// THIS IS FOR GETTING GAME LIBRARY
-	// ONE USER TO ONE GAME LIBRARY
-	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="GAME_LIB_ID")
-	private GameImpl GameLibrary;
+
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name="GAME_LIBRARY",
+			joinColumns=@JoinColumn(name="USER_ID"),
+			inverseJoinColumns=@JoinColumn(name="GAME_ID"))
 	
-	public GameImpl getGameLib() {
+	private List<GameImpl> gameLibrary;
+	
+	public List<GameImpl> getGameLib() {
 		// TODO Auto-generated method stub
-		return GameLibrary;
+		return gameLibrary;
 	}
 	
-	// END GETTING GAME LIBRARY
+	// END GETTING GAMES
 	
 	// ----------------------------------------------------------
 	
@@ -164,7 +170,7 @@ public class UserImpl implements User {
 	
 	// CONSTRUCTOR WITH FIELDS
 	public UserImpl(int userID, String firstName, String lastName, String userName, String pw, String email,
-			String picURL, String desc, GameImpl gameLibrary, List<GamePlanImpl> gamePlans) {
+			String picURL, String desc, List<GameImpl> gameLibrary, List<GamePlanImpl> gamePlans) {
 		super();
 		this.userID = userID;
 		this.firstName = firstName;
@@ -174,7 +180,11 @@ public class UserImpl implements User {
 		this.email = email;
 		this.picURL = picURL;
 		this.desc = desc;
+<<<<<<< HEAD
 		this.GameLibrary = gameLibrary;
+=======
+		this.gameLibrary = gameLibrary;
+>>>>>>> a702d222bc593c16519c8c8e7f85d3ae9ac7e2ac
 		this.gamePlans = gamePlans;
 	}
 
@@ -186,7 +196,7 @@ public class UserImpl implements User {
 	public String toString() {
 		return "UserImpl [userID=" + userID + ", firstName=" + firstName + ", lastName=" + lastName + ", userName="
 				+ userName + ", pw=" + pw + ", email=" + email + ", picURL=" + picURL + ", desc=" + desc
-				+ ", GameLibrary=" + GameLibrary + ", gamePlans=" + gamePlans + "]";
+				+ ", GameLibrary=" + gameLibrary + ", gamePlans=" + gamePlans + "]";
 	}
 	
 }
