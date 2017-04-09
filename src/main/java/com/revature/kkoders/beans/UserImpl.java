@@ -174,7 +174,7 @@ public class UserImpl implements User {
 		this.email = email;
 		this.picURL = picURL;
 		this.desc = desc;
-		GameLibrary = gameLibrary;
+		this.GameLibrary = gameLibrary;
 		this.gamePlans = gamePlans;
 	}
 
