@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.revature.kkoders.beans.UserImpl;
+import com.revature.kkoders.service.UserService;
 
 /**
  * Handles signing the user into the application.
@@ -26,8 +27,8 @@ public class LoginController
 	@Autowired
 	UserImpl emptyUser;
 	
-	//@Autowired
-	//UserService userService;
+	@Autowired
+	UserService userService;
 	
 	//PARAMETER NAME IS CALLED someInfo
 		//REQUEST.GETPARAM('someInfo')
@@ -67,27 +68,26 @@ public class LoginController
 	 * @return
 	 */
 	@RequestMapping(method=RequestMethod.POST)
-	public String doLogin(@Valid UserImpl user, BindingResult bindingResult, ModelMap modelMap, HttpSession seesion)
+	public String doLogin( UserImpl user, BindingResult bindingResult, ModelMap modelMap, HttpSession seesion)
 	{
 		System.out.println("This was a post request");
 		if(bindingResult.hasErrors())
 		{
+			System.out.println("errrors");
 			return "login";
 		}
-	/*	User authUser = userService.auth(user);
+		UserImpl authUser = userService.auth(user);
 		if (authUser != null)
 		{
-			System.out.println(user.getUsername());
 			modelMap.addAttribute("user", user);
 			seesion.setAttribute("alsoUser", user);
 			//NEW VIEW
-			return "home";
+      return "account"; //the user was logged in.
 		}
 		else
 		{
 			modelMap.addAttribute("errorMessage", "Username/password incorrect");
+			modelMap.addAttribute("user", emptyUser); 
 			return "login";
-		}*/
-		return "account"; //the user was logged in.
-	}
+		}	
 }

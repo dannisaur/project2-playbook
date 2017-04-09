@@ -15,7 +15,7 @@ public interface UserDAO {
     // read
     public UserImpl getUserByUsername(String username);
     public ArrayList<UserImpl> getAllUsers();
-    
+    public UserImpl validate (String uname, String pwd);
     // delete?
     
 
