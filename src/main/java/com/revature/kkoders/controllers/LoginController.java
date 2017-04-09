@@ -14,7 +14,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.revature.kkoders.beans.UserImpl;
 import com.revature.kkoders.service.UserService;
 
-//KNOWS IT SHOULD HANDLE LOGIN REQUESTS
+/**
+ * Handles signing the user into the application.
+ * 
+ * @author 
+ *
+ */
 @Controller
 @RequestMapping(value="/login")
 public class LoginController
@@ -34,6 +39,12 @@ public class LoginController
 		return "This is the info added";
 	}
 	
+	/**
+	 * Handles bringing up the login page.
+	 * 
+	 * @param modelMap
+	 * @return
+	 */
 	@RequestMapping(method=RequestMethod.GET)
 	public String getLoginPage(ModelMap modelMap)
 	{
@@ -47,6 +58,15 @@ public class LoginController
 		return "login";
 	}
 	
+	/**
+	 * Handles login details that were submitted.
+	 * 
+	 * @param user
+	 * @param bindingResult
+	 * @param modelMap
+	 * @param seesion
+	 * @return
+	 */
 	@RequestMapping(method=RequestMethod.POST)
 	public String doLogin( UserImpl user, BindingResult bindingResult, ModelMap modelMap, HttpSession seesion)
 	{
@@ -62,13 +82,12 @@ public class LoginController
 			modelMap.addAttribute("user", user);
 			seesion.setAttribute("alsoUser", user);
 			//NEW VIEW
-			return "home";
+      return "account"; //the user was logged in.
 		}
 		else
 		{
 			modelMap.addAttribute("errorMessage", "Username/password incorrect");
 			modelMap.addAttribute("user", emptyUser); 
 			return "login";
-		}
-	}
+		}	
 }
