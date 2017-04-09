@@ -58,6 +58,8 @@
 					<li><a href="#">Settings</a></li>
 					<li><a href="#">Profile</a></li>
 					<li><a href="#">Help</a></li>
+					<li><a href="account/edit">EDIT</a></li>
+					<li><a href="logout">LOGOUT</a></li>
 				</ul>
 				<form class="navbar-form navbar-right">
 					<input type="text" class="form-control" placeholder="Search...">
