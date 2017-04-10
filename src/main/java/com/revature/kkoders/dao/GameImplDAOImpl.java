@@ -17,7 +17,7 @@ import com.revature.kkoders.hibernateUtil.HibernateUtil;
 public class GameImplDAOImpl implements GameImplDAO {
 
 	@Override
-	public GameImpl getLibraryById(int gl_id) {
+	public GameImpl getGameById(int gl_id) {
 		Session session = HibernateUtil.getSession();
 		GameImpl users_gl = (GameImpl) session.get(GameImpl.class, gl_id);
 		
@@ -27,7 +27,7 @@ public class GameImplDAOImpl implements GameImplDAO {
 	}
 
 	@Override
-	public void CreateLibrary(String gm_t, int st_id, int igDB_idm, String Rdate, String Platform) {
+	public void CreateGame(String gm_t, int st_id, int igDB_idm, String Rdate, String Platform) {
 		Session session = HibernateUtil.getSession();
 		Transaction t = session.beginTransaction();
 		
@@ -91,12 +91,30 @@ public class GameImplDAOImpl implements GameImplDAO {
 	@Override
 	public void RemoveGameTtle(String gm) {
 		Session session = HibernateUtil.getSession();
-		//String hql = "DELETE "
+		String hql = "DELETE from GameImpl where gameTitle =: gameTitle";
+		Query query = session.createQuery(hql);
+		
+		Transaction t = session.beginTransaction();
+		query.setParameter("gameTitle", gm);
+		query.executeUpdate();
+		
+		t.commit();
+		session.close();
 	}
 
 	@Override
 	public void RemoveReleaseDateByGameTitle(String gm) {
-		// TODO Auto-generated method stub
+		Session session = HibernateUtil.getSession();
+		String hql = "DELETE from GameImpl releasedate where gameTitle =: gameTitle";
+		
+		Query query = session.createQuery(hql);
+		
+		Transaction t = session.beginTransaction();
+		query.setParameter("gameTitle", gm);
+		query.executeUpdate();
+		
+		t.commit();
+		session.close();
 
 	}
 
