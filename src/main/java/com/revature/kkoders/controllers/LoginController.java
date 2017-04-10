@@ -89,5 +89,6 @@ public class LoginController
 			modelMap.addAttribute("errorMessage", "Username/password incorrect");
 			modelMap.addAttribute("user", emptyUser); 
 			return "login";
-		}	
+		}
+	}
 }

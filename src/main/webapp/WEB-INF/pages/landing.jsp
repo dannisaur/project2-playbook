@@ -20,7 +20,7 @@
 <link rel="stylesheet" type="text/css"
 	href="http://fonts.googleapis.com/css?family=Source Code Pro">
 
-<link rel="stylesheet" href="css/style1.css">
+<link rel="stylesheet" href="resources/css/style1.css">
 
 </head>
 <body>

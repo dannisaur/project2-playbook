@@ -63,6 +63,22 @@
             <version>4.3.11.Final</version>
 
         </dependency>
+<dependency>
+    <groupId>com.lukaspradel</groupId>
+    <artifactId>steam-web-api</artifactId>
+    <version>1.2</version>
+</dependency>
+
+<dependency>
+    <groupId>com.github.go-ive</groupId>
+    <artifactId>steam-api</artifactId>
+    <version>5.0</version>
+</dependency>
+<dependency>
+    <groupId>com.ibasco.agql</groupId>
+    <artifactId>agql-steam-webapi</artifactId>
+    <version>0.1.4</version>
+</dependency>
     </dependencies>
     
     <build>
