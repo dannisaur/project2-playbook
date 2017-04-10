@@ -186,11 +186,7 @@ public class UserImpl implements Serializable, User {
 		this.email = email;
 		this.picURL = picURL;
 		this.desc = desc;
-<<<<<<< HEAD
-		this.GameLibrary = gameLibrary;
-=======
 		this.gameLibrary = gameLibrary;
->>>>>>> a702d222bc593c16519c8c8e7f85d3ae9ac7e2ac
 		this.gamePlans = gamePlans;
 	}
 
