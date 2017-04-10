@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>The Playbook App - Sign In</title>
+<title>The Playbook App - Landing Page</title>
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -20,7 +20,7 @@
 <link rel="stylesheet" type="text/css"
 	href="http://fonts.googleapis.com/css?family=Source Code Pro">
 
-<link rel="stylesheet" href="css/style1.css">
+<link rel="stylesheet" href="resources/css/style1.css">
 
 </head>
 <body>

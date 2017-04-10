@@ -35,7 +35,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-<link rel="stylesheet" href="css/style2.css">
+<link rel="stylesheet" href="resources/css/style2.css">
 </head>
 
 <body>
@@ -58,6 +58,8 @@
 					<li><a href="#">Settings</a></li>
 					<li><a href="#">Profile</a></li>
 					<li><a href="#">Help</a></li>
+					<li><a href="account/edit">EDIT</a></li>
+					<li><a href="logout">LOGOUT</a></li>
 				</ul>
 				<form class="navbar-form navbar-right">
 					<input type="text" class="form-control" placeholder="Search...">
@@ -77,11 +79,11 @@
 					<li><a href="#">Export</a></li>
 				</ul>
 				<ul class="nav nav-sidebar">
-					<li><a href="">Nav item</a></li>
-					<li><a href="">Nav item again</a></li>
-					<li><a href="">One more nav</a></li>
-					<li><a href="">Another nav item</a></li>
-					<li><a href="">More navigation</a></li>
+					<li><a href="#">Nav item</a></li>
+					<li><a href="#">Nav item again</a></li>
+					<li><a href="#">One more nav</a></li>
+					<li><a href="#">Another nav item</a></li>
+					<li><a href="#">More navigation</a></li>
 				</ul>
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
