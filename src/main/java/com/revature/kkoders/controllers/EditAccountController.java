@@ -21,6 +21,8 @@ public class EditAccountController {
 	 */
 	@RequestMapping(method=RequestMethod.GET)
 	public String doEditAccount(HttpSession session) {
+		System.out.println("GET request: /account/edit");
+		
 		//TODO: validate that user is logged in to display edit account page, otherwise send to login page.
 		
 		
