@@ -79,6 +79,7 @@ public class LoginController
 		UserImpl authUser = userService.auth(user);
 		if (authUser != null)
 		{
+			//TODO GET A USERS GAMES
 			modelMap.addAttribute("user", user);
 			seesion.setAttribute("alsoUser", user);
 			//NEW VIEW
