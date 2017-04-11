@@ -6,10 +6,10 @@ public interface UserImplDAO {
 	
 	public UserImpl getUserById(int userID);
 	//public void UpdateUserName(String newname);
-	public void UpdatePassword(String password);
-	public void UpdateEmail(String email);
-	public void UpdateDescription(String descrip);
-	public void UpdatePicture(String URL);
+	public void UpdatePasswordByUn(String password, String n);
+	public void UpdateEmailByUn(String email, String n);
+	public void UpdateDescriptionByUn(String descrip, String n);
+	public void UpdatePictureByUn(String URL, String n);
 	public void SignUpUser(String fn, String ln, String un, 
 			String p, String em, String picurl, String d );
 	
