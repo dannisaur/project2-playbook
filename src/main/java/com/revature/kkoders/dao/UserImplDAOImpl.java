@@ -108,6 +108,15 @@ public class UserImplDAOImpl implements UserImplDAO {
 		
 	}
 
+	@Override
+	public String getUserByUserName(String newname) {
+		Session session = HibernateUtil.getSession();
+		UserImpl user = (UserImpl) session.get(UserImpl.class, newname);
+		
+		session.close();
+		return user.toString();
+	}
+
 	
 
 }
