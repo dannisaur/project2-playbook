@@ -23,14 +23,15 @@ public class UserImplDAOImpl implements UserImplDAO {
 		
 	}
 
-	public void UpdatePassword(String password) {
+	public void UpdatePasswordByUn(String password, String n) {
 		Session session = HibernateUtil.getSession();
-		String hql = "UPDATE UserImpl SET pw  =: pw";
+		String hql = "UPDATE UserImpl SET pw  =: pw where userName =: userName";
 		Query query = session.createQuery(hql);
 		
 		Transaction t = session.beginTransaction();
 		
 		query.setParameter("pw", password);
+		query.setParameter("userName", n);
 		query.executeUpdate();
 		
 		t.commit();
@@ -38,14 +39,15 @@ public class UserImplDAOImpl implements UserImplDAO {
 
 	}
 
-	public void UpdateEmail(String email) {
+	public void UpdateEmailByUn(String email, String n) {
 		Session session = HibernateUtil.getSession();
-		String hql = "UPDATE UserImpl SET email =: email";
+		String hql = "UPDATE UserImpl SET email =: email where userName =: userName";
 		Query query = session.createQuery(hql);
 		
 		Transaction t = session.beginTransaction();
 		
 		query.setParameter("email", email);
+		query.setParameter("userName", n);
 		query.executeUpdate();
 		
 		t.commit();
@@ -53,14 +55,15 @@ public class UserImplDAOImpl implements UserImplDAO {
 
 	}
 
-	public void UpdateDescription(String descrip) {
+	public void UpdateDescriptionByUn(String descrip, String n) {
 		Session session = HibernateUtil.getSession();
-		String hql = "UPDATE UserImpl SET desc =: desc";
+		String hql = "UPDATE UserImpl SET desc =: desc where userName =: userName";
 		Query query = session.createQuery(hql);
 		
 		Transaction t = session.beginTransaction();
 		
 		query.setParameter("desc", descrip);
+		query.setParameter("userName", n);
 		query.executeUpdate();
 		
 		t.commit();
@@ -68,14 +71,15 @@ public class UserImplDAOImpl implements UserImplDAO {
 
 	}
 
-	public void UpdatePicture(String URL) {
+	public void UpdatePictureByUn(String URL, String n) {
 		Session session = HibernateUtil.getSession();
-		String hql = "UPDATE UserImpl SET picURL =: picURL";
+		String hql = "UPDATE UserImpl SET picURL =: picURL where userName =: userName";
 		Query query = session.createQuery(hql);
 		
 		Transaction t = session.beginTransaction();
 		
 		query.setParameter("picURl", URL);
+		query.setParameter("userName", n);
 		query.executeUpdate();
 		
 		t.commit();
@@ -103,5 +107,7 @@ public class UserImplDAOImpl implements UserImplDAO {
 		
 		
 	}
+
+	
 
 }
