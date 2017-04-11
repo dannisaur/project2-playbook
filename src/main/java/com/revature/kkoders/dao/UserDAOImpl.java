@@ -63,10 +63,10 @@ public class UserDAOImpl implements UserDAO {
         
         // we make a criteria to list all the objects in the UserImpl class
         // save it to an ArrayList
-        ArrayList<UserImpl> allUsers = (ArrayList) currSession.createCriteria(UserImpl.class).list();
+      //  ArrayList<UserImpl> allUsers = (ArrayList) currSession.createCriteria(UserImpl.class).list();
         
-        // return
-        return allUsers;
+         return null;
+        //return allUsers;
     }
 
 	@Override
