@@ -59,6 +59,8 @@ public class UserImpl implements Serializable, User {
 	@Column(name="DESCRIPTION")
 	private String desc;
 	
+	@Column(name="STEAM_ID")
+	private String steamId;
 
 	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="GAME_LIBRARY",
@@ -172,11 +174,20 @@ public class UserImpl implements Serializable, User {
 		// TODO Auto-generated method stub
 		return this.desc;
 	}
+	
+	public String getSteamId() {
+		return steamId;
+	}
+
+	public void setSteamId(String steamId) {
+		this.steamId = steamId;
+	}
+
 
 	
 	// CONSTRUCTOR WITH FIELDS
 	public UserImpl(int userID, String firstName, String lastName, String userName, String pw, String email,
-			String picURL, String desc, List<GameImpl> gameLibrary, List<GamePlanImpl> gamePlans) {
+			String picURL, String desc, String steamId, List<GameImpl> gameLibrary, List<GamePlanImpl> gamePlans) {
 		super();
 		this.userID = userID;
 		this.firstName = firstName;
@@ -186,12 +197,14 @@ public class UserImpl implements Serializable, User {
 		this.email = email;
 		this.picURL = picURL;
 		this.desc = desc;
+		this.steamId = steamId;
 		this.gameLibrary = gameLibrary;
 		this.gamePlans = gamePlans;
 	}
-
 	// NO ARGS CONSTRUCTOR
 	public UserImpl(){}
+
+	
 
 	// OVERRIDE TOSTRING
 	@Override
