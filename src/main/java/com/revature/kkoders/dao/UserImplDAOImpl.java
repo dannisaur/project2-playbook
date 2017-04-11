@@ -8,11 +8,14 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserImplDAOImpl implements UserImplDAO {
 
+	@Autowired
+	UserImpl newUser;
 	public UserImpl getUserById(int userID) {
 		Session session = HibernateUtil.getSession();
 		String hql = "from UserImpl where userID =:uid";
@@ -97,7 +100,6 @@ public class UserImplDAOImpl implements UserImplDAO {
 		Session session = HibernateUtil.getSession();
 		Transaction t = session.beginTransaction();
 		
-		UserImpl newUser = new UserImpl();
 		newUser.setFirstName(fn);
 		newUser.setLastName(ln);
 		newUser.setUserName(un);

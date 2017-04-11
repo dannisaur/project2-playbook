@@ -22,7 +22,7 @@ public class GamePlanImplDAOImpl implements GamePlanImplDAO {
 	@Override
 	public void setTitleForForm(String plan_name) {
 		Session session = HibernateUtil.getSession();
-		String hql = "UPDATE GamePlanImpl SET title  =: title";
+		String hql = "UPDATE GamePlanImpl SET title  =:title";
 		Query query = session.createQuery(hql);
 		
 		Transaction t = session.beginTransaction();
@@ -38,7 +38,7 @@ public class GamePlanImplDAOImpl implements GamePlanImplDAO {
 	@Override
 	public void setStartDate(String sd) {
 		Session session = HibernateUtil.getSession();
-		String hql = "UPDATE GamePlanImpl SET startDate =: startdate";
+		String hql = "UPDATE GamePlanImpl SET startDate =:startdate";
 		Query query = session.createQuery(hql);
 		
 		Transaction t = session.beginTransaction();
@@ -53,7 +53,7 @@ public class GamePlanImplDAOImpl implements GamePlanImplDAO {
 	@Override
 	public void setEndDate(String ed) {
 		Session session = HibernateUtil.getSession();
-		String hql = "UPDATE GamePlanImpl SET endDate =: endDate";
+		String hql = "UPDATE GamePlanImpl SET endDate =:endDate";
 		Query query = session.createQuery(hql);
 		
 		Transaction t = session.beginTransaction();
@@ -69,7 +69,7 @@ public class GamePlanImplDAOImpl implements GamePlanImplDAO {
 	@Override
 	public void ChangeEndDate(String c_ed) {
 		Session session = HibernateUtil.getSession();
-		String hql = "UPDATE GamePlanImpl SET endDate =: endDate";
+		String hql = "UPDATE GamePlanImpl SET endDate =:endDate";
 		Query query = session.createQuery(hql);
 		
 		Transaction t = session.beginTransaction();
@@ -85,7 +85,7 @@ public class GamePlanImplDAOImpl implements GamePlanImplDAO {
 	@Override
 	public void setHoursByUser(double uh) {
 		Session session = HibernateUtil.getSession();
-		String hql = "UPDATE GamePlanImpl SET hours =: hours";
+		String hql = "UPDATE GamePlanImpl SET hours =:hours";
 		Query query = session.createQuery(hql);
 		
 		Transaction t = session.beginTransaction();
