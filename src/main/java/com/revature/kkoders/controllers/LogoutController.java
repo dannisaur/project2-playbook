@@ -32,10 +32,12 @@ public class LogoutController {
 	 */
 	@RequestMapping(method=RequestMethod.GET)
 	public String doLogout(HttpSession session, ModelMap modelMap) {
+		System.out.println("GET request: /logout");
+		
 		modelMap.addAttribute("user", emptyUser); 
 		session.invalidate();
 		
-		return "login";
+		return "redirect:/login"; //by redirecting we make it so URL in browser displays "login" instead of "logout" that had triggered this controller!
 	}
 
 }

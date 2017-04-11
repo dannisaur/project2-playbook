@@ -35,7 +35,9 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Project name</a>
+				<!-- <a class="navbar-brand" href="<%--<%= request.getSession().getServletContext().getContextPath() %>--%>">Playbook</a>-->
+				<!-- <a class="navbar-brand" href="landing">Playbook</a>-->
+				<form action="landing" method="POST"><button class="navbar-brand btn btn-link" type="submit" value="landing">Playbook</button></form>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
