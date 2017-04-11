@@ -49,7 +49,7 @@
 				</form:form>
 
 
-
+			New User? <a href="signup.jsp">Sign Up Here.</a>
 			</div>
 		</div>
 	</div>
