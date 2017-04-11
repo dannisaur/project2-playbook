@@ -8,9 +8,9 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Component;
 
-
-
+@Component
 public class UserImplDAOImpl implements UserImplDAO {
 
 	public UserImpl getUserById(int userID) {
