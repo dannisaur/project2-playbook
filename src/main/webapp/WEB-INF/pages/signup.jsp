@@ -54,7 +54,7 @@
 		<div class="row" id="signup">
 			<div
 				class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-				<form:form action="signup" method="post" commandName="signupForm">
+				<form:form action="signup" method="post" commandName="signupForm" modelAttribute="userImpl">
 					<h2>
 						The Playbook <small>Sign up</small>
 					</h2>
@@ -89,14 +89,14 @@
 					<div class="row">
 						<div class="col-xs-12 col-sm-6 col-md-6">
 							<div class="form-group">
-								<form:password type="password" path="pw" id="password"
+								<form:password path="pw" id="password"
 									class="form-control input-lg" placeholder="Password"
 									tabindex="5" />
 							</div>
 						</div>
 						<div class="col-xs-12 col-sm-6 col-md-6">
 							<div class="form-group">
-								<form:password type="password" path="password_confirmation"
+								<form:password path="pw"
 									id="password_confirmation" class="form-control input-lg"
 									placeholder="Confirm Password" tabindex="6" />
 							</div>
