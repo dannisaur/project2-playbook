@@ -19,13 +19,13 @@ import com.revature.kkoders.dao.UserDAOImpl;
 
 public class SignUpController {
 	
-	ApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
+	//ApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String processSignUp(@ModelAttribute("signupForm") UserImpl newUser, BindingResult br) {
 		
-		UserDAOImpl userDAO = ac.getBean(UserDAOImpl.class);
-		userDAO.addOrUpdateUser(newUser);
+		//UserDAOImpl userDAO = ac.getBean(UserDAOImpl.class);
+		//userDAO.addOrUpdateUser(newUser);
 		
 		return "success";
 	}

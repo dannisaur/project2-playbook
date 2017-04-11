@@ -1,7 +1,9 @@
 package com.revature.kkoders.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +13,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.revature.kkoders.beans.GameImpl;
 import com.revature.kkoders.beans.UserImpl;
+import com.revature.kkoders.service.GameLibService;
 import com.revature.kkoders.service.UserService;
 
 /**
@@ -30,6 +34,9 @@ public class LoginController
 	@Autowired
 	UserService userService;
 	
+	@Autowired
+	GameLibService gameLibService;
+
 	//PARAMETER NAME IS CALLED someInfo
 		//REQUEST.GETPARAM('someInfo')
 	@ModelAttribute("someInfo")
@@ -80,6 +87,16 @@ public class LoginController
 		if (authUser != null)
 		{
 			//TODO GET A USERS GAMES
+			List<GameImpl> myGames = new ArrayList<>();
+			if(gameLibService.getUsersGame(authUser)== null || gameLibService.getUsersGame(authUser).isEmpty())
+			{
+				System.out.println("no games");
+			}
+			else
+			{
+			myGames = gameLibService.getUsersGame(authUser);
+			}
+			
 			modelMap.addAttribute("user", user);
 			seesion.setAttribute("alsoUser", user);
 			//NEW VIEW

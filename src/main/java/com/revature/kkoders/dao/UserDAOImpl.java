@@ -55,7 +55,7 @@ public class UserDAOImpl implements UserDAO {
         return user;
     }
 
-    public ArrayList<UserImpl> getAllUsers() {
+    public List<UserImpl> getAllUsers() {
         // TODO Auto-generated method stub
         
         // we get the current session
@@ -63,7 +63,7 @@ public class UserDAOImpl implements UserDAO {
         
         // we make a criteria to list all the objects in the UserImpl class
         // save it to an ArrayList
-        ArrayList<UserImpl> allUsers = (ArrayList) currSession.createCriteria(UserImpl.class).list();
+        List<UserImpl> allUsers =  currSession.createCriteria(UserImpl.class).list();
         
         // return
         return allUsers;
