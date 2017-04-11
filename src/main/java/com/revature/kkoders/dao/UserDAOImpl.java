@@ -9,10 +9,12 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.LogicalExpression;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Component;
 
 import com.revature.kkoders.beans.UserImpl;
 import com.revature.kkoders.util.HibernateUtil;
 
+@Component
 public class UserDAOImpl implements UserDAO {
 
     // since session.save will do both add and update
