@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.lukaspradel.steamapi.core.exception.SteamApiException;
 import com.revature.kkoders.beans.GameImpl;
 import com.revature.kkoders.beans.UserImpl;
+import com.revature.kkoders.dao.SteamApiDAOImpl;
 import com.revature.kkoders.service.GameLibService;
 import com.revature.kkoders.service.UserService;
 
@@ -36,6 +38,9 @@ public class LoginController
 	
 	@Autowired
 	GameLibService gameLibService;
+	
+	@Autowired
+	SteamApiDAOImpl steamAPI;
 
 	//PARAMETER NAME IS CALLED someInfo
 		//REQUEST.GETPARAM('someInfo')
@@ -86,15 +91,28 @@ public class LoginController
 		UserImpl authUser = userService.auth(user);
 		if (authUser != null)
 		{
-			//TODO GET A USERS GAMES
 			List<GameImpl> myGames = new ArrayList<>();
 			if(gameLibService.getUsersGame(authUser)== null || gameLibService.getUsersGame(authUser).isEmpty())
 			{
 				System.out.println("no games");
+				System.out.println(authUser.getSteamId());
+				if (authUser.getSteamId() != null || !authUser.getSteamId().isEmpty())
+				{
+					//GET THE USERS GAMES FROM STEAM
+					try
+					{
+						steamAPI.getGames(authUser);
+					} catch (SteamApiException e)
+					{
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
 			}
 			else
 			{
-			myGames = gameLibService.getUsersGame(authUser);
+				myGames = gameLibService.getUsersGame(authUser);
+				//ADD USERS GAMES TO A PARAMETER
 			}
 			
 			modelMap.addAttribute("user", user);
