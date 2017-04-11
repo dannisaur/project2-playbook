@@ -5,7 +5,7 @@ import com.revature.kkoders.beans.UserImpl;
 public interface UserImplDAO {
 	
 	public UserImpl getUserById(int userID);
-	//public void UpdateUserName(String newname);
+	public String getUserByUserName(String newname);
 	public void UpdatePasswordByUn(String password, String n);
 	public void UpdateEmailByUn(String email, String n);
 	public void UpdateDescriptionByUn(String descrip, String n);
