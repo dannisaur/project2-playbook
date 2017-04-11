@@ -44,12 +44,12 @@
 					 	<div class="form-group">
     						<form:password  class="form-control" path="pw" placeholder="Password"  />
 						</div>
-					<input class="btn btn-sm btn-success" type="submit" value="Login" />
+					<input class="btn btn-success btn-block btn-lg" type="submit" value="Login" />
 					</fieldset>
 				</form:form>
 
-
-
+			<br>
+			<p>New User? <a href="signup">Sign Up Here.</a></p>
 			</div>
 		</div>
 	</div>
