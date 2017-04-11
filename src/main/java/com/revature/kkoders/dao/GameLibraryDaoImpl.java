@@ -16,13 +16,12 @@ public class GameLibraryDaoImpl implements GameLibraryDao {
 	@Override
 	public ArrayList<GameImpl> getGamesByUser(UserImpl user) {
 		Session session = HibernateUtil.getSession();
-		//Criteria cr = session.createCriteria(GameImpl.class);
-		//cr.add(Restrictions.eq("user_id", user.getUserID()));
-		//ArrayList<GameImpl> results = (ArrayList<GameImpl>) cr.list();
+		Criteria cr = session.createCriteria(GameImpl.class);
+		cr.add(Restrictions.eq("user_id", user.getUserID()));
+		ArrayList<GameImpl> results = (ArrayList<GameImpl>) cr.list();
 		//session.pers
 		
-//		return results;
-		return null;
+		return results;
 	}
 
 	@Override
