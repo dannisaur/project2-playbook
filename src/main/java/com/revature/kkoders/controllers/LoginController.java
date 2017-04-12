@@ -81,6 +81,7 @@ public class LoginController
 		UserImpl authUser = userService.auth(user);
 		if (authUser != null)
 		{
+			System.out.println(userService.UsersInfo(authUser.getUserName()).getFirstName());
 			//TODO GET A USERS GAMES
 			modelMap.addAttribute("user", user);
 			session.setAttribute("alsoUser", user);
