@@ -115,6 +115,7 @@ public class UserImplDAOImpl implements UserImplDAO {
 		
 	}
 
+	/*
 	@Override
 	public String getUserByUserName(String newname) {
 		Session session = HibernateUtil.getSession();
@@ -126,6 +127,28 @@ public class UserImplDAOImpl implements UserImplDAO {
 		return  x;
 	}
 
-	
+	//This method will get ALL INFO of the user by the user name
+	@Override
+	public UserImpl getUsersInfoByUsername(String un) {
+		 
+		UserImpl x  =null;
+		Session session = HibernateUtil.getSession();
+		String hql = "from UserImpl where userName =:userName";
+		Query query = session.createQuery(hql);
+		
+		
+		
+		query.setParameter("userName", un);
+		
+		x = (UserImpl) query.list().get(0);
+		
+		session.close();
+		return x;
+		
+		
+		
+	}
+
+	*/
 
 }

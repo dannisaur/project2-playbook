@@ -20,14 +20,15 @@ public class GamePlanImplDAOImpl implements GamePlanImplDAO {
 	}
 
 	@Override
-	public void setTitleForForm(String plan_name) {
+	public void setTitleForForm(String plan_name, int un ) {
 		Session session = HibernateUtil.getSession();
-		String hql = "UPDATE GamePlanImpl SET title  =:title";
+		String hql = "UPDATE GamePlanImpl SET title  =:title where uid =:USER_ID";
 		Query query = session.createQuery(hql);
 		
 		Transaction t = session.beginTransaction();
 		
 		query.setParameter("title", plan_name);
+		query.setParameter("uid", un);
 		query.executeUpdate();
 		
 		t.commit();
@@ -36,14 +37,15 @@ public class GamePlanImplDAOImpl implements GamePlanImplDAO {
 	}
 
 	@Override
-	public void setStartDate(String sd) {
+	public void setStartDate(String sd, int un) {
 		Session session = HibernateUtil.getSession();
-		String hql = "UPDATE GamePlanImpl SET startDate =:startdate";
+		String hql = "UPDATE GamePlanImpl SET startDate =:startdate where uid =:USER_ID";
 		Query query = session.createQuery(hql);
 		
 		Transaction t = session.beginTransaction();
 		
 		query.setParameter("startdate", sd);
+		query.setParameter("uid", un);
 		query.executeUpdate();
 		
 		t.commit();
@@ -51,14 +53,15 @@ public class GamePlanImplDAOImpl implements GamePlanImplDAO {
 	}
 
 	@Override
-	public void setEndDate(String ed) {
+	public void setEndDate(String ed, int un) {
 		Session session = HibernateUtil.getSession();
-		String hql = "UPDATE GamePlanImpl SET endDate =:endDate";
+		String hql = "UPDATE GamePlanImpl SET endDate =:endDate where uid =:USER_ID";
 		Query query = session.createQuery(hql);
 		
 		Transaction t = session.beginTransaction();
 		
 		query.setParameter("endDate", ed);
+		query.setParameter("uid", un);
 		query.executeUpdate();
 		
 		t.commit();
@@ -67,14 +70,15 @@ public class GamePlanImplDAOImpl implements GamePlanImplDAO {
 	}
 
 	@Override
-	public void ChangeEndDate(String c_ed) {
+	public void ChangeEndDate(String c_ed, int un) {
 		Session session = HibernateUtil.getSession();
-		String hql = "UPDATE GamePlanImpl SET endDate =:endDate";
+		String hql = "UPDATE GamePlanImpl SET endDate =:endDate where uid =:USER_ID";
 		Query query = session.createQuery(hql);
 		
 		Transaction t = session.beginTransaction();
 		
 		query.setParameter("endDate", c_ed);
+		query.setParameter("uid", un);
 		query.executeUpdate();
 		
 		t.commit();
@@ -83,14 +87,15 @@ public class GamePlanImplDAOImpl implements GamePlanImplDAO {
 	}
 
 	@Override
-	public void setHoursByUser(double uh) {
+	public void setHoursByUser(double uh, int un) {
 		Session session = HibernateUtil.getSession();
-		String hql = "UPDATE GamePlanImpl SET hours =:hours";
+		String hql = "UPDATE GamePlanImpl SET hours =:hours where uid =:USER_ID";
 		Query query = session.createQuery(hql);
 		
 		Transaction t = session.beginTransaction();
 		
 		query.setParameter("hours", uh);
+		query.setParameter("uid", un);
 		query.executeUpdate();
 		
 		t.commit();
