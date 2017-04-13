@@ -68,6 +68,7 @@ public class LoginController
 	 * @param modelMap
 	 * @param seesion
 	 * @return
+	 * @throws Throwable 
 	 */
 	@RequestMapping(method=RequestMethod.POST)
 	public String doLogin( UserImpl user, BindingResult bindingResult, ModelMap modelMap, HttpSession session)
@@ -79,6 +80,7 @@ public class LoginController
 			return "login";
 		}
 		UserImpl authUser = userService.auth(user);
+		
 		if (authUser != null)
 		{
 			//TODO GET A USERS GAMES
