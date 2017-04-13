@@ -43,7 +43,6 @@ public class EditAccountController {
 		currUser = (UserImpl) session.getAttribute("alsoUser");
 		
 		updatedUser = currUser;
-		System.out.println(updatedUser.getPw());
 
 		return new ModelAndView("account/edit_account", "updatedUser", updatedUser); 
 	}
@@ -53,8 +52,6 @@ public class EditAccountController {
 
 		currUser = (UserImpl) session.getAttribute("alsoUser");
 		
-		System.out.println(updatedUser.getPw());
-		System.out.println(currUser.getPw());
 		service.updateUser(currUser, updatedUser);
 
 		return "account/edit_account";

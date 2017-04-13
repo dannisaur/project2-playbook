@@ -96,9 +96,9 @@
 						</div>
 						<div class="col-xs-12 col-sm-6 col-md-6">
 							<div class="form-group">
-								<form:password path="pw"
+								<input type="password" name="validatePw"
 									id="password_confirmation" class="form-control input-lg"
-									placeholder="Confirm Password" tabindex="6" />
+									placeholder="Confirm Password" tabindex="6">
 							</div>
 						</div>
 					</div>
