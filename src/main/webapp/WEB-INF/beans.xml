@@ -5,9 +5,11 @@
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">	
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">	
 	<!-- GOES THORUGH EVERY SINGLE CLASS IN THE PACKAGE FOR ANNOTATION -->
 	<!-- FOR SPRING BEANS -->
 <bean id="gameImpl" class="com.revature.kkoders.beans.GameImpl"
@@ -17,6 +19,8 @@
 	<!-- ENABLE ANNOTATIONS FOR SPRING MVC -->	
 	<mvc:annotation-driven></mvc:annotation-driven>
 	
+	<!-- enable aop -->
+	<aop:aspectj-autoproxy/>
 	
 	<!--  SPECIFY A RESOURCES FOLDER SO MVC DOENST THINK ITS A REQUEST -->
 	<mvc:resources location="/resources" mapping="/**"></mvc:resources>

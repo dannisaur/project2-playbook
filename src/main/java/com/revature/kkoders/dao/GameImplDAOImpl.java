@@ -11,6 +11,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+
 import com.revature.kkoders.beans.GameImpl;
 //import com.revature.kkoders.beans.GameLibraryImpl;
 import com.revature.kkoders.beans.UserImpl;
@@ -18,6 +19,7 @@ import com.revature.kkoders.hibernateUtil.HibernateUtil;
 
 @Component
 public class GameImplDAOImpl implements GameImplDAO {
+
 	@Autowired
 	GameImpl new_gl;
 	
@@ -36,7 +38,9 @@ public class GameImplDAOImpl implements GameImplDAO {
 		Session session = HibernateUtil.getSession();
 		Transaction t = session.beginTransaction();
 		
+
 		session.save(game);
+
 		session.getTransaction();
 		t.commit();
 		session.close();
@@ -89,7 +93,7 @@ public class GameImplDAOImpl implements GameImplDAO {
 	@Override
 	public void RemoveGameTtle(String gm) {
 		Session session = HibernateUtil.getSession();
-		String hql = "DELETE from GameImpl where gameTitle =: gameTitle";
+		String hql = "DELETE from GameImpl where gameTitle =:gameTitle";
 		Query query = session.createQuery(hql);
 		
 		Transaction t = session.beginTransaction();
@@ -103,7 +107,7 @@ public class GameImplDAOImpl implements GameImplDAO {
 	@Override
 	public void RemoveReleaseDateByGameTitle(String gm) {
 		Session session = HibernateUtil.getSession();
-		String hql = "DELETE from GameImpl releasedate where gameTitle =: gameTitle";
+		String hql = "DELETE from GameImpl releasedate where gameTitle =:gameTitle";
 		
 		Query query = session.createQuery(hql);
 		

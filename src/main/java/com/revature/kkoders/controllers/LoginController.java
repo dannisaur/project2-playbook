@@ -44,12 +44,14 @@ public class LoginController
 
 	//PARAMETER NAME IS CALLED someInfo
 		//REQUEST.GETPARAM('someInfo')
+	/*
 	@ModelAttribute("someInfo")
-	public String addInfoToRequestScope()
+	public String addInfoToRequestScope() //appends to the url like it's a GET request
 	{
 		System.out.println("Adding something to the modelmap");
 		return "This is the info added";
 	}
+	*/
 	
 	/**
 	 * Handles bringing up the login page.
@@ -60,8 +62,8 @@ public class LoginController
 	@RequestMapping(method=RequestMethod.GET)
 	public String getLoginPage(ModelMap modelMap)
 	{
-		System.out.println(modelMap.get("someInfo"));
-		System.out.println("This was a get request");
+		//System.out.println(modelMap.get("someInfo"));
+		System.out.println("GET request: /login");
 		modelMap.addAttribute("user", emptyUser); 
 		
 		//RETURN LOGIN TO TAKE US TO PREFIX: WEB-INF
@@ -80,9 +82,9 @@ public class LoginController
 	 * @return
 	 */
 	@RequestMapping(method=RequestMethod.POST)
-	public String doLogin( UserImpl user, BindingResult bindingResult, ModelMap modelMap, HttpSession seesion)
+	public String doLogin( UserImpl user, BindingResult bindingResult, ModelMap modelMap, HttpSession session)
 	{
-		System.out.println("This was a post request");
+		System.out.println("POST request: /login");
 		if(bindingResult.hasErrors())
 		{
 			System.out.println("errrors");
@@ -91,6 +93,7 @@ public class LoginController
 		UserImpl authUser = userService.auth(user);
 		if (authUser != null)
 		{
+
 			List<GameImpl> myGames = new ArrayList<>();
 			if(gameLibService.getUsersGame(authUser)== null || gameLibService.getUsersGame(authUser).isEmpty())
 			{
@@ -115,10 +118,11 @@ public class LoginController
 				//ADD USERS GAMES TO A PARAMETER
 			}
 			
+
 			modelMap.addAttribute("user", user);
-			seesion.setAttribute("alsoUser", user);
+			session.setAttribute("alsoUser", user);
 			//NEW VIEW
-      return "account"; //the user was logged in.
+			return "redirect:/account"; //the user has successfully logged in, so take them to main account page. redirect in order to change url to "account".
 		}
 		else
 		{

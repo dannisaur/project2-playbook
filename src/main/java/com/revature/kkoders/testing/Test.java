@@ -4,6 +4,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.revature.kkoders.service.UserService;
+import com.revature.kkoders.beans.UserImpl;
+import com.revature.kkoders.service.EditAccountService;;
 
 public class Test {
 
@@ -14,11 +16,28 @@ public class Test {
 
     	//UserService service = (UserService)a.getBean(UserService.class);
     	
-        UserService service = new UserService();
+       // UserService service = new UserService();
         
-        service.addUser();
+        //service.addUser();
         
         System.out.println("test main");
+        
+        /****************************************************************************************/
+        /*					Testing edit account service with tguy credetnials					*/
+        /****************************************************************************************/
+        
+        
+       // EditAccountService update_user = new EditAccountService();
+        
+        String guy = "tguy";
+        //update_user.checkNewpassword(guy, "opeth");
+        
+        /****************************************************************************************/
+        /*					Getting tguys info													*/
+        /****************************************************************************************/
+        
+        UserService service = new UserService();
+        System.out.println(service.UsersInfo(guy).toString());
         
     }
 
