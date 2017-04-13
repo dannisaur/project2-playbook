@@ -3,6 +3,9 @@ package com.revature.kkoders.dao;
 import com.revature.kkoders.hibernateUtil.HibernateUtil;
 import com.revature.kkoders.beans.UserImpl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -16,24 +19,23 @@ public class UserImplDAOImpl implements UserImplDAO {
 	public UserImpl getUserById(int userID) {
 		Session session = HibernateUtil.getSession();
 		UserImpl user = (UserImpl) session.get(UserImpl.class, userID);
-		
+
 		session.close();
 		return user;
-		
-		
+
 	}
 
 	public void UpdatePasswordByUn(String password, String n) {
 		Session session = HibernateUtil.getSession();
 		String hql = "UPDATE UserImpl SET pw  =: pw where userName =: userName";
 		Query query = session.createQuery(hql);
-		
+
 		Transaction t = session.beginTransaction();
-		
+
 		query.setParameter("pw", password);
 		query.setParameter("userName", n);
 		query.executeUpdate();
-		
+
 		t.commit();
 		session.close();
 
@@ -43,13 +45,13 @@ public class UserImplDAOImpl implements UserImplDAO {
 		Session session = HibernateUtil.getSession();
 		String hql = "UPDATE UserImpl SET email =: email where userName =: userName";
 		Query query = session.createQuery(hql);
-		
+
 		Transaction t = session.beginTransaction();
-		
+
 		query.setParameter("email", email);
 		query.setParameter("userName", n);
 		query.executeUpdate();
-		
+
 		t.commit();
 		session.close();
 
@@ -59,13 +61,13 @@ public class UserImplDAOImpl implements UserImplDAO {
 		Session session = HibernateUtil.getSession();
 		String hql = "UPDATE UserImpl SET desc =: desc where userName =: userName";
 		Query query = session.createQuery(hql);
-		
+
 		Transaction t = session.beginTransaction();
-		
+
 		query.setParameter("desc", descrip);
 		query.setParameter("userName", n);
 		query.executeUpdate();
-		
+
 		t.commit();
 		session.close();
 
@@ -75,13 +77,13 @@ public class UserImplDAOImpl implements UserImplDAO {
 		Session session = HibernateUtil.getSession();
 		String hql = "UPDATE UserImpl SET picURL =: picURL where userName =: userName";
 		Query query = session.createQuery(hql);
-		
+
 		Transaction t = session.beginTransaction();
-		
+
 		query.setParameter("picURl", URL);
 		query.setParameter("userName", n);
 		query.executeUpdate();
-		
+
 		t.commit();
 		session.close();
 
@@ -91,7 +93,7 @@ public class UserImplDAOImpl implements UserImplDAO {
 	public void SignUpUser(String fn, String ln, String un, String p, String em, String picurl, String d) {
 		Session session = HibernateUtil.getSession();
 		Transaction t = session.beginTransaction();
-		
+
 		UserImpl newUser = new UserImpl();
 		newUser.setFirstName(fn);
 		newUser.setLastName(ln);
@@ -100,23 +102,31 @@ public class UserImplDAOImpl implements UserImplDAO {
 		newUser.setEmail(em);
 		newUser.setPicture(picurl);
 		newUser.setDesc(d);
-		
+
 		session.save(newUser);
 		session.getTransaction();
 		t.commit();
-		
-		
+
 	}
 
-	@Override
-	public String getUserByUserName(String newname) {
+	public UserImpl getUserByUserName(String username) {
+
 		Session session = HibernateUtil.getSession();
-		UserImpl user = (UserImpl) session.get(UserImpl.class, newname);
-		
-		session.close();
-		return user.toString();
-	}
 
+		List<UserImpl> user = session.createCriteria(UserImpl.class).add(Restrictions.eq("userName", username)).list();
+
+		session.close();
+		
+		return user.get(0);
+	}
 	
+	public void updateUser(UserImpl updatedUser){
+		Session session = HibernateUtil.getSession();
+		Transaction t = session.beginTransaction();
+
+		session.update(updatedUser);
+		//session.getTransaction();
+		t.commit();
+	}
 
 }

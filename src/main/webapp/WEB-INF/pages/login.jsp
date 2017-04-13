@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -24,13 +24,20 @@
 
 <link rel="stylesheet" href="resources/css/style1.css">
 
+<style>
+body {
+	background-image: url('resources/media/coffee.jpg');
+	background-size: cover;
+}
+</style>
+
 </head>
 <body>
 	<div class="col-md-4" id="loginPanel">
-	<c:if test="${errorMessage != null}">
-		<div class="alert alert-danger">${errorMessage}</div>
-	</c:if>
-	
+		<c:if test="${errorMessage != null}">
+			<div class="alert alert-danger">${errorMessage}</div>
+		</c:if>
+
 		<div class="login-panel panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title">The Playbook - Sign In</h3>
@@ -39,17 +46,22 @@
 				<form:form action="login" method="POST" commandName="user">
 					<fieldset>
 						<div class="form-group">
-    						<form:input  class="form-control" path="userName" placeholder="Username" />
+							<form:input class="form-control" path="userName"
+								placeholder="Username" />
 						</div>
-					 	<div class="form-group">
-    						<form:password  class="form-control" path="pw" placeholder="Password"  />
+						<div class="form-group">
+							<form:password class="form-control" path="pw"
+								placeholder="Password" />
 						</div>
-					<input class="btn btn-success btn-block btn-lg" type="submit" value="Login" />
+						<input class="btn btn-success btn-block btn-lg" type="submit"
+							value="Login" />
 					</fieldset>
 				</form:form>
 
-			<br>
-			<p>New User? <a href="signup">Sign Up Here.</a></p>
+				<br>
+				<p>
+					New User? <a href="signup">Sign Up Here.</a>
+				</p>
 			</div>
 		</div>
 	</div>

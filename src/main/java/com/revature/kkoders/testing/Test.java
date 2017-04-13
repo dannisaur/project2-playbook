@@ -14,11 +14,11 @@ public class Test {
 
     	//UserService service = (UserService)a.getBean(UserService.class);
     	
-        UserService service = new UserService();
+        //UserService service = new UserService();
         
-        service.addUser();
+        //service.addUser();
         
-        System.out.println("test main");
+        //System.out.println("test main");
         
     }
 

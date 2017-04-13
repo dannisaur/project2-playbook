@@ -17,47 +17,44 @@ import com.revature.kkoders.service.UserService;
 /**
  * Handles signing the user into the application.
  * 
- * @author 
+ * @author
  *
  */
 @Controller
-@RequestMapping(value="/login")
-public class LoginController
-{
+@RequestMapping(value = "/login")
+public class LoginController {
 	@Autowired
 	UserImpl emptyUser;
-	
+
 	@Autowired
 	UserService userService;
-	
-	//PARAMETER NAME IS CALLED someInfo
-		//REQUEST.GETPARAM('someInfo')
+
+	// PARAMETER NAME IS CALLED someInfo
+	// REQUEST.GETPARAM('someInfo')
 	@ModelAttribute("someInfo")
-	public String addInfoToRequestScope()
-	{
+	public String addInfoToRequestScope() {
 		System.out.println("Adding something to the modelmap");
 		return "This is the info added";
 	}
-	
+
 	/**
 	 * Handles bringing up the login page.
 	 * 
 	 * @param modelMap
 	 * @return
 	 */
-	@RequestMapping(method=RequestMethod.GET)
-	public String getLoginPage(ModelMap modelMap)
-	{
+	@RequestMapping(method = RequestMethod.GET)
+	public String getLoginPage(ModelMap modelMap) {
 		System.out.println(modelMap.get("someInfo"));
 		System.out.println("This was a get request");
-		modelMap.addAttribute("user", emptyUser); 
-		
-		//RETURN LOGIN TO TAKE US TO PREFIX: WEB-INF
-		//LOGIN
-		//SUFFIX: .jsp
+		modelMap.addAttribute("user", emptyUser);
+
+		// RETURN LOGIN TO TAKE US TO PREFIX: WEB-INF
+		// LOGIN
+		// SUFFIX: .jsp
 		return "login";
 	}
-	
+
 	/**
 	 * Handles login details that were submitted.
 	 * 
@@ -67,28 +64,24 @@ public class LoginController
 	 * @param seesion
 	 * @return
 	 */
-	@RequestMapping(method=RequestMethod.POST)
-	public String doLogin( UserImpl user, BindingResult bindingResult, ModelMap modelMap, HttpSession seesion)
-	{
+	@RequestMapping(method = RequestMethod.POST)
+	public String doLogin(UserImpl user, BindingResult bindingResult, ModelMap modelMap, HttpSession session) {
 		System.out.println("This was a post request");
-		if(bindingResult.hasErrors())
-		{
+		if (bindingResult.hasErrors()) {
 			System.out.println("errrors");
 			return "login";
 		}
 		UserImpl authUser = userService.auth(user);
-		if (authUser != null)
-		{
-			//TODO GET A USERS GAMES
-			modelMap.addAttribute("user", user);
-			seesion.setAttribute("alsoUser", user);
-			//NEW VIEW
-      return "account"; //the user was logged in.
-		}
-		else
-		{
+		if (authUser != null) {
+			// TODO GET A USERS GAMES
+			
+			modelMap.addAttribute("user", userService.getUserInfoByUserName(user));
+			session.setAttribute("alsoUser", userService.getUserInfoByUserName(user));
+			// NEW VIEW
+			return "account"; // the user was logged in.
+		} else {
 			modelMap.addAttribute("errorMessage", "Username/password incorrect");
-			modelMap.addAttribute("user", emptyUser); 
+			modelMap.addAttribute("user", emptyUser);
 			return "login";
 		}
 	}
