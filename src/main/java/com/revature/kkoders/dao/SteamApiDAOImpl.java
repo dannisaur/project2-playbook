@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.github.goive.steamapi.SteamApi;
@@ -25,6 +26,9 @@ public class SteamApiDAOImpl
 	@Autowired
 	GameLibService gameLibService;
 	
+	@Autowired
+	GameImpl newGame;
+	
 	public List<GameImpl> getGames (UserImpl user) throws SteamApiException
 	{
 		List<GameImpl> myGames = new ArrayList<>();
@@ -41,7 +45,6 @@ public class SteamApiDAOImpl
         //	System.out.println(x.getAppid());
         	gameids.add(x.getAppid());
         }
-        System.out.println("==============================================================================================");
         
         //CHANGED IT TO EU BECAUSE THE API CAN ONLY HANDLE EU DATE FORMATS
         SteamApi steamApi = new SteamApi("EU");
@@ -54,19 +57,21 @@ public class SteamApiDAOImpl
         {
         	try 
         	{
-        		
        			SteamApp steamApp = steamApi.retrieve(y); // by appId (exact match)
-       			System.out.println("Game Name:");
        			String name = steamApp.getName();
-       			System.out.println(name);
-       			System.out.println("Release Date: ");
        			Date date = steamApp.getReleaseDate();
+        		newGame.setGameTitle(name);
+        		newGame.setPlatform("PC");
+        		newGame.setSteamGameID(y);
        			if (date !=null)
        			{
        				String[] todate = date.toString().split(" ");
-       				gameLibService.addGame(user, name, y, 0, todate[1]+" "+ todate[2] +", "+ todate[todate.length-1], "PC");
-       				System.out.println(todate[1]+" "+ todate[2] +", "+ todate[todate.length-1]);
+       				String crrctDate = todate[1]+" "+ todate[2] +", "+ todate[todate.length-1];
+       				newGame.setReleaseDate(crrctDate);
+     				gameLibService.addGame(user, name, y, 0, todate[1]+" "+ todate[2] +", "+ todate[todate.length-1], "PC");
        			}
+       			else
+       				newGame.setReleaseDate("N/A");
        		} 
         	catch (com.github.goive.steamapi.exceptions.SteamApiException e)
         	{
@@ -74,7 +79,6 @@ public class SteamApiDAOImpl
         		//System.out.println("here");
        		}
        	}
-        System.out.println("==============================================================================================");
 		return null;
 	}
 

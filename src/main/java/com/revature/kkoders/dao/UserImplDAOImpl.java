@@ -104,6 +104,7 @@ public class UserImplDAOImpl implements UserImplDAO {
 		session.save(newUser);
 		session.getTransaction();
 		t.commit();
+		session.close();
 		
 		
 	}

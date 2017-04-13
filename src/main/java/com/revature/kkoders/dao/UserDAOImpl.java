@@ -50,7 +50,7 @@ public class UserDAOImpl implements UserDAO {
         
         // we use a get method to eagerly fetch this object
         UserImpl user = (UserImpl) currSession.get(UserImpl.class, username);
-        
+        currSession.close();
         // then we return it
         return user;
     }
@@ -64,7 +64,7 @@ public class UserDAOImpl implements UserDAO {
         // we make a criteria to list all the objects in the UserImpl class
         // save it to an ArrayList
         List<UserImpl> allUsers =  currSession.createCriteria(UserImpl.class).list();
-        
+        currSession.close();
         // return
         return allUsers;
     }
@@ -84,6 +84,7 @@ public class UserDAOImpl implements UserDAO {
         List rs = cr.list();
         if (rs.isEmpty() || rs.size() != 1)
         {
+        	currSession.close();
         	return result;
         }
         for (Object x : rs)
@@ -91,6 +92,7 @@ public class UserDAOImpl implements UserDAO {
         	result = (UserImpl)x;
         }
         System.out.println(result);
+        currSession.close();
         return result;
 	}
 

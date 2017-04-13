@@ -36,12 +36,10 @@ public class GameImplDAOImpl implements GameImplDAO {
 		Session session = HibernateUtil.getSession();
 		Transaction t = session.beginTransaction();
 		
-		System.out.println("in created game");
 		session.save(game);
-		System.out.println("saved created game");
 		session.getTransaction();
 		t.commit();
-
+		session.close();
 	}
 
 	@Override

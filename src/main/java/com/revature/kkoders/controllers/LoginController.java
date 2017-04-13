@@ -95,9 +95,9 @@ public class LoginController
 			if(gameLibService.getUsersGame(authUser)== null || gameLibService.getUsersGame(authUser).isEmpty())
 			{
 				System.out.println("no games");
-				System.out.println(authUser.getSteamId());
-				if (authUser.getSteamId() != null || !authUser.getSteamId().isEmpty())
+				if (authUser.getSteamId() != null && !authUser.getSteamId().isEmpty())
 				{
+				System.out.println(authUser.getSteamId());
 					//GET THE USERS GAMES FROM STEAM
 					try
 					{
