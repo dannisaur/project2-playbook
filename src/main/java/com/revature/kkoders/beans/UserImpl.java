@@ -18,9 +18,12 @@ import javax.persistence.Table;
 import javax.transaction.Transactional;
 
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.stereotype.Component;
 
 @Component
+@Scope(value=WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS) 
 @Transactional
 @Entity
 @Scope(value="prototype")
