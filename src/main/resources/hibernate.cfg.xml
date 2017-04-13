@@ -15,6 +15,7 @@
         <mapping class="com.revature.kkoders.beans.GameImpl"/>
         <mapping class="com.revature.kkoders.beans.DailySessionImpl"/>
         <mapping class="com.revature.kkoders.logging.LogImpl"/>
+        <mapping class="com.revature.kkoders.logging.LogLevelImpl"/>
 
     </session-factory>
 </hibernate-configuration>

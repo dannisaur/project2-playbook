@@ -1,7 +1,11 @@
 package com.revature.kkoders.service;
 
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+
 import com.revature.kkoders.dao.GamePlanImplDAOImpl;
 
+@Component
 public class GamePlanService {
 	
 	GamePlanImplDAOImpl gmpl = new GamePlanImplDAOImpl();
@@ -70,6 +74,20 @@ public class GamePlanService {
 		return complete;
 	}
 	
+	/**
+	 * Pulls the daily session for every user and every game plan.
+	 * 
+	 */
+	///* TODO: Write code to pull daily sessions.
+	//@Scheduled(cron="59 59 23 * * *") //scheduled for 11:59:59 PM every day.
+	@Scheduled(cron="0 0 12 * * *") //test: scheduled for noon.
+	//@Scheduled(fixedRate=2000)
+	public void pullDailySessions() {
+		//System.out.println("time");//test statement.
+		
+		
+	}
+	//*/
 	
 
 }

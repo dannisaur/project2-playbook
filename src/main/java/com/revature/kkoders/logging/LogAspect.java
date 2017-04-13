@@ -57,13 +57,12 @@ public class LogAspect {
 			logInfo = false;
 		}
 		
-		//System.out.println(logMessage); //TODO: commit to DB.
 		if (logInfo) {
-			//logger.info(message);
+			logger.info(message); //commit to DB
 			System.out.println(message);
 		}
 		else {
-			//logger.error(message);
+			logger.error(message); //commit to DB
 			System.out.println(message);
 		}
 		
