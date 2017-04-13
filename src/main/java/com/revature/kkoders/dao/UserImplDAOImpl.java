@@ -116,6 +116,20 @@ public class UserImplDAOImpl implements UserImplDAO {
 		
 	}
 
+	@Override
+	public String getUserByUserName(String newname)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UserImpl getUsersInfoByUsername(String userName)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	/*
 	@Override
 	public String getUserByUserName(String newname) {
