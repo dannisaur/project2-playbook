@@ -150,6 +150,12 @@ public class UserImplDAOImpl implements UserImplDAO {
 		t.commit();
 	}
 
+	@Override
+	public UserImpl getUsersInfoByUsername(String userName)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	/*
 	@Override

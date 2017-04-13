@@ -26,7 +26,7 @@ import org.springframework.stereotype.Component;
 @Scope(value=WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS) 
 @Transactional
 @Entity
-@Scope(value="prototype")
+//@Scope(value="prototype")
 @Table(name="USERS")
 public class UserImpl implements Serializable, User {
 	
