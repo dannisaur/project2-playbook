@@ -1,0 +1,78 @@
+package com.revature.kkoders.testing;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.revature.kkoders.service.UserService;
+import com.revature.kkoders.beans.UserImpl;
+import com.revature.kkoders.service.EditAccountService;;
+
+public class Test {
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+
+<<<<<<< HEAD
+||||||| merged common ancestors
+    	//UserService service = (UserService)a.getBean(UserService.class);
+    	
+<<<<<<<<< Temporary merge branch 1
+       // UserService service = new UserService();
+||||||||| merged common ancestors
+        UserService service = new UserService();
+=========
+        //UserService service = new UserService();
+>>>>>>>>> Temporary merge branch 2
+        
+        //service.addUser();
+        
+        //System.out.println("test main");
+        
+        /****************************************************************************************/
+        /*					Testing edit account service with tguy credetnials					*/
+        /****************************************************************************************/
+        
+        
+       // EditAccountService update_user = new EditAccountService();
+        
+        String guy = "tguy";
+        //update_user.checkNewpassword(guy, "opeth");
+        
+        /****************************************************************************************/
+        /*					Getting tguys info													*/
+        /****************************************************************************************/
+        
+        UserService service = new UserService();
+        System.out.println(service.UsersInfo(guy).toString());
+=======
+    	//UserService service = (UserService)a.getBean(UserService.class);
+    	
+
+        //UserService service = new UserService();
+
+        
+        //service.addUser();
+        
+        //System.out.println("test main");
+        
+        /****************************************************************************************/
+        /*					Testing edit account service with tguy credetnials					*/
+        /****************************************************************************************/
+        
+        
+       // EditAccountService update_user = new EditAccountService();
+        
+        String guy = "tguy";
+        //update_user.checkNewpassword(guy, "opeth");
+        
+        /****************************************************************************************/
+        /*					Getting tguys info													*/
+        /****************************************************************************************/
+        
+        UserService service = new UserService();
+        System.out.println(service.UsersInfo(guy).toString());
+>>>>>>> eb8dafab90e8e1701b0df1bd18b3cee7bbd8d35b
+        
+    }
+
+}

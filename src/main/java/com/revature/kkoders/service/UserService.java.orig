@@ -82,5 +82,19 @@ public class UserService {
 		}
 		
 		return check;
+<<<<<<< HEAD
+  }
+||||||| merged common ancestors
+	}
+>>>>>>>>> Temporary merge branch 2
+=======
+  }
+
+	//Adding Method to get all of the users information by username
+	public UserImpl UsersInfo(String nn) {
+		return userDAO.getUsersInfoByUsername(nn);
+
+	}
+>>>>>>> eb8dafab90e8e1701b0df1bd18b3cee7bbd8d35b
 
 }

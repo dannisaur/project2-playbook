@@ -41,7 +41,19 @@ public class EditAccountController {
 		// otherwise send to login page.
 
 		currUser = (UserImpl) session.getAttribute("alsoUser");
+<<<<<<< HEAD
+||||||| merged common ancestors
+>>>>>>>>> Temporary merge branch 2
+=======
 
+	@RequestMapping(method=RequestMethod.GET)
+	public String doEditAccount(HttpSession session) {
+		System.out.println("GET request: /account/edit");
+		
+		//TODO: validate that user is logged in to display edit account page, otherwise send to login page.
+
+>>>>>>> eb8dafab90e8e1701b0df1bd18b3cee7bbd8d35b
+		
 		updatedUser = currUser;
 
 		return new ModelAndView("account/edit_account", "updatedUser", updatedUser); 

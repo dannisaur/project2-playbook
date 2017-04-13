@@ -43,20 +43,12 @@ public class LoginController {
 		return "This is the info added";
 	}
 
+
 	@Autowired
 	GameLibService gameLibService;
 
 	@Autowired
 	SteamApiDAOImpl steamAPI;
-
-	// PARAMETER NAME IS CALLED someInfo
-	// REQUEST.GETPARAM('someInfo')
-	/*
-	 * @ModelAttribute("someInfo") public String addInfoToRequestScope()
-	 * //appends to the url like it's a GET request {
-	 * System.out.println("Adding something to the modelmap"); return
-	 * "This is the info added"; }
-	 */
 
 	/**
 	 * Handles bringing up the login page.
@@ -70,11 +62,6 @@ public class LoginController {
 		System.out.println(modelMap.get("someInfo"));
 		System.out.println("GET request: /login");
 		modelMap.addAttribute("user", emptyUser);
-
-		// RETURN LOGIN TO TAKE US TO PREFIX: WEB-INF
-		// LOGIN
-		// SUFFIX: .jsp
-
 		return "login";
 	}
 

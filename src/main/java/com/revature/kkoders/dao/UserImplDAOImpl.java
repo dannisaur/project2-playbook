@@ -22,7 +22,7 @@ public class UserImplDAOImpl implements UserImplDAO {
   
 	public UserImpl getUserById(int userID) {
 		Session session = HibernateUtil.getSession();
-
+		
 		String hql = "from UserImpl where userID =:uid";
 		Query query = session.createQuery(hql);
 		
@@ -32,7 +32,6 @@ public class UserImplDAOImpl implements UserImplDAO {
 		
 		session.close();
 		return x;
-		
 	}
 
 	public void UpdatePasswordByUn(String password, String n) {
@@ -133,7 +132,6 @@ public class UserImplDAOImpl implements UserImplDAO {
 		Session session = HibernateUtil.getSession();
 		Transaction t = session.beginTransaction();
 
-		System.out.println(updatedUser);
 		session.update(updatedUser);
 		
 		session.flush();
