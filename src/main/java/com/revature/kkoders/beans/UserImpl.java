@@ -3,7 +3,6 @@ package com.revature.kkoders.beans;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,16 +13,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.transaction.Transactional;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.stereotype.Component;
 
 @Component
+//@Scope(value=WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS) 
 @Transactional
 @Entity
+//@Scope(value="prototype")
 @Table(name="USERS")
 public class UserImpl implements Serializable, User {
 	
@@ -59,23 +62,35 @@ public class UserImpl implements Serializable, User {
 	@Column(name="DESCRIPTION")
 	private String desc;
 	
+	@Column(name="STEAM_ID")
+	private String steamId;
 
 	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="GAME_LIBRARY",
 			joinColumns=@JoinColumn(name="USER_ID"),
 			inverseJoinColumns=@JoinColumn(name="GAME_ID"))
-	
 	private List<GameImpl> gameLibrary;
 	
-	public List<GameImpl> getGameLib() {
-		// TODO Auto-generated method stub
+	
+	public List<GameImpl> getGameLib()
+	{	
 		return gameLibrary;
 	}
 	
+	public final void setGameLibrary(List<GameImpl> gameLibrary)
+	{
+		this.gameLibrary = gameLibrary;
+	}
+	
+	
+	public final void addGameToLibrary(GameImpl game)
+	{
+		this.gameLibrary.add(game);
+	}
 	// END GETTING GAMES
 	
 	// ----------------------------------------------------------
-	
+
 	// THIS IS FOR SETTING AND GETTING GAMEPLANS
 	// ONE USER TO MANY GAME PLANS
 	@OneToMany(mappedBy = "user")
@@ -172,11 +187,20 @@ public class UserImpl implements Serializable, User {
 		// TODO Auto-generated method stub
 		return this.desc;
 	}
+	
+	public String getSteamId() {
+		return steamId;
+	}
+
+	public void setSteamId(String steamId) {
+		this.steamId = steamId;
+	}
+
 
 	
 	// CONSTRUCTOR WITH FIELDS
 	public UserImpl(int userID, String firstName, String lastName, String userName, String pw, String email,
-			String picURL, String desc, List<GameImpl> gameLibrary, List<GamePlanImpl> gamePlans) {
+			String picURL, String desc, String steamId, List<GameImpl> gameLibrary, List<GamePlanImpl> gamePlans) {
 		super();
 		this.userID = userID;
 		this.firstName = firstName;
@@ -186,12 +210,14 @@ public class UserImpl implements Serializable, User {
 		this.email = email;
 		this.picURL = picURL;
 		this.desc = desc;
+		this.steamId = steamId;
 		this.gameLibrary = gameLibrary;
 		this.gamePlans = gamePlans;
 	}
-
 	// NO ARGS CONSTRUCTOR
 	public UserImpl(){}
+
+	
 
 	// OVERRIDE TOSTRING
 	@Override

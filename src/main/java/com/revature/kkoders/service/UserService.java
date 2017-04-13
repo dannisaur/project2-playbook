@@ -1,46 +1,95 @@
 package com.revature.kkoders.service;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.revature.kkoders.beans.User;
 import com.revature.kkoders.beans.UserImpl;
-import com.revature.kkoders.dao.UserDAO;
 import com.revature.kkoders.dao.UserDAOImpl;
+import com.revature.kkoders.dao.UserImplDAOImpl;
 
 @Component
 public class UserService {
-	static UserDAOImpl userDao = new UserDAOImpl();
-    
-    public void addUser(){
-        String firstname = "Danni";
-        String lastname = "Tang";
-        String username = "dtang";
-        String password = "1234";
-        String email = "dt1379@nyu.edu";
-        
-        UserImpl dummyUser = new UserImpl();
-        
-        dummyUser.setFirstName(firstname);
-        dummyUser.setLastName(lastname);
-        dummyUser.setUserName(username);
-        dummyUser.setPw(password);
-        dummyUser.setEmail(email);
-        
-        UserDAOImpl userDao = new UserDAOImpl();
-        
-        System.out.println("service adduser");
-        
-        // DAO method
-        userDao.addOrUpdateUser(dummyUser);
-    }
-    
-    public UserImpl auth(UserImpl usr)
-    {
-    	return userDao.validate(usr.getUserName(), usr.getPw());
-    }
+	
+	@Autowired
+	UserImpl userInfo;
 
+	@Autowired
+	UserDAOImpl userDao;
+
+	@Autowired
+	UserImplDAOImpl userDAO;
+
+	public void addUser(UserImpl newUser) {
+
+		// DAO method
+		userDAO.SignUpUser(newUser.getFirstName(), newUser.getLastName(), newUser.getUserName(), newUser.getPw(),
+				newUser.getEmail(), newUser.getPicture(), newUser.getDesc());
+
+		System.out.println("User added.");
+
+	}
+	
+	public void updateUser(UserImpl currUser, UserImpl updatedUser){
+		
+		// store the user id
+		updatedUser.setUserID(currUser.getUserID());
+		updatedUser.setUserName(currUser.getUserName());
+		updatedUser.setSteamId(currUser.getSteamId());
+
+		// now we do a series of checks
+		// if the first name has NOT been changed
+		if (currUser.getFirstName().equals(updatedUser.getFirstName())) {
+			updatedUser.setFirstName(currUser.getFirstName());
+		}
+		// if the last name has NOT been changed
+		if (currUser.getLastName().equals(updatedUser.getLastName())) {
+			updatedUser.setLastName(currUser.getLastName());
+		}
+		// if the password has NOT been changed
+		if (updatedUser.getPw().length()==0) {
+			updatedUser.setPw(currUser.getPw().substring(0, currUser.getPw().length()-1));
+		}
+		// if the email has NOT been changed
+		if (currUser.getEmail().equals(updatedUser.getEmail())) {
+			updatedUser.setEmail(currUser.getEmail());
+		}
+		
+		System.out.println(updatedUser);
+		userDAO.updateUser(updatedUser);
+		
+		System.out.println("user updated.");
+	}
+
+	public UserImpl auth(UserImpl usr) {
+		if (userDao == null) {
+			System.out.println("something??");
+		}
+		System.out.println(usr.getUserName() + " IN AUTH USRSERVICE");
+		return userDao.validate(usr.getUserName(), usr.getPw());
+	}
+	
+
+	public UserImpl getUserInfoByUserName(UserImpl user){
+		
+		userInfo = userDAO.getUserByUserName(user.getUserName());
+		
+		return userInfo;
+	}
+	
+	public boolean confirmPassword(String enteredPw, UserImpl userInfo){
+		boolean check = false;
+		
+		if (enteredPw.equals(userInfo.getPw())){
+			check = true;
+		}
+		
+		return check;
+  }
+
+	//Adding Method to get all of the users information by username
+	public UserImpl UsersInfo(String nn) {
+		return userDAO.getUsersInfoByUsername(nn);
+
+	}
 
 }

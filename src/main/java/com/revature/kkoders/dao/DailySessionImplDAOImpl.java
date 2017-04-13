@@ -10,6 +10,7 @@ import com.revature.kkoders.beans.GamePlanImpl;
 import com.revature.kkoders.beans.UserImpl;
 import com.revature.kkoders.hibernateUtil.HibernateUtil;
 
+
 public class DailySessionImplDAOImpl implements DailySessionImplDAO {
 
 	@Override
@@ -36,11 +37,12 @@ public class DailySessionImplDAOImpl implements DailySessionImplDAO {
 	@Override
 	public void deleteSessionById(int ds_id) {
 		Session sess = HibernateUtil.getSession();
-		String hql = "DELETE from DailySessionImpl dailysessionID =: dailysessionID";
+		String hql = "DELETE from DailySessionImpl dailysessionID =:dailysessionID";
 		Query query = sess.createQuery(hql);
 		
 		Transaction t = sess.beginTransaction();
 		query.setParameter("dailysessionID", ds_id);
+		sess.close();
 	}
 
 	

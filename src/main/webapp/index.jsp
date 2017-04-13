@@ -27,11 +27,12 @@
 	<div class="col-md-4" id="loginPanel">
 		<div class="login-panel panel panel-default">
 			<div class="panel-heading">
-				<h3 class="panel-title">The Playbook - Sign In</h3>
+				<h3 class="panel-title">The Playbook</h3>
 			</div>
 			<div class="panel-body">
 				<form action="test.jsp" role="form">
 					<fieldset>
+						 <!-- 
 						<div class="form-group">
 							<input class="form-control" placeholder="Username"
 								name="username">
@@ -45,6 +46,7 @@
 								value="Remember Me">Remember Me
 							</label>
 						</div>
+						-->
 						<!-- Change this to a button or input when using this as a form -->
 						<a href="login" class="btn btn-sm btn-success">Login</a>
 						
