@@ -2,6 +2,7 @@ package com.revature.kkoders.beans;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,7 +27,7 @@ import org.springframework.stereotype.Component;
 @Scope(value=WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS) 
 @Transactional
 @Entity
-@Scope(value="prototype")
+//@Scope(value="prototype")
 @Table(name="USERS")
 public class UserImpl implements Serializable, User {
 	
@@ -93,14 +94,14 @@ public class UserImpl implements Serializable, User {
 
 	// THIS IS FOR SETTING AND GETTING GAMEPLANS
 	// ONE USER TO MANY GAME PLANS
-	@OneToMany(mappedBy = "user")
-	private List<GamePlanImpl> gamePlans;
+	@OneToMany(fetch=FetchType.EAGER, mappedBy = "user")
+	private Set<GamePlanImpl> gamePlans;
 	
-	public void setGamePlans(List<GamePlanImpl> newGamePlans){
+	public void setGamePlans(Set<GamePlanImpl> newGamePlans){
 		this.gamePlans = newGamePlans;
 	}
 	
-	public List<GamePlanImpl> getGamePlans(){
+	public Set<GamePlanImpl> getGamePlans(){
 		return gamePlans;
 	}
 	
@@ -200,7 +201,7 @@ public class UserImpl implements Serializable, User {
 	
 	// CONSTRUCTOR WITH FIELDS
 	public UserImpl(int userID, String firstName, String lastName, String userName, String pw, String email,
-			String picURL, String desc, String steamId, List<GameImpl> gameLibrary, List<GamePlanImpl> gamePlans) {
+			String picURL, String desc, String steamId, List<GameImpl> gameLibrary, Set<GamePlanImpl> gamePlans) {
 		super();
 		this.userID = userID;
 		this.firstName = firstName;

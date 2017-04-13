@@ -133,9 +133,11 @@ public class UserImplDAOImpl implements UserImplDAO {
 		Session session = HibernateUtil.getSession();
 		Transaction t = session.beginTransaction();
 
+		System.out.println(updatedUser);
 		session.update(updatedUser);
-		//session.getTransaction();
-    		session.close();
+		
+		session.flush();
+    	session.close();
 		t.commit();
 	}
 }
