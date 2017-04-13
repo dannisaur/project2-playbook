@@ -17,6 +17,7 @@ import com.revature.kkoders.service.UserService;
 
 public class SignUpController {
 	
+
 	@Autowired
 	UserService uService;
 	
@@ -29,11 +30,11 @@ public class SignUpController {
 		
 		return new ModelAndView("signup", "userImpl", newUser);
 	}
-
 	// handles the registration
 	@RequestMapping(method = RequestMethod.POST)
 	public String processSignUp(@ModelAttribute("userImpl") UserImpl userImpl, BindingResult br, ModelMap mm) {
 		
+
 		System.out.println(userImpl);
 		uService.addUser(userImpl);
 		

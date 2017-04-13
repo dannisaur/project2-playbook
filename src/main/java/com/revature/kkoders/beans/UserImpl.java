@@ -26,6 +26,7 @@ import org.springframework.stereotype.Component;
 @Scope(value=WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS) 
 @Transactional
 @Entity
+@Scope(value="prototype")
 @Table(name="USERS")
 public class UserImpl implements Serializable, User {
 	
@@ -68,18 +69,28 @@ public class UserImpl implements Serializable, User {
 	@JoinTable(name="GAME_LIBRARY",
 			joinColumns=@JoinColumn(name="USER_ID"),
 			inverseJoinColumns=@JoinColumn(name="GAME_ID"))
-	
 	private List<GameImpl> gameLibrary;
 	
-	public List<GameImpl> getGameLib() {
-		// TODO Auto-generated method stub
+	
+	public List<GameImpl> getGameLib()
+	{	
 		return gameLibrary;
 	}
 	
+	public final void setGameLibrary(List<GameImpl> gameLibrary)
+	{
+		this.gameLibrary = gameLibrary;
+	}
+	
+	
+	public final void addGameToLibrary(GameImpl game)
+	{
+		this.gameLibrary.add(game);
+	}
 	// END GETTING GAMES
 	
 	// ----------------------------------------------------------
-	
+
 	// THIS IS FOR SETTING AND GETTING GAMEPLANS
 	// ONE USER TO MANY GAME PLANS
 	@OneToMany(mappedBy = "user")

@@ -7,8 +7,7 @@ import com.revature.kkoders.beans.GameImpl;
 public interface GameImplDAO {
 	
 	public GameImpl getGameById(int gl_id);
-	public void CreateGame(String gm_t, int st_id, int igDB_idm, 
-			String Rdate, String Platform);
+	public void CreateGame(GameImpl game);
 	public Set<String> getAllPlatforms();
 	public Set<Integer> getSteamIds();
 	public Set<Integer> getIgdbIds();
