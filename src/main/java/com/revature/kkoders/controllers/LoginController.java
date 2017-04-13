@@ -93,6 +93,7 @@ public class LoginController {
 	 * @param modelMap
 	 * @param seesion
 	 * @return
+	 * @throws Throwable 
 	 */
 
 	@RequestMapping(method=RequestMethod.POST)
@@ -105,7 +106,7 @@ public class LoginController {
 			return "login";
 		}
 		UserImpl authUser = userService.auth(user);
-
+    
 		if (authUser != null)
 		{
       //get games
