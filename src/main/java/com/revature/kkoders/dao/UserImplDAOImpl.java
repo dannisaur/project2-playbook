@@ -133,9 +133,9 @@ public class UserImplDAOImpl implements UserImplDAO {
 		Transaction t = session.beginTransaction();
 
 		session.update(updatedUser);
-		
+
 		session.flush();
-    	session.close();
+    session.close();
 		t.commit();
 	}
 }
