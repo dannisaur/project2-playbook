@@ -26,7 +26,7 @@ public class EditAccountService {
 			System.out.println("User is not in the database");
 		}
 		
-		else if ( pass.isEmpty() ) {
+		if ( pass.isEmpty() ) {
 			System.out.println("You must put in a password");
 		}
 		

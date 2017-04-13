@@ -61,9 +61,13 @@ public class UserService {
 	}
 
 	public UserImpl auth(UserImpl usr) {
+		if (userDao == null) {
+			System.out.println("something??");
+		}
 		return userDao.validate(usr.getUserName(), usr.getPw());
 	}
 	
+
 	public UserImpl getUserInfoByUserName(UserImpl user){
 		
 		userInfo = userDAO.getUserByUserName(user.getUserName());
@@ -79,6 +83,12 @@ public class UserService {
 		}
 		
 		return check;
+  }
+
+	//Adding Method to get all of the users information by username
+	public UserImpl UsersInfo(String nn) {
+		return userDAO.getUsersInfoByUsername(nn);
+
 	}
 
 }

@@ -41,6 +41,13 @@ public class EditAccountController {
 		// otherwise send to login page.
 
 		currUser = (UserImpl) session.getAttribute("alsoUser");
+
+	@RequestMapping(method=RequestMethod.GET)
+	public String doEditAccount(HttpSession session) {
+		System.out.println("GET request: /account/edit");
+		
+		//TODO: validate that user is logged in to display edit account page, otherwise send to login page.
+
 		
 		updatedUser = currUser;
 		System.out.println(updatedUser.getPw());

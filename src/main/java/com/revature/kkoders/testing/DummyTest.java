@@ -27,7 +27,7 @@ public class DummyTest {
 		        List<Integer> gameids = new ArrayList<Integer>();
 		        for (Game x :games.getResponse().getGames())
 		        {
-		        //	System.out.println(x.getAppid());
+		        	System.out.println(x.getAppid());
 		        	gameids.add(x.getAppid());
 		        }
 		        
@@ -68,9 +68,8 @@ public class DummyTest {
 		        		try 
 		        		{
 		        			SteamApp steamApp = steamApi.retrieve(y); // by appId (exact match)
-		        			System.out.println(steamApp.getHeaderImage());
-		        //			System.out.println(steamApp.getAboutTheGame());
-		        //			System.out.println("--------------------------------------------------------------------");
+		        			System.out.println(steamApp.getAboutTheGame());
+		        			System.out.println("--------------------------------------------------------------------");
 		        		} 
 		        		catch (com.github.goive.steamapi.exceptions.SteamApiException e)
 		        		{
