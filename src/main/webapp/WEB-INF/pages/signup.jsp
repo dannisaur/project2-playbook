@@ -54,7 +54,7 @@
 		<div class="row" id="signup">
 			<div
 				class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-				<form:form action="signup" method="post" commandName="signupForm" modelAttribute="userImpl">
+				<form:form action="signup" method="post" modelAttribute="userImpl">
 					<h2>
 						The Playbook <small>Sign up</small>
 					</h2>
