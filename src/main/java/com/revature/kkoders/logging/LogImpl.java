@@ -40,16 +40,12 @@ public class LogImpl implements Log, Serializable {
 	@GeneratedValue(generator="LOGID_SEQ", strategy=GenerationType.SEQUENCE)
 	private Integer logID;
 	
-	//@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	//@JoinColumn(name="LEVEL_ID")
 	@OneToOne(fetch = FetchType.EAGER, optional = false) 
     @JoinColumn(name = "LEVEL_ID", nullable = false, updatable = false)
 	private LogLevelImpl level;
 
 	@Column(name="MESSAGE")
 	private String message;
-
-	//private Integer levelId;
 	
 	public LogImpl() {
 		super();
@@ -73,44 +69,12 @@ public class LogImpl implements Log, Serializable {
 	public void setLogID(Integer logID) {
 		this.logID = logID;
 	}
-	/*
-	public Integer getLevel() {
-		return level;
-	}
-	public Level getLevelLevel() {
-		return Log.Level.getLevel(level);
-	}
-	public Integer getLevelID() {
-		return level;
-	}
-	public void setLevel(Integer level) {
-		this.level = level;
-	}
-	public void setLevelLevel(Level level) {
-		this.level = level.getId();
-	}
-	*/
 	public String getMessage() {
 		return message;
 	}
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	/*
-	@Override
-	public String toString() {
-		return "LogImpl [logID=" + logID + ", level=" + level + ", message=" + message + ", datetimeCreated="
-				+ datetimeCreated + "]";
-	}
-	*/
-
-	//public Integer getLevelId() {
-	//	return levelId;
-	//}
-
-	//public void setLevelId(Integer levelId) {
-	//	this.levelId = levelId;
-	//}
 
 	public Timestamp getDatetimeCreated() {
 		return datetimeCreated;
@@ -130,16 +94,4 @@ public class LogImpl implements Log, Serializable {
 				+ ", datetimeCreated=" + datetimeCreated + "]";
 	}
 
-//	@Override
-//	public Integer getLevel() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public void setLevel(Integer level) {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//	*/
 }

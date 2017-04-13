@@ -36,7 +36,6 @@ public class LogDAOImpl implements LogDAO {
 	public void addLog(Level level, String message) {
 		Session session = HibernateUtil.getSession();
 		
-		//log.setLevelLevel(level); bs
 		log.setLevel(logLevelDao.getLogLevel(level));
 		log.setMessage(message);
 		

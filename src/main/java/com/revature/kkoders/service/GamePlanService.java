@@ -74,14 +74,20 @@ public class GamePlanService {
 		return complete;
 	}
 	
-	/* TODO: Write code to pull daily sessions.
+	/**
+	 * Pulls the daily session for every user and every game plan.
+	 * 
+	 */
+	///* TODO: Write code to pull daily sessions.
 	//@Scheduled(cron="59 59 23 * * *") //scheduled for 11:59:59 PM every day.
-	@Scheduled(cron="0 0 12 * * *") //scheduled for noon.
+	@Scheduled(cron="0 0 12 * * *") //test: scheduled for noon.
 	//@Scheduled(fixedRate=2000)
 	public void pullDailySessions() {
-		System.out.println("time");
+		//System.out.println("time");//test statement.
+		
+		
 	}
-	*/
+	//*/
 	
 
 }

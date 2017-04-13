@@ -33,9 +33,6 @@ public class LogLevelImpl implements LogLevel, Serializable {
 	@Column(name="LOG_LEVEL")
 	private String level;
 	
-	//@OneToMany(mappedBy="level")
-	//private List<LogImpl> logs;
-	
 	public LogLevelImpl() {
 		super();
 	}

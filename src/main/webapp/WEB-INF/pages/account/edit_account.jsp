@@ -74,28 +74,25 @@
 
 
 	<nav class="navbar navbar-inverse navbar-fixed-top">
-
 	<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-					aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<!-- <a class="navbar-brand" href="<%--<%= request.getSession().getServletContext().getContextPath() %>--%>">Playbook</a>-->
-				<!-- <a class="navbar-brand" href="landing">Playbook</a>-->
-				<form action="landing" method="POST"><button class="navbar-brand btn btn-link" type="submit" value="landing">Playbook</button></form>
-			</div>
-			<div id="navbar" class="navbar-collapse collapse">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#">Dashboard</a></li>
-					<li><a href="#">Settings</a></li>
-					<li><a href="#">Profile</a></li>
-					<li><a href="#">Help</a></li>
-					<li class="active"><a href="edit">EDIT</a></li>
-					<li><a href="../logout">LOGOUT</a></li>
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+				aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">Project name</a>
+		</div>
+		<div id="navbar" class="navbar-collapse collapse">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#">Dashboard</a></li>
+				<li><a href="#">Settings</a></li>
+				<li><a href="#">Profile</a></li>
+				<li><a href="#">Help</a></li>
+				<li class="active"><a href="edit">EDIT</a></li>
+				<li><a href="../logout">LOGOUT</a></li>
 			</ul>
 			<form class="navbar-form navbar-right">
 				<input type="text" class="form-control" placeholder="Search...">
@@ -180,7 +177,7 @@
 								<label class="col-md-4 control-label" for="passwordinput">New
 									password</label>
 								<div class="col-md-4">
-									<form:password id="passwordinput" path="pw"
+									<form:password id="password" path="pw"
 										placeholder="new password" class="form-control input-md" />
 
 								</div>
@@ -265,6 +262,15 @@
 	</div>
 
 	<script>
+	$(document).ready(function(){
+		var pw = $('#password');
+		var confirm = $('#validatePw');
+		$('#validatePw').blur(function(){
+			if (confirm != pw){
+				alert("passwords do not match!")
+			}
+		});
+	
 		$(document).on('click', '#close-preview', function() {
 			$('.image-preview').popover('hide');
 			// Hover befor close the preview
@@ -322,6 +328,8 @@
 						reader.readAsDataURL(file);
 					});
 		});
+		
+	});
 	</script>
 
 

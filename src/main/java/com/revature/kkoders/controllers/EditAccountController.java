@@ -42,15 +42,7 @@ public class EditAccountController {
 
 		currUser = (UserImpl) session.getAttribute("alsoUser");
 
-	//@RequestMapping(method=RequestMethod.GET)
-	//public String doEditAccount(HttpSession session) {
-		System.out.println("GET request: /account/edit");
-		
-		//TODO: validate that user is logged in to display edit account page, otherwise send to login page.
-
-		
 		updatedUser = currUser;
-		//System.out.println(updatedUser.getPw());
 
 		return new ModelAndView("account/edit_account", "updatedUser", updatedUser); 
 	}
@@ -60,8 +52,6 @@ public class EditAccountController {
 
 		currUser = (UserImpl) session.getAttribute("alsoUser");
 		
-		System.out.println(updatedUser.getPw());
-		System.out.println(currUser.getPw());
 		service.updateUser(currUser, updatedUser);
 
 		return "account/edit_account";
