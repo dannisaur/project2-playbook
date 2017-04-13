@@ -59,11 +59,11 @@ public class LogAspect {
 		
 		//System.out.println(logMessage); //TODO: commit to DB.
 		if (logInfo) {
-			//logger.info(message);
+			logger.info(message);
 			System.out.println(message);
 		}
 		else {
-			//logger.error(message);
+			logger.error(message);
 			System.out.println(message);
 		}
 		

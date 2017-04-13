@@ -29,15 +29,15 @@ public class LogDAOImpl implements LogDAO {
 	@Autowired
 	private LogImpl log;
 	
-	//@Autowired
-	//private LogLevelDao logLevelDao;
+	@Autowired
+	private LogLevelDAOImpl logLevelDao;
 
 	@Override
 	public void addLog(Level level, String message) {
 		Session session = HibernateUtil.getSession();
 		
-		//log.setLevelLevel(level);
-		//log.setLevel(logLevel.);
+		//log.setLevelLevel(level); bs
+		log.setLevel(logLevelDao.getLogLevel(level));
 		log.setMessage(message);
 		
 		Transaction transaction = session.beginTransaction();
