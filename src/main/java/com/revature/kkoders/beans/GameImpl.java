@@ -1,16 +1,22 @@
 package com.revature.kkoders.beans;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
+@Scope(value="prototype")
 @Entity
 @Table(name="GAME")
 public class GameImpl implements Game {
@@ -35,6 +41,20 @@ public class GameImpl implements Game {
 	
 	@Column(name="PLATFORM_NAME")
 	private String platform;
+	
+	@ManyToMany (fetch=FetchType.EAGER, mappedBy="gameLibrary")
+	private List<UserImpl> owners;
+
+	
+	public final List<UserImpl> getOwners()
+	{
+		return owners;
+	}
+
+	public final void setOwners(List<UserImpl> owners)
+	{
+		this.owners = owners;
+	}
 
 	public void setGameLibID(int gameLibID) {
 		// TODO Auto-generated method stub

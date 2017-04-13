@@ -9,7 +9,7 @@
         <property name="hibernate.connection.url">jdbc:oracle:thin:@project-playbook.cytep8yn5pok.us-east-1.rds.amazonaws.com:1521:ORCL</property>
         <property name="hibernate.connection.username">kawaii</property>
         <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
-        
+       <property name="hibernate.show_sql">true</property> 
         <mapping class="com.revature.kkoders.beans.UserImpl"/>
         <mapping class="com.revature.kkoders.beans.GamePlanImpl"/>
         <mapping class="com.revature.kkoders.beans.GameImpl"/>

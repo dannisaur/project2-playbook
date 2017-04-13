@@ -1,8 +1,5 @@
 package com.revature.kkoders.controllers;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,25 +17,24 @@ import com.revature.kkoders.service.UserService;
 
 public class SignUpController {
 	
+
 	@Autowired
 	UserService uService;
 	
 	@Autowired
 	UserImpl newUser;
-	
-	//static ApplicationContext ac = new XmlWebApplicationContext();
-	
+		
 	//  handles loading the sign up page
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView getSignupPage(ModelMap model){
-		//model.addAttribute("signupForm");
+		
 		return new ModelAndView("signup", "userImpl", newUser);
 	}
-
 	// handles the registration
 	@RequestMapping(method = RequestMethod.POST)
 	public String processSignUp(@ModelAttribute("userImpl") UserImpl userImpl, BindingResult br, ModelMap mm) {
 		
+
 		System.out.println(userImpl);
 		uService.addUser(userImpl);
 		

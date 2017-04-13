@@ -42,6 +42,7 @@ public class DailySessionImplDAOImpl implements DailySessionImplDAO {
 		
 		Transaction t = sess.beginTransaction();
 		query.setParameter("dailysessionID", ds_id);
+		sess.close();
 	}
 
 	

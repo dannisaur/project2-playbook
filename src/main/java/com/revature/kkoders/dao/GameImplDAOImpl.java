@@ -9,12 +9,15 @@ import org.hibernate.Query;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 
 import com.revature.kkoders.beans.GameImpl;
 //import com.revature.kkoders.beans.GameLibraryImpl;
 import com.revature.kkoders.beans.UserImpl;
 import com.revature.kkoders.hibernateUtil.HibernateUtil;
 
+@Component
 public class GameImplDAOImpl implements GameImplDAO {
 
 	@Autowired
@@ -31,21 +34,16 @@ public class GameImplDAOImpl implements GameImplDAO {
 	}
 
 	@Override
-	public void CreateGame(String gm_t, int st_id, int igDB_idm, String Rdate, String Platform) {
+	public void CreateGame(GameImpl game) {
 		Session session = HibernateUtil.getSession();
 		Transaction t = session.beginTransaction();
 		
-		//GameImpl new_gl = new GameImpl();
-		new_gl.setGameTitle(gm_t);
-		new_gl.setSteamGameID(st_id);
-		new_gl.setIgdbID(igDB_idm);
-		new_gl.setReleaseDate(Rdate);
-		new_gl.setPlatform(Platform);
-		
-		session.save(new_gl);
+
+		session.save(game);
+
 		session.getTransaction();
 		t.commit();
-
+		session.close();
 	}
 
 	@Override
