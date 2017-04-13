@@ -1,7 +1,9 @@
 package com.revature.kkoders.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +13,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.lukaspradel.steamapi.core.exception.SteamApiException;
+import com.revature.kkoders.beans.GameImpl;
 import com.revature.kkoders.beans.UserImpl;
+import com.revature.kkoders.dao.SteamApiDAOImpl;
+import com.revature.kkoders.service.GameLibService;
 import com.revature.kkoders.service.UserService;
 
 /**
@@ -30,6 +36,12 @@ public class LoginController
 	@Autowired
 	UserService userService;
 	
+	@Autowired
+	GameLibService gameLibService;
+	
+	@Autowired
+	SteamApiDAOImpl steamAPI;
+
 	//PARAMETER NAME IS CALLED someInfo
 		//REQUEST.GETPARAM('someInfo')
 	/*
@@ -81,8 +93,32 @@ public class LoginController
 		UserImpl authUser = userService.auth(user);
 		if (authUser != null)
 		{
-			System.out.println(userService.UsersInfo(authUser.getUserName()).getFirstName());
-			//TODO GET A USERS GAMES
+
+			List<GameImpl> myGames = new ArrayList<>();
+			if(gameLibService.getUsersGame(authUser)== null || gameLibService.getUsersGame(authUser).isEmpty())
+			{
+				System.out.println("no games");
+				if (authUser.getSteamId() != null && !authUser.getSteamId().isEmpty())
+				{
+				System.out.println(authUser.getSteamId());
+					//GET THE USERS GAMES FROM STEAM
+					try
+					{
+						steamAPI.getGames(authUser);
+					} catch (SteamApiException e)
+					{
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+			else
+			{
+				myGames = gameLibService.getUsersGame(authUser);
+				//ADD USERS GAMES TO A PARAMETER
+			}
+			
+
 			modelMap.addAttribute("user", user);
 			session.setAttribute("alsoUser", user);
 			//NEW VIEW
