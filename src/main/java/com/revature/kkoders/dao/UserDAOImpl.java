@@ -82,7 +82,8 @@ public class UserDAOImpl implements UserDAO {
         cr.add(andExp);
         
         List rs = cr.list();
-        if (rs.isEmpty() || rs.size() != 1)
+//        if (rs.isEmpty() || rs.size() != 1)
+        if (rs.isEmpty())
         {
         	currSession.close();
         	return result;
@@ -91,7 +92,6 @@ public class UserDAOImpl implements UserDAO {
         {
         	result = (UserImpl)x;
         }
-        System.out.println(result);
         currSession.close();
         return result;
 	}

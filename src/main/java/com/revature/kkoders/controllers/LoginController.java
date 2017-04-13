@@ -106,9 +106,10 @@ public class LoginController {
 			return "login";
 		}
 		UserImpl authUser = userService.auth(user);
-    
+		System.out.println("here");
 		if (authUser != null)
 		{
+			System.out.println(authUser.getUserName());
       //get games
 			List<GameImpl> myGames = new ArrayList<>();
 			if(gameLibService.getUsersGame(authUser)== null || gameLibService.getUsersGame(authUser).isEmpty())

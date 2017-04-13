@@ -40,7 +40,6 @@ public class GameLibService
 		game.setPlatform(Platform);
 		
 		gameDao.CreateGame(game);
-		l.debug("GAME TITLE -----> " + game.getGameTitle());
 		gLDao.addGameToUser(game, user);
 	}
 }

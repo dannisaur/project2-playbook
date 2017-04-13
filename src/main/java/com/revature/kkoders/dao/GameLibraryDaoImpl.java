@@ -1,9 +1,11 @@
 package com.revature.kkoders.dao;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -24,10 +26,49 @@ public class GameLibraryDaoImpl implements GameLibraryDao {
 	
 	@Override
 	public List<GameImpl> getGamesByUser(UserImpl user) {
+		System.out.println("IN GETGAMESBYUSER GAMELIBRARYDAOIML");
+		l.error("==================================================================================");
 		Session session = HibernateUtil.getSession();
-		Criteria cr = session.createCriteria(GameLibraryImpl.class);
-		cr.add(Restrictions.eq("USER_ID", user.getUserID()));
-		List<GameImpl> results =  cr.list();
+		String qry = "SELECT u.gameLibrary FROM UserImpl u JOIN u.gameLibrary gms WHERE u.userID =:usr ";
+		Query q = session.createQuery(qry);
+		q.setParameter("usr", user.getUserID());
+		//q.list();
+		
+		//Criteria cr = session.createCriteria(UserImpl.class);
+		//cr.add(Restrictions.eq("USER_ID", user.getUserID()));
+		l.warn("----------------------------------- LIST RETURNED ---------------------------");
+		l.warn(q.list().size()+ " SIZE ");
+		System.out.println("testst");
+//		List<Object[]> outs = q.list();
+//		for(Object[] x : outs)
+//		{
+//			System.out.println("HERE");
+//			l.warn(Arrays.toString(x) + ": OBJECT ");
+//			int f = 0;
+//			//l.warn((UserImpl)x+ ": OBJECT ");
+//			//l.warn(((UserImpl)x).getUserName()+ " : USERNAME");
+//		}
+		List outs = q.list();
+		for(int i =0; i < outs.size(); i++)
+		{
+			System.out.println("HERE");
+			l.warn(outs.get(i).toString() + ": OBJECT ");
+			int f = 0;
+			//l.warn((UserImpl)x+ ": OBJECT ");
+			//l.warn(((UserImpl)x).getUserName()+ " : USERNAME");
+		}
+		l.warn("----------------------------------- END LIST RETURNED ---------------------------");
+		
+		//List<GameImpl> results =  cr.list();
+//		l.error("==================================================================================");
+//		if(!q.list().isEmpty())
+//		{
+//			for (GameImpl x: (List<GameImpl>) q.list())
+//			{
+//				System.out.println(x.getGameTitle()+ " ===========================================");
+//			}
+//		}
+		List<GameImpl> results = q.list();
 		//session.pers
 		session.close();
 		return results;

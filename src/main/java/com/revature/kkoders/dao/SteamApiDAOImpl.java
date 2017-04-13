@@ -42,6 +42,7 @@ public class SteamApiDAOImpl
         //GET THE GAME IDS FROM STEAM
         for (Game x :games.getResponse().getGames())
         {
+        	System.out.println(x.getPlaytimeForever());
         //	System.out.println(x.getAppid());
         	gameids.add(x.getAppid());
         }
