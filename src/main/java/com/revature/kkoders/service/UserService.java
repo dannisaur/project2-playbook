@@ -47,14 +47,13 @@ public class UserService {
 		}
 		// if the password has NOT been changed
 		if (updatedUser.getPw().length()==0) {
-			updatedUser.setPw(currUser.getPw().substring(0, currUser.getPw().length()-1));
+			updatedUser.setPw(currUser.getPw());
 		}
 		// if the email has NOT been changed
 		if (currUser.getEmail().equals(updatedUser.getEmail())) {
 			updatedUser.setEmail(currUser.getEmail());
 		}
 		
-		System.out.println(updatedUser);
 		userDAO.updateUser(updatedUser);
 		
 		System.out.println("user updated.");
@@ -83,12 +82,5 @@ public class UserService {
 		}
 		
 		return check;
-  }
-
-	//Adding Method to get all of the users information by username
-	public UserImpl UsersInfo(String nn) {
-		return userDAO.getUsersInfoByUsername(nn);
-
-	}
 
 }

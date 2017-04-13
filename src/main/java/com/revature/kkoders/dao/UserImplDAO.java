@@ -13,9 +13,6 @@ public interface UserImplDAO {
 	public void SignUpUser(String fn, String ln, String un, 
 			String p, String em, String picurl, String d );
 	
-	public UserImpl getUsersInfoByUsername(String userName);
-	
-	
-	
+	//public UserImpl getUsersInfoByUsername(String userName);
 
 }
