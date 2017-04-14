@@ -100,9 +100,9 @@
 							<figure class="snip1174 navy col-md-4"> <img
 								src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample33.jpg"
 								alt="sq-sample33" /> <figcaption>
-							<h2>Game Name</h2>
-							<p>Some Info</p>
-							<p>More Info</p>
+							<h2>${ games.gameTitle }</h2>
+							<p> ${ games.releaseDate }</p>
+							<p> ${ games.platform }</p>
 							</figcaption> </figure>
 						</div>
 					</div>

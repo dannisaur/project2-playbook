@@ -15,30 +15,27 @@ import com.revature.kkoders.beans.GameImpl;
 import com.revature.kkoders.beans.UserImpl;
 
 @Controller
-@RequestMapping(value = { "/library" })
-public class LibraryController {
-	
+@RequestMapping(value = { "/link_steam" })
+public class LinkSteamController {
+
 	@Autowired
 	UserImpl currUser;
-	
+
 	@Autowired
 	GameImpl allGames;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView doLibrary(HttpSession session) {
-		ModelAndView model = new ModelAndView("/library");
+		ModelAndView model = new ModelAndView("/link_steam");
 
 		currUser = (UserImpl) session.getAttribute("alsoUser");
-		List<GameImpl> allGames = currUser.getGameLib();
 
-		System.out.println(allGames.isEmpty());
-
-		if (allGames.isEmpty()) {
-			model.addObject("message", "You currently have no games in your Library. <a href='library/link_steam'>Link your steam account now?</a>");
+		if (currUser.getSteamId().isEmpty()) {
+			model.addObject("user", currUser);
+			// link steam logic here
 		} else {
-			model.addObject("games", allGames);
+			model.addObject("message", "You already linked your steam!");
 		}
-		model.addObject("user", currUser);
 
 		return model;
 	}
