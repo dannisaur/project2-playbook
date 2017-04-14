@@ -34,7 +34,7 @@ public class LibraryController {
 		System.out.println(allGames.isEmpty());
 
 		if (allGames.isEmpty()) {
-			model.addObject("message", "You currently have no games in your Library. <a href='library/link_steam'>Link your steam account now?</a>");
+			model.addObject("message", "You currently have no games in your Library. <a href='link_steam'>Link your steam account now?</a>");
 		} else {
 			model.addObject("games", allGames);
 		}

@@ -3,7 +3,9 @@ package com.revature.kkoders.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.lukaspradel.steamapi.core.exception.SteamApiException;
 import com.revature.kkoders.beans.UserImpl;
+import com.revature.kkoders.dao.SteamApiDAOImpl;
 import com.revature.kkoders.dao.UserDAOImpl;
 import com.revature.kkoders.dao.UserImplDAOImpl;
 
@@ -18,6 +20,9 @@ public class UserService {
 
 	@Autowired
 	UserImplDAOImpl userDAO;
+	
+	@Autowired
+	SteamApiDAOImpl steam;
 
 	public void addUser(UserImpl newUser) {
 
@@ -83,5 +88,18 @@ public class UserService {
 		}
 		
 		return check;
+	}
+	
+	public void addSteamId(String steamId, UserImpl userInfo){
+		userDAO.updateSteamIdByUsername(steamId, userInfo.getUserName());
+		
+		try {
+			steam.getGames(userInfo);
+		} catch (SteamApiException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println("Steam ID added.");
 	}
 }

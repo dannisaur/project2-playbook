@@ -41,6 +41,12 @@
 
 <link rel="stylesheet" href="resources/css/style2.css">
 <link rel="stylesheet" href="resources/css/style3.css">
+
+<link rel="stylesheet" type="text/css"
+	href="http://fonts.googleapis.com/css?family=Rambla">
+<link rel="stylesheet" type="text/css"
+	href="http://fonts.googleapis.com/css?family=Open Sans">
+	
 <%@ page isELIgnored="false" %>
 </head>
 <body>
@@ -91,18 +97,18 @@
 				</ul>
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<h1 class="page-header">This is your Steam Library.</h1>
+				<h1 class="page-header">Your Steam Library</h1>
 
 				${message}
 				<c:forEach var="games" items="${games}">
 					<div class="services">
 						<div class="col-md-4">
 							<figure class="snip1174 navy col-md-4"> <img
-								src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample33.jpg"
+								src="${ games.pic }"
 								alt="sq-sample33" /> <figcaption>
-							<h2>${ games.gameTitle }</h2>
-							<p> ${ games.releaseDate }</p>
-							<p> ${ games.platform }</p>
+							<div class= "info">
+							<h4> ${ games.gameTitle } </h4>
+							<h4> ${ games.releaseDate }, ${ games.platform }</h4></div>	
 							</figcaption> </figure>
 						</div>
 					</div>
@@ -114,71 +120,22 @@
 
 	<script>
 	$(document).ready(function(){
-		var pw = $('#password');
-		var confirm = $('#validatePw');
-		$('#validatePw').blur(function(){
-			if (confirm != pw){
-				alert("passwords do not match!")
-			}
-		});
 	
-		$(document).on('click', '#close-preview', function() {
-			$('.image-preview').popover('hide');
-			// Hover befor close the preview
-			$('.image-preview').hover(function() {
-				$('.image-preview').popover('show');
-			}, function() {
-				$('.image-preview').popover('hide');
-			});
-		});
+		// hiding info on load
+		$('#info').hide();
+		
+		if($('#info')) {
+	        $('#info').each(function() {
+	            $(this).mouseover(function() {
+	            	$(this).show();
+	            });
 
-		$(function() {
-			// Create the close button
-			var closebtn = $('<button/>', {
-				type : "button",
-				text : 'x',
-				id : 'close-preview',
-				style : 'font-size: initial;',
-			});
-			closebtn.attr("class", "close pull-right");
-			// Set the popover default content
-			$('.image-preview').popover({
-				trigger : 'manual',
-				html : true,
-				title : "<strong>Preview</strong>" + $(closebtn)[0].outerHTML,
-				content : "There's no image",
-				placement : 'bottom'
-			});
-			// Clear event
-			$('.image-preview-clear').click(function() {
-				$('.image-preview').attr("data-content", "").popover('hide');
-				$('.image-preview-filename').val("");
-				$('.image-preview-clear').hide();
-				$('.image-preview-input input:file').val("");
-				$(".image-preview-input-title").text("Browse");
-			});
-			// Create the preview image
-			$(".image-preview-input input:file").change(
-					function() {
-						var img = $('<img/>', {
-							id : 'dynamic',
-							width : 250,
-							height : 200
-						});
-						var file = this.files[0];
-						var reader = new FileReader();
-						// Set preview image into the popover data-content
-						reader.onload = function(e) {
-							$(".image-preview-input-title").text("Change");
-							$(".image-preview-clear").show();
-							$(".image-preview-filename").val(file.name);
-							img.attr('src', e.target.result);
-							$(".image-preview").attr("data-content",
-									$(img)[0].outerHTML).popover("show");
-						}
-						reader.readAsDataURL(file);
-					});
-		});
+	            $(this).mouseout(function() {
+	                $(this).hide();
+	            });
+
+	        });
+	    }
 		
 	});
 	</script>
