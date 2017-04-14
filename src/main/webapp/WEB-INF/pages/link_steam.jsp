@@ -14,7 +14,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="icon" href="../../favicon.ico">
-<title>Your Games</title>
+<title>Link Steam</title>
 
 <!-- Bootstrap core CSS -->
 <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
@@ -41,13 +41,7 @@
 
 <link rel="stylesheet" href="resources/css/style2.css">
 <link rel="stylesheet" href="resources/css/style3.css">
-
-<link rel="stylesheet" type="text/css"
-	href="http://fonts.googleapis.com/css?family=Rambla">
-<link rel="stylesheet" type="text/css"
-	href="http://fonts.googleapis.com/css?family=Open Sans">
-	
-<%@ page isELIgnored="false" %>
+<%@ page isELIgnored="false"%>
 </head>
 <body>
 
@@ -97,47 +91,122 @@
 				</ul>
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<h1 class="page-header">Your Steam Library</h1>
+				<h1 class="page-header">Link Your Steam Account</h1>
 
 				${message}
-				<c:forEach var="games" items="${games}">
-					<div class="services">
-						<div class="col-md-4">
-							<figure class="snip1174 navy col-md-4"> <img
-								src="${ games.pic }"
-								alt="sq-sample33" /> <figcaption>
-							<div class= "info">
-							<h4> ${ games.gameTitle } </h4>
-							<h4> ${ games.releaseDate }, ${ games.platform }</h4></div>	
-							</figcaption> </figure>
-						</div>
-					</div>
-				</c:forEach>
+
+				<div class="container">
+					<form action="link_steam" method="post"
+						class="form-horizontal">
+						<fieldset>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="textinput">Enter
+									your Steam ID</label>
+								<div class="col-md-4">
+									<input id="textinput" name="steamId" type="text"
+										placeholder="Steam ID" class="form-control input-md" />
+								</div>
+							</div>
+							
+							
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="steamButton">Get</label>
+								<div class="col-md-4">
+									<button id="steamButton" name="steamButton"
+										class="btn btn-success">Save</button>
+								</div>
+							</div>
+						</fieldset>
+					</form>
+
+				</div>
 
 			</div>
 		</div>
 	</div>
 
 	<script>
-	$(document).ready(function(){
-	
-		// hiding info on load
-		$('#info').hide();
-		
-		if($('#info')) {
-	        $('#info').each(function() {
-	            $(this).mouseover(function() {
-	            	$(this).show();
-	            });
+		$(document).ready(
+				function() {
+					var pw = $('#password');
+					var confirm = $('#validatePw');
+					$('#validatePw').blur(function() {
+						if (confirm != pw) {
+							alert("passwords do not match!")
+						}
+					});
 
-	            $(this).mouseout(function() {
-	                $(this).hide();
-	            });
+					$(document).on('click', '#close-preview', function() {
+						$('.image-preview').popover('hide');
+						// Hover befor close the preview
+						$('.image-preview').hover(function() {
+							$('.image-preview').popover('show');
+						}, function() {
+							$('.image-preview').popover('hide');
+						});
+					});
 
-	        });
-	    }
-		
-	});
+					$(function() {
+						// Create the close button
+						var closebtn = $('<button/>', {
+							type : "button",
+							text : 'x',
+							id : 'close-preview',
+							style : 'font-size: initial;',
+						});
+						closebtn.attr("class", "close pull-right");
+						// Set the popover default content
+						$('.image-preview').popover(
+								{
+									trigger : 'manual',
+									html : true,
+									title : "<strong>Preview</strong>"
+											+ $(closebtn)[0].outerHTML,
+									content : "There's no image",
+									placement : 'bottom'
+								});
+						// Clear event
+						$('.image-preview-clear').click(
+								function() {
+									$('.image-preview')
+											.attr("data-content", "").popover(
+													'hide');
+									$('.image-preview-filename').val("");
+									$('.image-preview-clear').hide();
+									$('.image-preview-input input:file')
+											.val("");
+									$(".image-preview-input-title").text(
+											"Browse");
+								});
+						// Create the preview image
+						$(".image-preview-input input:file").change(
+								function() {
+									var img = $('<img/>', {
+										id : 'dynamic',
+										width : 250,
+										height : 200
+									});
+									var file = this.files[0];
+									var reader = new FileReader();
+									// Set preview image into the popover data-content
+									reader.onload = function(e) {
+										$(".image-preview-input-title").text(
+												"Change");
+										$(".image-preview-clear").show();
+										$(".image-preview-filename").val(
+												file.name);
+										img.attr('src', e.target.result);
+										$(".image-preview").attr(
+												"data-content",
+												$(img)[0].outerHTML).popover(
+												"show");
+									}
+									reader.readAsDataURL(file);
+								});
+					});
+
+				});
 	</script>
 
 

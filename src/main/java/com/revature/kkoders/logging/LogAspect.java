@@ -57,6 +57,8 @@ public class LogAspect {
 			logInfo = false;
 		}
 		
+		message = message.substring(0, message.length() > 299 ? 299 : message.length());
+		
 		if (logInfo) {
 			logger.info(message); //commit to DB
 			System.out.println(message);
