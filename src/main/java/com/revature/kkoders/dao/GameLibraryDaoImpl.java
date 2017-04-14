@@ -48,7 +48,7 @@ public class GameLibraryDaoImpl implements GameLibraryDao {
 		}
 		//List<GameImpl> results = q.list();
 		//session.pers
-		//session.close();
+		session.close();
 		//return results;
 		
 		return test;
@@ -88,6 +88,7 @@ public class GameLibraryDaoImpl implements GameLibraryDao {
 		{
 			rets.put(in.getSteamGameID(), in);
 		}
+		session.close();
 		return rets;		
 	}
 
