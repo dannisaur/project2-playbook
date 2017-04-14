@@ -22,5 +22,8 @@ public interface Game {
 	
 	public void setPlatform(String platform);
 	public String getPlatform();
+	
+	public String getPic();
+	public void setPic(String pic);
 
 }
