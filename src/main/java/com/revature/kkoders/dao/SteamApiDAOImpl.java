@@ -50,7 +50,7 @@ public class SteamApiDAOImpl
         //GET THE GAME IDS FROM STEAM
         for (Game x :games.getResponse().getGames())
         {
-        	hours.put(x.getAppid(), x.getPlaytimeForever());
+        	hours.put(x.getAppid(), x.getPlaytimeForever()/60);
         	System.out.println(x.getPlaytimeForever());
         	if(dbGames.containsKey(x.getAppid()))
         	{        		
