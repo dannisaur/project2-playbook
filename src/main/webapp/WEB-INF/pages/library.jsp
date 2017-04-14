@@ -86,7 +86,7 @@
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
-					<li><a href="#">New Plan</a></li>
+					<li><a href="newgameplan">New Plan</a></li>
 					<li><a href="account/edit">Edit Account</a></li>
 					<li class="active"><a href="library">View Library <span
 							class="sr-only">(current)</span></a></li>

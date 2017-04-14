@@ -14,7 +14,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="icon" href="../../favicon.ico">
-<title>Link Steam</title>
+<title>New Game Plan</title>
 
 <!-- Bootstrap core CSS -->
 <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
@@ -39,14 +39,14 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+<link rel="stylesheet" href="resources/css/style1.css">
 <link rel="stylesheet" href="resources/css/style2.css">
-<link rel="stylesheet" href="resources/css/style3.css">
 
 <link rel="stylesheet" type="text/css"
 	href="http://fonts.googleapis.com/css?family=Rambla">
 <link rel="stylesheet" type="text/css"
 	href="http://fonts.googleapis.com/css?family=Open Sans">
-	
+
 <%@ page isELIgnored="false"%>
 </head>
 <body>
@@ -70,7 +70,7 @@
 				<li><a href="#">Profile</a></li>
 				<li><a href="#">Help</a></li>
 				<li class="active"><a href="edit">EDIT</a></li>
-				<li><a href="logout">LOGOUT</a></li>
+				<li><a href="../logout">LOGOUT</a></li>
 			</ul>
 			<form class="navbar-form navbar-right">
 				<input type="text" class="form-control" placeholder="Search...">
@@ -84,10 +84,10 @@
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
-					<li><a href="newgameplan">New Plan</a></li>
+					<li class="active"><a href="newgameplan"><span
+							class="sr-only">(current)</span>New Plan</a></li>
 					<li><a href="account/edit">Edit Account</a></li>
-					<li class="active"><a href="library">View Library <span
-							class="sr-only">(current)</span></a></li>
+					<li><a href="library">View Library</a></li>
 				</ul>
 				<ul class="nav nav-sidebar">
 					<li><a href="#">Game Plans</a></li>
@@ -95,123 +95,83 @@
 				</ul>
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<h1 class="page-header">Link Your Steam Account</h1>
+				<h1 class="page-header">Let's make a productive use of your
+					day.</h1>
 
-				${message}
 
+				<p>Fields marked with (*) are optional.</p>
 				<div class="container">
-					<form action="link_steam" method="post"
+					<form:form action="edit" method="POST" modelAttribute="newGamePlan"
 						class="form-horizontal">
 						<fieldset>
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="col-md-4 control-label" for="textinput">Enter
-									your Steam ID</label>
+								<label class="col-md-4 control-label" for="textinput">Plan
+									Title *</label>
 								<div class="col-md-4">
-									<input id="textinput" name="steamId" type="text"
-										placeholder="Steam ID" class="form-control input-md" />
+									<form:input id="textinput" path="title" type="text"
+										placeholder="Plan Title" class="form-control input-md" />
 								</div>
 							</div>
-							
-							
+
 							<div class="form-group">
-								<label class="col-md-4 control-label" for="steamButton">Get</label>
+								<label class="col-md-4 control-label" for="textinput">Start
+									Date</label>
 								<div class="col-md-4">
-									<button id="steamButton" name="steamButton"
+									<form:input id="textinput" path="startDate" type="text"
+										placeholder="mm-dd-yyyy" class="form-control input-md" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="textinput">End
+									Date</label>
+								<div class="col-md-4">
+									<form:input id="textinput" path="endDate" type="text"
+										placeholder="mm-dd-yyyy" class="form-control input-md" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="textinput">Hours
+									Per Day</label>
+								<div class="col-md-4">
+									<form:input id="textinput" path="hoursPerDay"
+										placeholder="Hours" class="form-control input-md" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="textinput">Select
+									the games to be played: </label>
+								<div class="col-md-4">
+									<form:select class="form-control" size="10" id="gamesSelect"
+										multiple="true" path="gamesInPlan">
+										<form:options items="${ games }" />
+									</form:select>
+								</div>
+							</div>
+
+							<!-- Button -->
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="singlebutton">Save
+									Changes</label>
+								<div class="col-md-4">
+									<button id="singlebutton" name="singlebutton"
 										class="btn btn-success">Save</button>
 								</div>
 							</div>
+
 						</fieldset>
-					</form>
+					</form:form>
 
 				</div>
+
+
 
 			</div>
 		</div>
 	</div>
-
-	<script>
-		$(document).ready(
-				function() {
-					var pw = $('#password');
-					var confirm = $('#validatePw');
-					$('#validatePw').blur(function() {
-						if (confirm != pw) {
-							alert("passwords do not match!")
-						}
-					});
-
-					$(document).on('click', '#close-preview', function() {
-						$('.image-preview').popover('hide');
-						// Hover befor close the preview
-						$('.image-preview').hover(function() {
-							$('.image-preview').popover('show');
-						}, function() {
-							$('.image-preview').popover('hide');
-						});
-					});
-
-					$(function() {
-						// Create the close button
-						var closebtn = $('<button/>', {
-							type : "button",
-							text : 'x',
-							id : 'close-preview',
-							style : 'font-size: initial;',
-						});
-						closebtn.attr("class", "close pull-right");
-						// Set the popover default content
-						$('.image-preview').popover(
-								{
-									trigger : 'manual',
-									html : true,
-									title : "<strong>Preview</strong>"
-											+ $(closebtn)[0].outerHTML,
-									content : "There's no image",
-									placement : 'bottom'
-								});
-						// Clear event
-						$('.image-preview-clear').click(
-								function() {
-									$('.image-preview')
-											.attr("data-content", "").popover(
-													'hide');
-									$('.image-preview-filename').val("");
-									$('.image-preview-clear').hide();
-									$('.image-preview-input input:file')
-											.val("");
-									$(".image-preview-input-title").text(
-											"Browse");
-								});
-						// Create the preview image
-						$(".image-preview-input input:file").change(
-								function() {
-									var img = $('<img/>', {
-										id : 'dynamic',
-										width : 250,
-										height : 200
-									});
-									var file = this.files[0];
-									var reader = new FileReader();
-									// Set preview image into the popover data-content
-									reader.onload = function(e) {
-										$(".image-preview-input-title").text(
-												"Change");
-										$(".image-preview-clear").show();
-										$(".image-preview-filename").val(
-												file.name);
-										img.attr('src', e.target.result);
-										$(".image-preview").attr(
-												"data-content",
-												$(img)[0].outerHTML).popover(
-												"show");
-									}
-									reader.readAsDataURL(file);
-								});
-					});
-
-				});
-	</script>
 
 
 	<script

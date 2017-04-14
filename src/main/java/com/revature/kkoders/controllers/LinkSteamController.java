@@ -52,7 +52,7 @@ public class LinkSteamController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView linkSteam(HttpServletRequest request, HttpSession session) {
-		ModelAndView model = new ModelAndView("/link_steam");
+		ModelAndView model = new ModelAndView("/library");
 		
 		String id = request.getParameter("steamId");
 		
@@ -62,6 +62,8 @@ public class LinkSteamController {
 		currUser = service.addSteamId(id, currUser);
 		session.removeAttribute("alsoUser");
 		session.setAttribute("alsoUser", currUser);
+		
+		model.addObject("games", currUser.getGameLib());
 		
 		System.out.println("Printing steam id: " + currUser.getSteamId());
 		

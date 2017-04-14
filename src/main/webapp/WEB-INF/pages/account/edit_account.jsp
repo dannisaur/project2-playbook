@@ -74,10 +74,9 @@
 <link rel="stylesheet" type="text/css"
 	href="http://fonts.googleapis.com/css?family=Open Sans">
 
+<%@ page isELIgnored="false"%>
 </head>
 <body>
-
-
 
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container-fluid">
@@ -112,7 +111,7 @@
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
-					<li><a href="#">New Plan</a></li>
+					<li><a href="../newgameplan">New Plan</a></li>
 					<li class="active"><a href="edit">Edit Account <span
 							class="sr-only">(current)</span></a></li>
 					<li><a href="../library">View Library</a></li>
