@@ -46,7 +46,7 @@
 	href="http://fonts.googleapis.com/css?family=Rambla">
 <link rel="stylesheet" type="text/css"
 	href="http://fonts.googleapis.com/css?family=Open Sans">
-	
+
 <%@ page isELIgnored="false"%>
 </head>
 <body>
@@ -84,6 +84,7 @@
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
+
 					<li><a href="newgameplan">New Plan</a></li>
 					<li><a href="account/edit">Edit Account</a></li>
 					<li class="active"><a href="library">View Library <span

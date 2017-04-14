@@ -75,6 +75,7 @@
 	href="http://fonts.googleapis.com/css?family=Open Sans">
 
 <%@ page isELIgnored="false"%>
+
 </head>
 <body>
 

@@ -37,6 +37,7 @@ public class UserService {
 
 	}
 
+
 	public UserImpl updateUser(UserImpl currUser, UserImpl updatedUser) {
 
 		// store the user id

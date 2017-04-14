@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.revature.kkoders.beans.GameImpl;
-import com.revature.kkoders.beans.GameLibraryImpl;
+import com.revature.kkoders.beans.UserGame;
 import com.revature.kkoders.beans.UserImpl;
 import com.revature.kkoders.util.HibernateUtil;
 
@@ -21,8 +21,9 @@ import com.revature.kkoders.util.HibernateUtil;
 public class GameLibraryDaoImpl implements GameLibraryDao {
 
 	static final Logger l = Logger.getRootLogger();
-	@Autowired
-	GameLibraryImpl myGames;
+	
+	//@Autowired 
+	UserGame addJoint = new UserGame();
 	
 	@Override
 	public List<GameImpl> getGamesByUser(UserImpl user) {
@@ -61,18 +62,28 @@ public class GameLibraryDaoImpl implements GameLibraryDao {
 	}
 
 	@Override
-	public void addGameToUser(GameImpl game, UserImpl user) {
+	public void addGameToUser(GameImpl game, UserImpl user, Integer hour) {
+		System.out.println("HERE0");
 		Session session = HibernateUtil.getSession();
+		System.out.println("HERE1");
 		Transaction t = session.beginTransaction();
-		user.addGameToLibrary(game);
+		System.out.println("HERE2");
+		addJoint.setUser(user);
+		System.out.println("HERE3");
+		addJoint.setGame(game);
+		System.out.println("HERE4");
+		addJoint.setHours(hour);
+		System.out.println("HERE5");
+		
+		System.out.println("ADDGAMETOUSER GLDAOIMPL");
+		System.out.println("\t"+user.getUserName());
+		System.out.println("\t"+game.getGameTitle());
 		//user.getGameLib().add(game);
 		//user.setGameLibrary(user.getGameLib());
-		for ( GameImpl games : user.getGameLib())
-		{
-			l.warn("GAMES IN LIST ===> " + games.getGameTitle() + " " + games.getGameLibID());
-		}
-		session.saveOrUpdate(user);
+		//session.saveOrUpdate(user);
+		session.save(addJoint);
 		t.commit();
+		System.out.println("==== END ADDGAMETOUSER GLDAOIMPL ====");
 		session.close();
 	}
 
