@@ -3,13 +3,15 @@ package com.revature.kkoders.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.lukaspradel.steamapi.core.exception.SteamApiException;
 import com.revature.kkoders.beans.UserImpl;
+import com.revature.kkoders.dao.SteamApiDAOImpl;
 import com.revature.kkoders.dao.UserDAOImpl;
 import com.revature.kkoders.dao.UserImplDAOImpl;
 
 @Component
 public class UserService {
-	
+
 	@Autowired
 	UserImpl userInfo;
 
@@ -18,6 +20,12 @@ public class UserService {
 
 	@Autowired
 	UserImplDAOImpl userDAO;
+
+	@Autowired
+	SteamApiDAOImpl steam;
+	
+	@Autowired
+	GameLibService gameService;
 
 	public void addUser(UserImpl newUser) {
 
@@ -28,13 +36,14 @@ public class UserService {
 		System.out.println("User added.");
 
 	}
-	
-	public void updateUser(UserImpl currUser, UserImpl updatedUser){
-		
+
+	public void updateUser(UserImpl currUser, UserImpl updatedUser) {
+
 		// store the user id
 		updatedUser.setUserID(currUser.getUserID());
 		updatedUser.setUserName(currUser.getUserName());
 		updatedUser.setSteamId(currUser.getSteamId());
+		updatedUser.setGameLibrary(currUser.getGameLib());
 
 		// now we do a series of checks
 		// if the first name has NOT been changed
@@ -46,16 +55,16 @@ public class UserService {
 			updatedUser.setLastName(currUser.getLastName());
 		}
 		// if the password has NOT been changed
-		if (updatedUser.getPw().length()==0) {
+		if (updatedUser.getPw().length() == 0) {
 			updatedUser.setPw(currUser.getPw());
 		}
 		// if the email has NOT been changed
 		if (currUser.getEmail().equals(updatedUser.getEmail())) {
 			updatedUser.setEmail(currUser.getEmail());
 		}
-		
+
 		userDAO.updateUser(updatedUser);
-		
+
 		System.out.println("user updated.");
 	}
 
@@ -66,22 +75,38 @@ public class UserService {
 		System.out.println(usr.getUserName() + " IN AUTH USRSERVICE");
 		return userDao.validate(usr.getUserName(), usr.getPw());
 	}
-	
 
-	public UserImpl getUserInfoByUserName(UserImpl user){
-		
+	public UserImpl getUserInfoByUserName(UserImpl user) {
+
 		userInfo = userDAO.getUserByUserName(user.getUserName());
-		
+
 		return userInfo;
 	}
-	
-	public boolean confirmPassword(String enteredPw, UserImpl userInfo){
+
+	public boolean confirmPassword(String enteredPw, UserImpl userInfo) {
 		boolean check = false;
-		
-		if (enteredPw.equals(userInfo.getPw())){
+
+		if (enteredPw.equals(userInfo.getPw())) {
 			check = true;
 		}
-		
+
 		return check;
+	}
+
+	public UserImpl addSteamId(String steamId, UserImpl userInfo) {
+		userDAO.updateSteamIdByUsername(steamId, userInfo.getUserName());
+		userInfo.setSteamId(steamId);
+
+		try {
+			steam.getGames(userInfo);
+		} catch (SteamApiException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		userInfo.setGameLibrary(gameService.getUsersGame(userInfo));
+
+		System.out.println("Steam ID added.");
+
+		return userInfo;
 	}
 }

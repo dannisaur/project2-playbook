@@ -43,13 +43,6 @@ public class LoginController {
 		return "This is the info added";
 	}
 
-
-	@Autowired
-	GameLibService gameLibService;
-
-	@Autowired
-	SteamApiDAOImpl steamAPI;
-
 	/**
 	 * Handles bringing up the login page.
 	 * 
@@ -85,39 +78,12 @@ public class LoginController {
 		}
 		UserImpl authUser = userService.auth(user);
 		System.out.println("here");
-		if (authUser != null)
-		{
+		if (authUser != null) {
 			System.out.println(authUser.getUserName());
-      //get games
-			List<GameImpl> myGames = new ArrayList<>();
-			if(gameLibService.getUsersGame(authUser)== null || gameLibService.getUsersGame(authUser).isEmpty())
-			{
-				System.out.println("no games");
-				if (authUser.getSteamId() != null && !authUser.getSteamId().isEmpty())
-				{
-				System.out.println(authUser.getSteamId());
-					//GET THE USERS GAMES FROM STEAM
-					try
-					{
-						System.out.println("STEAMAPI");
-						steamAPI.getGames(authUser);
-					} catch (SteamApiException e)
-					{
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}
-			else
-			{
-				myGames = gameLibService.getUsersGame(authUser);
-				//ADD USERS GAMES TO A PARAMETER
-			}
-			
 
-			//modelMap.addAttribute("user", user);
-			//session.setAttribute("alsoUser", user);
-      modelMap.addAttribute("user", userService.getUserInfoByUserName(user));
+			// modelMap.addAttribute("user", user);
+			// session.setAttribute("alsoUser", user);
+			modelMap.addAttribute("user", userService.getUserInfoByUserName(user));
 
 			session.setAttribute("alsoUser", userService.getUserInfoByUserName(user));
 			// NEW VIEW
