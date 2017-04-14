@@ -1,14 +1,14 @@
 package com.revature.kkoders.dao;
 
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,52 +26,32 @@ public class GameLibraryDaoImpl implements GameLibraryDao {
 	
 	@Override
 	public List<GameImpl> getGamesByUser(UserImpl user) {
-		System.out.println("IN GETGAMESBYUSER GAMELIBRARYDAOIML");
 		l.error("==================================================================================");
 		Session session = HibernateUtil.getSession();
-		String qry = "SELECT u.gameLibrary FROM UserImpl u JOIN u.gameLibrary gms WHERE u.userID =:usr ";
-		Query q = session.createQuery(qry);
-		q.setParameter("usr", user.getUserID());
-		//q.list();
+		//String qry = "SELECT u.gameLibrary FROM UserImpl u JOIN u.gameLibrary gms WHERE u.userID =:usr ";
+		//Query q = session.createQuery(qry);
+		//q.setParameter("usr", user.getUserID());
 		
-		//Criteria cr = session.createCriteria(UserImpl.class);
-		//cr.add(Restrictions.eq("USER_ID", user.getUserID()));
-		l.warn("----------------------------------- LIST RETURNED ---------------------------");
-		l.warn(q.list().size()+ " SIZE ");
-		System.out.println("testst");
-//		List<Object[]> outs = q.list();
-//		for(Object[] x : outs)
-//		{
-//			System.out.println("HERE");
-//			l.warn(Arrays.toString(x) + ": OBJECT ");
-//			int f = 0;
-//			//l.warn((UserImpl)x+ ": OBJECT ");
-//			//l.warn(((UserImpl)x).getUserName()+ " : USERNAME");
-//		}
-		List outs = q.list();
-		for(int i =0; i < outs.size(); i++)
+		
+		String query = "SELECT G.* FROM GAME G INNER JOIN"
+				+ 		" GAME_LIBRARY GL ON G.GAME_ID = GL.GAME_ID INNER JOIN"
+				+ 		" USERS U ON U.USER_ID = GL.USER_ID "
+				+ 		" AND U.USER_ID = :usr1";
+		
+		SQLQuery qerty = session.createSQLQuery(query);
+		qerty.addEntity(GameImpl.class);
+		qerty.setParameter("usr1", user.getUserID());
+		List<GameImpl> test = qerty.list();
+		for(GameImpl s : test)
 		{
-			System.out.println("HERE");
-			l.warn(outs.get(i).toString() + ": OBJECT ");
-			int f = 0;
-			//l.warn((UserImpl)x+ ": OBJECT ");
-			//l.warn(((UserImpl)x).getUserName()+ " : USERNAME");
+			System.out.println(s.getGameTitle());
 		}
-		l.warn("----------------------------------- END LIST RETURNED ---------------------------");
-		
-		//List<GameImpl> results =  cr.list();
-//		l.error("==================================================================================");
-//		if(!q.list().isEmpty())
-//		{
-//			for (GameImpl x: (List<GameImpl>) q.list())
-//			{
-//				System.out.println(x.getGameTitle()+ " ===========================================");
-//			}
-//		}
-		List<GameImpl> results = q.list();
+		//List<GameImpl> results = q.list();
 		//session.pers
 		session.close();
-		return results;
+		//return results;
+		
+		return test;
 	}
 
 	@Override
@@ -94,6 +74,22 @@ public class GameLibraryDaoImpl implements GameLibraryDao {
 		session.saveOrUpdate(user);
 		t.commit();
 		session.close();
+	}
+
+	@Override
+	public Map<Integer,GameImpl> getAllGames()
+	{
+		Session session = HibernateUtil.getSession();
+		String query = "FROM GameImpl G";
+		Query q = session.createQuery(query);
+		List<GameImpl> output = q.list();
+		Map<Integer,GameImpl> rets = new HashMap<>();
+		for (GameImpl in : output)
+		{
+			rets.put(in.getSteamGameID(), in);
+		}
+		session.close();
+		return rets;		
 	}
 
 }

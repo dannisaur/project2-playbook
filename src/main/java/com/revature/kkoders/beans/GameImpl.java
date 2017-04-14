@@ -42,6 +42,9 @@ public class GameImpl implements Game {
 	@Column(name="PLATFORM_NAME")
 	private String platform;
 	
+	@Column(name="PICTURE")
+	private String pic;
+	
 	@ManyToMany (fetch=FetchType.EAGER, mappedBy="gameLibrary")
 	private List<UserImpl> owners;
 
@@ -116,9 +119,19 @@ public class GameImpl implements Game {
 		return this.platform;
 	}
 
+	public final String getPic()
+	{
+		return pic;
+	}
+
+	public final void setPic(String pic)
+	{
+		this.pic = pic;
+	}
+
 	//	CONSTRUCTOR WITH FIELDS
 	public GameImpl(int gameLibID, String gameTitle, int steamGameID, int igdbID, String releaseDate,
-			String platform) {
+			String platform, String pic) {
 		super();
 		this.gameLibID = gameLibID;
 		this.gameTitle = gameTitle;
@@ -126,6 +139,7 @@ public class GameImpl implements Game {
 		this.igdbID = igdbID;
 		this.releaseDate = releaseDate;
 		this.platform = platform;
+		this.pic = pic;
 	}
 	
 	// NO ARGS CONSTRUCTOR
@@ -134,7 +148,7 @@ public class GameImpl implements Game {
 	@Override
 	public String toString() {
 		return "GameLibraryImpl [gameLibID=" + gameLibID + ", gameTitle=" + gameTitle + ", steamGameID=" + steamGameID
-				+ ", igdbID=" + igdbID + ", releaseDate=" + releaseDate + ", platform=" + platform + "]";
+				+ ", igdbID=" + igdbID + ", releaseDate=" + releaseDate + ", platform=" + platform + ", pic=" + pic + "]";
 	}
 
 }

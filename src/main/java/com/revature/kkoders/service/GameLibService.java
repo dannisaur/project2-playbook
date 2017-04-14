@@ -1,6 +1,7 @@
 package com.revature.kkoders.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,15 +32,21 @@ public class GameLibService
 		return gLDao.getGamesByUser(me);
 	}
 	
-	public void addGame(UserImpl user, String gm_t, int st_id, int igDB_idm, String Rdate, String Platform)
+	public void addGame(UserImpl user, String gm_t, int st_id, int igDB_idm, String Rdate, String Platform, String pic)
 	{
 		GameImpl game = (GameImpl)context.getBean("gameImpl");
 		game.setGameTitle(gm_t);
 		game.setSteamGameID(st_id);
 		game.setReleaseDate(Rdate);
 		game.setPlatform(Platform);
+		game.setPic(pic);
 		
 		gameDao.CreateGame(game);
 		gLDao.addGameToUser(game, user);
+	}
+	
+	public Map<Integer,GameImpl> getGames()
+	{
+		return gLDao.getAllGames();
 	}
 }

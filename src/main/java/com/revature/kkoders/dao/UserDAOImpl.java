@@ -90,6 +90,7 @@ public class UserDAOImpl implements UserDAO {
         }
         for (Object x : rs)
         {
+        	System.out.println(((UserImpl)x).getUserName());
         	result = (UserImpl)x;
         }
         currSession.close();
