@@ -1,5 +1,6 @@
 package com.revature.kkoders.dao;
 
+import com.revature.kkoders.beans.GamePlan;
 import com.revature.kkoders.beans.GamePlanImpl;
 
 public interface GamePlanImplDAO {
@@ -10,6 +11,7 @@ public interface GamePlanImplDAO {
 	public void setEndDate(String ed, int un);
 	public void ChangeEndDate(String c_ed, int un);
 	public void setHoursByUser(double uh, int un);
+	public void CreateGamePlan(GamePlanImpl gm);
 	
 	
 

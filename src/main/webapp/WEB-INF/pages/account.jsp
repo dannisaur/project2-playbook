@@ -93,7 +93,7 @@
 					<li><a href="#">View Library</a></li>
 				</ul>
 				<ul class="nav nav-sidebar">
-					<li><a href="#">Game Plans</a></li>
+					<li><a href="gameplan">Game Plans</a></li>
 					<li><a href="#">#1</a></li>
 				</ul>
 			</div>

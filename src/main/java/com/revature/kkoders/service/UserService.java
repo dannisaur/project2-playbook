@@ -86,8 +86,9 @@ public class UserService {
   }
 
 	//Adding Method to get all of the users information by username
-	public UserImpl UsersInfo(String nn) {
-		return userDAO.getUsersInfoByUsername(nn);
+	public UserImpl UsersInfo(String n) {
+		System.out.println("Getting users info");
+		return userInfo= userDAO.getUsersInfoByUsername(n);
 
 	}
 

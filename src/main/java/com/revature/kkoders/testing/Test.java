@@ -4,7 +4,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.revature.kkoders.service.UserService;
+import com.revature.kkoders.service.GamePlanService;
 import com.revature.kkoders.beans.UserImpl;
+import com.revature.kkoders.beans.GamePlanImpl;
 import com.revature.kkoders.service.EditAccountService;;
 
 public class Test {
@@ -34,13 +36,11 @@ public class Test {
         String guy = "tguy";
         //update_user.checkNewpassword(guy, "opeth");
         
-        /****************************************************************************************/
-        /*					Getting tguys info													*/
-        /****************************************************************************************/
-        
-        UserService service = new UserService();
-        System.out.println(service.UsersInfo(guy).toString());
-        
+        //testing game plan service
+        GamePlanService gms = new GamePlanService();
+        GamePlanImpl GMS = new GamePlanImpl();
+        System.out.println("before putting info into the table");
+        gms.GamePlanSet(GMS);
     }
 
 }

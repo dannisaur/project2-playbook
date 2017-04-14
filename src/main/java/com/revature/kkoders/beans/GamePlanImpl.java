@@ -43,7 +43,7 @@ public class GamePlanImpl implements GamePlan {
 	// ----------------------------------------------------------
 	
 	// MANY GAME PLANS TO ONE USER
-	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@JoinColumn(name="USER_ID")
 	private UserImpl user;
 	

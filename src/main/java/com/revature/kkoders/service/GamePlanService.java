@@ -1,6 +1,9 @@
 package com.revature.kkoders.service;
 
+import com.revature.kkoders.beans.GamePlan;
+import com.revature.kkoders.beans.GamePlanImpl;
 import com.revature.kkoders.dao.GamePlanImplDAOImpl;
+import com.revature.kkoders.beans.UserImpl;
 
 public class GamePlanService {
 	
@@ -68,6 +71,16 @@ public class GamePlanService {
 		}
 		
 		return complete;
+	}
+	
+	public void GamePlanSet(GamePlanImpl gm) {
+		
+		gm.setTitle("My game plan");
+		gm.setStartDate("4-15-2017");
+		gm.setEndDate("4-22-2017");
+		gm.setHoursPerDay(5.0);
+		System.out.println("putting data into the table");
+		gmpl.CreateGamePlan(gm);
 	}
 	
 	

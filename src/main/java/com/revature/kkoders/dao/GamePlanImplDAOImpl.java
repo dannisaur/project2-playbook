@@ -4,6 +4,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.revature.kkoders.beans.GamePlan;
 import com.revature.kkoders.beans.GamePlanImpl;
 import com.revature.kkoders.beans.UserImpl;
 import com.revature.kkoders.hibernateUtil.HibernateUtil;
@@ -14,6 +15,7 @@ public class GamePlanImplDAOImpl implements GamePlanImplDAO {
 	public GamePlanImpl getGamePlanById(int plan_id) {
 		Session session = HibernateUtil.getSession();
 		GamePlanImpl user = (GamePlanImpl) session.get(GamePlanImpl.class, plan_id);
+		
 		
 		session.close();
 		return user;
@@ -31,6 +33,7 @@ public class GamePlanImplDAOImpl implements GamePlanImplDAO {
 		query.setParameter("uid", un);
 		query.executeUpdate();
 		
+		session.flush();
 		t.commit();
 		session.close();
 
@@ -48,6 +51,7 @@ public class GamePlanImplDAOImpl implements GamePlanImplDAO {
 		query.setParameter("uid", un);
 		query.executeUpdate();
 		
+		session.flush();
 		t.commit();
 		session.close();
 	}
@@ -64,6 +68,7 @@ public class GamePlanImplDAOImpl implements GamePlanImplDAO {
 		query.setParameter("uid", un);
 		query.executeUpdate();
 		
+		session.flush();
 		t.commit();
 		session.close();
 
@@ -81,6 +86,7 @@ public class GamePlanImplDAOImpl implements GamePlanImplDAO {
 		query.setParameter("uid", un);
 		query.executeUpdate();
 		
+		session.flush();
 		t.commit();
 		session.close();
 
@@ -97,10 +103,23 @@ public class GamePlanImplDAOImpl implements GamePlanImplDAO {
 		query.setParameter("hours", uh);
 		query.setParameter("uid", un);
 		query.executeUpdate();
-		
+		session.flush();
 		t.commit();
 		session.close();
 
+	}
+
+	@Override
+	public void CreateGamePlan(GamePlanImpl gm) {
+		Session session = HibernateUtil.getSession();
+		Transaction t = session.beginTransaction();
+		
+		session.save(gm);
+		session.getTransaction();
+		System.out.println("saving info");
+		t.commit();
+		session.close();
+		
 	}
 
 }

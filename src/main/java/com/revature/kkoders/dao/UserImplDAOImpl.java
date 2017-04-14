@@ -153,8 +153,21 @@ public class UserImplDAOImpl implements UserImplDAO {
 	@Override
 	public UserImpl getUsersInfoByUsername(String userName)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		
+		System.out.println("Before getting user info");
+		Session session = HibernateUtil.getSession();
+		String hql = "FROM UserImpl where userName =:userName";
+		Query query = session.createQuery(hql);
+		
+		
+		
+		query.setParameter("userName", userName);
+		
+		newUser = (UserImpl) query.list();
+		System.out.println("got user info");
+		
+		session.close();
+		return newUser;
 	}
 
 	/*
