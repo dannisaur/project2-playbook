@@ -50,7 +50,6 @@
 	background-color: #fff;
 	border-color: #ccc;
 }
-
 .image-preview-input input[type=file] {
 	position: absolute;
 	top: 0;
@@ -62,11 +61,9 @@
 	opacity: 0;
 	filter: alpha(opacity = 0);
 }
-
 .image-preview-input-title {
 	margin-left: 2px;
 }
-
 </style>
 
 <link rel="stylesheet" type="text/css"
@@ -75,6 +72,7 @@
 	href="http://fonts.googleapis.com/css?family=Open Sans">
 
 <%@ page isELIgnored="false"%>
+
 </head>
 <body>
 
@@ -174,7 +172,6 @@
 								<div class="col-md-4">
 									<form:password id="passwordinput" path="currPw"
 										placeholder="current password" class="form-control input-md" />
-
 								</div>
 							</div> --%>
 
@@ -285,7 +282,6 @@
 				$('.image-preview').popover('hide');
 			});
 		});
-
 		$(function() {
 			// Create the close button
 			var closebtn = $('<button/>', {
