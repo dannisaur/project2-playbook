@@ -14,7 +14,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="icon" href="../../favicon.ico">
-<title>Edit Account page</title>
+<title>Your Games</title>
 
 <!-- Bootstrap core CSS -->
 <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
@@ -39,35 +39,9 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-<link rel="stylesheet" href="../resources/css/style2.css">
-
-<style>
-.image-preview-input {
-	position: relative;
-	overflow: hidden;
-	margin: 0px;
-	color: #333;
-	background-color: #fff;
-	border-color: #ccc;
-}
-
-.image-preview-input input[type=file] {
-	position: absolute;
-	top: 0;
-	right: 0;
-	margin: 0;
-	padding: 0;
-	font-size: 20px;
-	cursor: pointer;
-	opacity: 0;
-	filter: alpha(opacity = 0);
-}
-
-.image-preview-input-title {
-	margin-left: 2px;
-}
-</style>
-
+<link rel="stylesheet" href="resources/css/style2.css">
+<link rel="stylesheet" href="resources/css/style3.css">
+<%@ page isELIgnored="false" %>
 </head>
 <body>
 
@@ -92,7 +66,7 @@
 				<li><a href="#">Profile</a></li>
 				<li><a href="#">Help</a></li>
 				<li class="active"><a href="edit">EDIT</a></li>
-				<li><a href="../logout">LOGOUT</a></li>
+				<li><a href="logout">LOGOUT</a></li>
 			</ul>
 			<form class="navbar-form navbar-right">
 				<input type="text" class="form-control" placeholder="Search...">
@@ -107,9 +81,9 @@
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
 					<li><a href="#">New Plan</a></li>
-					<li class="active"><a href="edit">Edit Account <span
+					<li><a href="account/edit">Edit Account</a></li>
+					<li class="active"><a href="library">View Library <span
 							class="sr-only">(current)</span></a></li>
-					<li><a href="../library">View Library</a></li>
 				</ul>
 				<ul class="nav nav-sidebar">
 					<li><a href="#">Game Plans</a></li>
@@ -117,145 +91,22 @@
 				</ul>
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<h1 class="page-header">Edit Account</h1>
-        
+				<h1 class="page-header">This is your Steam Library.</h1>
 
-				<p>Fields marked with (*) are optional.</p>
-				<div class="container">
-					<form:form action="edit" method="POST"
-						modelAttribute="updatedUser" class="form-horizontal">
-						<fieldset>
-							<!-- Text input-->
-							<div class="form-group">
-								<label class="col-md-4 control-label" for="textinput">First
-									Name *</label>
-								<div class="col-md-4">
-									<form:input id="textinput" path="firstName" type="text"
-										placeholder="First Name" class="form-control input-md" />
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="col-md-4 control-label" for="textinput">Last
-									Name *</label>
-								<div class="col-md-4">
-									<form:input id="textinput" path="lastName" type="text"
-										placeholder="Last Name" class="form-control input-md" />
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="col-md-4 control-label" for="textinput">Username</label>
-								<div class="col-md-4">
-									<form:input id="textinput" path="userName" type="text"
-										placeholder="Username" class="form-control input-md" disabled="true" />
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="col-md-4 control-label" for="textinput">Steam
-									ID</label>
-								<div class="col-md-4">
-									<form:input id="textinput" path="steamId" type="text"
-										placeholder="Steam ID" class="form-control input-md" disabled="true" />
-								</div>
-							</div>
-
-							<!-- Password input-->
-
-							<%-- <div class="form-group">
-								<label class="col-md-4 control-label" for="passwordinput">Current
-									password</label>
-								<div class="col-md-4">
-									<form:password id="passwordinput" path="currPw"
-										placeholder="current password" class="form-control input-md" />
-
-								</div>
-							</div> --%>
-
-							<div class="form-group">
-								<label class="col-md-4 control-label" for="passwordinput">New
-									password</label>
-								<div class="col-md-4">
-									<form:password id="password" path="pw"
-										placeholder="new password" class="form-control input-md" />
-
-								</div>
-							</div>
-
-							<!-- Password input-->
-							<div class="form-group">
-								<label class="col-md-4 control-label" for="passwordinput">Confirm
-									password</label>
-								<div class="col-md-4">
-									<input type="password" id="validatePw" class="form-control input-md">
-								</div>
-							</div>
-
-
-							<div class="form-group">
-								<label class="col-md-4 control-label" for="textinput">Email</label>
-								<div class="col-md-4">
-									<form:input id="textinput" path="email" type="text"
-										placeholder="your current email "
-										class="form-control input-md" />
-								</div>
-							</div>
-
-
-							<div class="form-group">
-								<label class="col-md-4 control-label" for="textinput">Set
-									Profile Pic *</label>
-								<div class="col-md-4">
-									<!-- image-preview-filename input [CUT FROM HERE]-->
-									<div class="input-group image-preview">
-										<input type="text" class="form-control image-preview-filename"
-											disabled="disabled">
-										<!-- don't give a name === doesn't send on POST/GET -->
-										<span class="input-group-btn"> <!-- image-preview-clear button -->
-											<button type="button"
-												class="btn btn-default image-preview-clear"
-												style="display: none;">
-												<span class="glyphicon glyphicon-remove"></span> Clear
-											</button> <!-- image-preview-input -->
-											<div class="btn btn-default image-preview-input">
-												<span class="glyphicon glyphicon-folder-open"></span> <span
-													class="image-preview-input-title">Browse</span> <input
-													type="file" accept="image/png, image/jpeg, image/gif"
-													name="input-file-preview" />
-												<!-- rename it -->
-											</div>
-										</span>
-									</div>
-									<!-- /input-group image-preview [TO HERE]-->
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="col-md-4 control-label" for="selectbasic">Tell
-									us about yourself *</label>
-								<div class="col-md-4">
-									<form:textarea path="desc" class="form-control" rows="4"
-										id="bio"></form:textarea>
-								</div>
-							</div>
-
-							<!-- Button -->
-							<div class="form-group">
-								<label class="col-md-4 control-label" for="singlebutton">Save
-									Changes</label>
-								<div class="col-md-4">
-									<button id="singlebutton" name="singlebutton"
-										class="btn btn-success">Save</button>
-								</div>
-							</div>
-
-						</fieldset>
-					</form:form>
-
-				</div>
-
-
+				${message}
+				<c:forEach var="games" items="${games}">
+					<div class="services">
+						<div class="col-md-4">
+							<figure class="snip1174 navy col-md-4"> <img
+								src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample33.jpg"
+								alt="sq-sample33" /> <figcaption>
+							<h2>Game Name</h2>
+							<p>Some Info</p>
+							<p>More Info</p>
+							</figcaption> </figure>
+						</div>
+					</div>
+				</c:forEach>
 
 			</div>
 		</div>
