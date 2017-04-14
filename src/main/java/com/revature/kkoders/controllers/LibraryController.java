@@ -1,5 +1,7 @@
 package com.revature.kkoders.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpSession;
@@ -10,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.lukaspradel.steamapi.core.exception.SteamApiException;
 import com.revature.kkoders.beans.GameImpl;
 import com.revature.kkoders.beans.UserGame;
 import com.revature.kkoders.beans.UserImpl;
@@ -39,7 +40,12 @@ public class LibraryController {
 		ModelAndView model = new ModelAndView("/library");
 
 		currUser = (UserImpl) session.getAttribute("alsoUser");
-		Set<UserGame> allGames = currUser.getGameLib();
+		Set<UserGame> allGamesJoint = currUser.getGameLib();
+		List<GameImpl> allGames = new ArrayList<>();
+		for (UserGame x : allGamesJoint)
+		{
+			allGames.add(x.getGame());
+		}
 
 		System.out.println(allGames.isEmpty());
 
