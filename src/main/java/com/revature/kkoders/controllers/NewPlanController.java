@@ -1,6 +1,8 @@
 package com.revature.kkoders.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,10 +12,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.revature.kkoders.beans.GameImpl;
 import com.revature.kkoders.beans.GamePlanImpl;
+import com.revature.kkoders.beans.UserGame;
 import com.revature.kkoders.beans.UserImpl;
 
 @Controller
@@ -32,7 +34,12 @@ public class NewPlanController {
 		// otherwise send to login page.
 
 		currUser = (UserImpl) session.getAttribute("alsoUser");
-		List<GameImpl> usersGames = currUser.getGameLib();
+		Set<UserGame> allGames = currUser.getGameLib();
+		List<GameImpl> usersGames = new ArrayList<>();
+		for (UserGame x : allGames)
+		{
+			usersGames.add(x.getGame());
+		}
 		mm.addAttribute("currUser", currUser);
 		mm.addAttribute("games", usersGames);
 
