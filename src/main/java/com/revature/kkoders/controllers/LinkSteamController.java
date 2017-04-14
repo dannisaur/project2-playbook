@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.lukaspradel.steamapi.core.exception.SteamApiException;
 import com.revature.kkoders.beans.GameImpl;
 import com.revature.kkoders.beans.UserImpl;
 import com.revature.kkoders.dao.SteamApiDAOImpl;
@@ -31,6 +32,10 @@ public class LinkSteamController {
 	@Autowired
 	UserService service;
 
+	@Autowired
+	SteamApiDAOImpl steamAPI;
+	
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView linkSteamView(HttpSession session) {
 		ModelAndView model = new ModelAndView("/link_steam");
@@ -54,9 +59,9 @@ public class LinkSteamController {
 		currUser = (UserImpl) session.getAttribute("alsoUser");
 		
 		// calling the add steam id method in the user service
-		service.addSteamId(id, currUser);
-		
-		
+		currUser = service.addSteamId(id, currUser);
+		session.removeAttribute("alsoUser");
+		session.setAttribute("alsoUser", currUser);
 		
 		System.out.println("Printing steam id: " + currUser.getSteamId());
 		
