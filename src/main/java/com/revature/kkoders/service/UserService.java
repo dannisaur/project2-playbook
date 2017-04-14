@@ -103,7 +103,7 @@ public class UserService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		userInfo.setGameLibrary(gameService.getUsersGame(userInfo));
+		//userInfo.setGameLibrary(gameService.getUsersGame(userInfo));
 
 		System.out.println("Steam ID added.");
 
