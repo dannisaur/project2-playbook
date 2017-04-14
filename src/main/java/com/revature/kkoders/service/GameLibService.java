@@ -32,7 +32,7 @@ public class GameLibService
 		return gLDao.getGamesByUser(me);
 	}
 	
-	public void addGame(UserImpl user, String gm_t, int st_id, int igDB_idm, String Rdate, String Platform, String pic)
+	public void addGame(UserImpl user, String gm_t, int st_id, int igDB_idm, String Rdate, String Platform, String pic, Integer hour)
 	{
 		GameImpl game = (GameImpl)context.getBean("gameImpl");
 		game.setGameTitle(gm_t);
@@ -42,7 +42,11 @@ public class GameLibService
 		game.setPic(pic);
 		
 		gameDao.CreateGame(game);
-		gLDao.addGameToUser(game, user);
+		
+		System.out.println("ADDING GAME TO USER");
+		System.out.println(game.getGameTitle() + " username:" + user.getUserName() + " hour:" + hour);
+		gLDao.addGameToUser(game, user, hour);
+		System.out.println("END ADDING GAME TO USER");
 	}
 	
 	public Map<Integer,GameImpl> getGames()
