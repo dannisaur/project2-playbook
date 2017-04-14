@@ -2,6 +2,7 @@ package com.revature.kkoders.dao;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,21 +39,23 @@ public class SteamApiDAOImpl
         SteamWebApiClient client = new SteamWebApiClient.SteamWebApiClientBuilder("1702897AF9585B3AEDABDB2C44075317").build();
         
         Map<Integer,GameImpl> dbGames = gLDao.getAllGames();
+        Map<Integer,Integer> hours =  new HashMap<>();
         
         //GET ALL THE GAMES BUT ONLY ID
         GetOwnedGamesRequest req = SteamWebApiRequestFactory.createGetOwnedGamesRequest(user.getSteamId());
         GetOwnedGames games =client.<GetOwnedGames> processRequest(req);
         List<Integer> gameids = new ArrayList<Integer>();
         
+        System.out.println("HERERERERRERRER");
         //GET THE GAME IDS FROM STEAM
         for (Game x :games.getResponse().getGames())
         {
+        	hours.put(x.getAppid(), x.getPlaytimeForever());
         	System.out.println(x.getPlaytimeForever());
-        //	System.out.println(x.getAppid());
         	if(dbGames.containsKey(x.getAppid()))
         	{        		
         		System.out.println("ALREADY HERE ");
-        		gLDao.addGameToUser(dbGames.get(x.getAppid()), user);
+        		gLDao.addGameToUser(dbGames.get(x.getAppid()), user, hours.get(x.getAppid()));
         	}
         	else
         	{
@@ -82,7 +85,7 @@ public class SteamApiDAOImpl
        				String[] todate = date.toString().split(" ");
        				String crrctDate = todate[1]+" "+ todate[2] +", "+ todate[todate.length-1];
        				newGame.setReleaseDate(crrctDate);
-     				gameLibService.addGame(user, name, y, 0, todate[1]+" "+ todate[2] +", "+ todate[todate.length-1], "PC", steamApp.getHeaderImage());
+     				gameLibService.addGame(user, name, y, 0, todate[1]+" "+ todate[2] +", "+ todate[todate.length-1], "PC", steamApp.getHeaderImage(), hours.get(y));
        			}
        			else
        				newGame.setReleaseDate("N/A");

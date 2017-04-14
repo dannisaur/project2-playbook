@@ -99,6 +99,7 @@ public class LoginController {
 					//GET THE USERS GAMES FROM STEAM
 					try
 					{
+						System.out.println("STEAMAPI");
 						steamAPI.getGames(authUser);
 					} catch (SteamApiException e)
 					{

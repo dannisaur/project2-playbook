@@ -11,6 +11,6 @@ public interface GameLibraryDao {
 	List<GameImpl> getGamesByUser(UserImpl user);
 	List<UserImpl> getUsersByGame(GameImpl game);
 	
-	void addGameToUser(GameImpl game, UserImpl user);
+	void addGameToUser(GameImpl game, UserImpl user, Integer hour);
 	Map<Integer,GameImpl> getAllGames();
 }

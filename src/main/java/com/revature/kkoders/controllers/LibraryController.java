@@ -1,17 +1,17 @@
 package com.revature.kkoders.controllers;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.revature.kkoders.beans.GameImpl;
+import com.revature.kkoders.beans.UserGame;
 import com.revature.kkoders.beans.UserImpl;
 
 @Controller
@@ -29,7 +29,7 @@ public class LibraryController {
 		ModelAndView model = new ModelAndView("/library");
 
 		currUser = (UserImpl) session.getAttribute("alsoUser");
-		List<GameImpl> allGames = currUser.getGameLib();
+		Set<UserGame> allGames = currUser.getGameLib();
 
 		System.out.println(allGames.isEmpty());
 
