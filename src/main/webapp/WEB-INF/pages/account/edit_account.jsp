@@ -64,6 +64,7 @@
 .image-preview-input-title {
 	margin-left: 2px;
 }
+
 </style>
 
 <link rel="stylesheet" type="text/css"
