@@ -146,8 +146,7 @@ public class GameImpl {
 
 	@Override
 	public String toString() {
-		return "GameLibraryImpl [gameLibID=" + gameLibID + ", gameTitle=" + gameTitle + ", steamGameID=" + steamGameID
-				+ ", igdbID=" + igdbID + ", releaseDate=" + releaseDate + ", platform=" + platform + ", pic=" + pic + "]";
+		return gameTitle;
 	}
 
 }

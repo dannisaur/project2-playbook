@@ -14,7 +14,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="icon" href="../../favicon.ico">
-<title>Your Games</title>
+<title>New Game Plan</title>
 
 <!-- Bootstrap core CSS -->
 <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
@@ -39,19 +39,17 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+<link rel="stylesheet" href="resources/css/style1.css">
 <link rel="stylesheet" href="resources/css/style2.css">
-<link rel="stylesheet" href="resources/css/style3.css">
 
 <link rel="stylesheet" type="text/css"
 	href="http://fonts.googleapis.com/css?family=Rambla">
 <link rel="stylesheet" type="text/css"
 	href="http://fonts.googleapis.com/css?family=Open Sans">
-	
-<%@ page isELIgnored="false" %>
+
+<%@ page isELIgnored="false"%>
 </head>
 <body>
-
-
 
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container-fluid">
@@ -72,7 +70,7 @@
 				<li><a href="#">Profile</a></li>
 				<li><a href="#">Help</a></li>
 				<li class="active"><a href="edit">EDIT</a></li>
-				<li><a href="logout">LOGOUT</a></li>
+				<li><a href="../logout">LOGOUT</a></li>
 			</ul>
 			<form class="navbar-form navbar-right">
 				<input type="text" class="form-control" placeholder="Search...">
@@ -86,10 +84,10 @@
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
-					<li><a href="newgameplan">New Plan</a></li>
+					<li class="active"><a href="newgameplan"><span
+							class="sr-only">(current)</span>New Plan</a></li>
 					<li><a href="account/edit">Edit Account</a></li>
-					<li class="active"><a href="library">View Library <span
-							class="sr-only">(current)</span></a></li>
+					<li><a href="library">View Library</a></li>
 				</ul>
 				<ul class="nav nav-sidebar">
 					<li><a href="#">Game Plans</a></li>
@@ -97,48 +95,83 @@
 				</ul>
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<h1 class="page-header">Your Steam Library</h1>
+				<h1 class="page-header">Let's make a productive use of your
+					day.</h1>
 
-				${message}
-				<c:forEach var="games" items="${games}">
-					<div class="services">
-						<div class="col-md-4">
-							<figure class="snip1174 navy col-md-4"> <img
-								src="${ games.pic }"
-								alt="sq-sample33" /> <figcaption>
-							<div class= "info">
-							<h4> ${ games.gameTitle } </h4>
-							<h4> ${ games.releaseDate }, ${ games.platform }</h4></div>	
-							</figcaption> </figure>
-						</div>
-					</div>
-				</c:forEach>
+
+				<p>Fields marked with (*) are optional.</p>
+				<div class="container">
+					<form:form action="edit" method="POST" modelAttribute="newGamePlan"
+						class="form-horizontal">
+						<fieldset>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="textinput">Plan
+									Title *</label>
+								<div class="col-md-4">
+									<form:input id="textinput" path="title" type="text"
+										placeholder="Plan Title" class="form-control input-md" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="textinput">Start
+									Date</label>
+								<div class="col-md-4">
+									<form:input id="textinput" path="startDate" type="text"
+										placeholder="mm-dd-yyyy" class="form-control input-md" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="textinput">End
+									Date</label>
+								<div class="col-md-4">
+									<form:input id="textinput" path="endDate" type="text"
+										placeholder="mm-dd-yyyy" class="form-control input-md" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="textinput">Hours
+									Per Day</label>
+								<div class="col-md-4">
+									<form:input id="textinput" path="hoursPerDay"
+										placeholder="Hours" class="form-control input-md" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="textinput">Select
+									the games to be played: </label>
+								<div class="col-md-4">
+									<form:select class="form-control" size="10" id="gamesSelect"
+										multiple="true" path="gamesInPlan">
+										<form:options items="${ games }" />
+									</form:select>
+								</div>
+							</div>
+
+							<!-- Button -->
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="singlebutton">Save
+									Changes</label>
+								<div class="col-md-4">
+									<button id="singlebutton" name="singlebutton"
+										class="btn btn-success">Save</button>
+								</div>
+							</div>
+
+						</fieldset>
+					</form:form>
+
+				</div>
+
+
 
 			</div>
 		</div>
 	</div>
-
-	<script>
-	$(document).ready(function(){
-	
-		// hiding info on load
-		$('#info').hide();
-		
-		if($('#info')) {
-	        $('#info').each(function() {
-	            $(this).mouseover(function() {
-	            	$(this).show();
-	            });
-
-	            $(this).mouseout(function() {
-	                $(this).hide();
-	            });
-
-	        });
-	    }
-		
-	});
-	</script>
 
 
 	<script

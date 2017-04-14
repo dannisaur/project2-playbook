@@ -37,7 +37,8 @@ public class UserService {
 
 	}
 
-	public void updateUser(UserImpl currUser, UserImpl updatedUser) {
+
+	public UserImpl updateUser(UserImpl currUser, UserImpl updatedUser) {
 
 		// store the user id
 		updatedUser.setUserID(currUser.getUserID());
@@ -66,6 +67,8 @@ public class UserService {
 		userDAO.updateUser(updatedUser);
 
 		System.out.println("user updated.");
+		
+		return updatedUser;
 	}
 
 	public UserImpl auth(UserImpl usr) {

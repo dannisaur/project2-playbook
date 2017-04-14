@@ -2,7 +2,6 @@ package com.revature.kkoders.controllers;
 
 import java.util.Set;
 
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +16,7 @@ import com.revature.kkoders.beans.UserGame;
 import com.revature.kkoders.beans.UserImpl;
 import com.revature.kkoders.dao.SteamApiDAOImpl;
 import com.revature.kkoders.service.GameLibService;
+
 
 @Controller
 @RequestMapping(value = { "/library" })
