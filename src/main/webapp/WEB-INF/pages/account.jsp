@@ -90,7 +90,7 @@
 					<li class="active"><a href="#">New Plan <span
 							class="sr-only">(current)</span></a></li>
 					<li><a href="account/edit">Edit Account</a></li>
-					<li><a href="#">View Library</a></li>
+					<li><a href="library">View Library</a></li>
 				</ul>
 				<ul class="nav nav-sidebar">
 					<li><a href="#">Game Plans</a></li>
