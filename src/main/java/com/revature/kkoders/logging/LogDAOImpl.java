@@ -2,6 +2,7 @@ package com.revature.kkoders.logging;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -10,8 +11,8 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.revature.kkoders.logging.Log.Level;
 import com.revature.kkoders.hibernateUtil.HibernateUtil;
+import com.revature.kkoders.logging.Log.Level;
 
 /**
  * Logger for persisting logs. 
@@ -22,6 +23,7 @@ import com.revature.kkoders.hibernateUtil.HibernateUtil;
 @Component
 public class LogDAOImpl implements LogDAO {
 	
+	static final Logger l = Logger.getRootLogger();
 	/**
 	 * Log to be persisted.
 	 * 
@@ -29,15 +31,14 @@ public class LogDAOImpl implements LogDAO {
 	@Autowired
 	private LogImpl log;
 	
-	//@Autowired
-	//private LogLevelDao logLevelDao;
+	@Autowired
+	private LogLevelDAOImpl logLevelDao;
 
 	@Override
 	public void addLog(Level level, String message) {
 		Session session = HibernateUtil.getSession();
 		
-		//log.setLevelLevel(level);
-		//log.setLevel(logLevel.);
+		log.setLevel(logLevelDao.getLogLevel(level));
 		log.setMessage(message);
 		
 		Transaction transaction = session.beginTransaction();

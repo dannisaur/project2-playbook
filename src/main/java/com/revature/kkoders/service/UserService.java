@@ -63,6 +63,7 @@ public class UserService {
 		if (userDao == null) {
 			System.out.println("something??");
 		}
+		System.out.println(usr.getUserName() + " IN AUTH USRSERVICE");
 		return userDao.validate(usr.getUserName(), usr.getPw());
 	}
 	

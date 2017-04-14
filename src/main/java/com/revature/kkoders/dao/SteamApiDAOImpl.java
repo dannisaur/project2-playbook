@@ -3,9 +3,9 @@ package com.revature.kkoders.dao;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.github.goive.steamapi.SteamApi;
@@ -27,12 +27,17 @@ public class SteamApiDAOImpl
 	GameLibService gameLibService;
 	
 	@Autowired
+	GameLibraryDaoImpl gLDao;
+	
+	@Autowired
 	GameImpl newGame;
 	
 	public List<GameImpl> getGames (UserImpl user) throws SteamApiException
 	{
 		List<GameImpl> myGames = new ArrayList<>();
         SteamWebApiClient client = new SteamWebApiClient.SteamWebApiClientBuilder("1702897AF9585B3AEDABDB2C44075317").build();
+        
+        Map<Integer,GameImpl> dbGames = gLDao.getAllGames();
         
         //GET ALL THE GAMES BUT ONLY ID
         GetOwnedGamesRequest req = SteamWebApiRequestFactory.createGetOwnedGamesRequest(user.getSteamId());
@@ -42,10 +47,18 @@ public class SteamApiDAOImpl
         //GET THE GAME IDS FROM STEAM
         for (Game x :games.getResponse().getGames())
         {
+        	System.out.println(x.getPlaytimeForever());
         //	System.out.println(x.getAppid());
-        	gameids.add(x.getAppid());
+        	if(dbGames.containsKey(x.getAppid()))
+        	{        		
+        		System.out.println("ALREADY HERE ");
+        		gLDao.addGameToUser(dbGames.get(x.getAppid()), user);
+        	}
+        	else
+        	{
+        		gameids.add(x.getAppid());
+        	}
         }
-        
         //CHANGED IT TO EU BECAUSE THE API CAN ONLY HANDLE EU DATE FORMATS
         SteamApi steamApi = new SteamApi("EU");
 
@@ -63,12 +76,13 @@ public class SteamApiDAOImpl
         		newGame.setGameTitle(name);
         		newGame.setPlatform("PC");
         		newGame.setSteamGameID(y);
+        		newGame.setPic(steamApp.getHeaderImage());
        			if (date !=null)
        			{
        				String[] todate = date.toString().split(" ");
        				String crrctDate = todate[1]+" "+ todate[2] +", "+ todate[todate.length-1];
        				newGame.setReleaseDate(crrctDate);
-     				gameLibService.addGame(user, name, y, 0, todate[1]+" "+ todate[2] +", "+ todate[todate.length-1], "PC");
+     				gameLibService.addGame(user, name, y, 0, todate[1]+" "+ todate[2] +", "+ todate[todate.length-1], "PC", steamApp.getHeaderImage());
        			}
        			else
        				newGame.setReleaseDate("N/A");
