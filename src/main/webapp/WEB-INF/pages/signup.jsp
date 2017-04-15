@@ -33,6 +33,10 @@
 <link rel="stylesheet" href="resources/css/style1.css">
 <link rel="stylesheet" href="resources/css/style2.css">
 
+<link rel="stylesheet" type="text/css"
+	href="http://fonts.googleapis.com/css?family=Rambla">
+<link rel="stylesheet" type="text/css"
+	href="http://fonts.googleapis.com/css?family=Open Sans">
 
 <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
 
@@ -59,7 +63,7 @@
 		<div class="container-fluid">
 			<!-- LOGO -->
 			<div class="!navbar-header">
-				<a class="navbar-brand" href="#">Playbook</a>
+				<a class="navbar-brand" href="landing">Playbook</a>
 			</div>
 			<!-- /.LOGO -->
 			<!-- NAV OPTIONS -->

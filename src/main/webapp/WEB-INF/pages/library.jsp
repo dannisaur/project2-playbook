@@ -59,7 +59,7 @@
 		<div class="container-fluid">
 			<!-- LOGO -->
 			<div class="!navbar-header">
-				<a class="navbar-brand" href="#">Playbook</a>
+				<a class="navbar-brand" href="landing">Playbook</a>
 			</div>
 			<!-- /.LOGO -->
 			<!-- NAV OPTIONS -->

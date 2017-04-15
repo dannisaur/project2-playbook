@@ -60,7 +60,9 @@ public class LinkSteamController {
 		currUser = (UserImpl) session.getAttribute("alsoUser");
 		
 		// calling the add steam id method in the user service
-		currUser = service.addSteamId(id, currUser);
+		//currUser = service.addSteamId(id, currUser);
+		service.addSteamId(id, currUser);
+		currUser.setSteamId(id);
 		session.removeAttribute("alsoUser");
 		session.setAttribute("alsoUser", currUser);
 		
