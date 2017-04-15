@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,13 +34,6 @@
 		<div class="container-fluid">
 			<!-- LOGO -->
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-					aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
 				<a class="navbar-brand" href="#">Playbook</a>
 			</div>
 			<!-- /.LOGO -->
@@ -47,28 +41,31 @@
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
 					<!-- display user button if user signed in; otherwise display login button -->
-					<% if (request.getSession().getAttribute("alsoUser") != null) { %>
-						<!-- USER BUTTON -->
-					 	<li class="dropdown">
-	          				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-	          					<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-	          					UserOptions 
-	          					<span class="caret"></span>
-	          				</a>
-	          				<ul class="dropdown-menu">
-								<li><a href="account">Profile</a></li>
-	            				<li><a href="account/edit">Edit Account</a></li>
-	            				<li><a href="logout">Sign out</a></li>
-	          				</ul>
-	        			</li>
-        				<!-- /.USER BUTTON -->
-        			<% } else { %>
-        				<!-- LOGIN BUTTON -->
-	          			<li>
-	          				<a href="login">Sign in</a>
-	          			</li>
-	         			<!-- /.LOGIN BUTTON -->
-        			<% } %>
+					<c:choose>
+						<c:when test="${not empty alsoUser}">
+							<!-- USER BUTTON -->
+						 	<li class="dropdown">
+		          				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+		          					<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+		          					${alsoUser.userName}
+		          					<span class="caret"></span>
+		          				</a>
+		          				<ul class="dropdown-menu">
+									<li><a href="account">Profile</a></li>
+		            				<li><a href="account/edit">Edit Account</a></li>
+		            				<li><a href="logout">Sign out</a></li>
+		          				</ul>
+		        			</li>
+        					<!-- /.USER BUTTON -->
+						</c:when>
+						<c:otherwise>
+							<!-- LOGIN BUTTON -->
+		          			<li>
+		          				<a href="login">Sign in</a>
+		          			</li>
+		         			<!-- /.LOGIN BUTTON -->
+						</c:otherwise>
+					</c:choose>
 				</ul>
 				<!-- USER SEARCH BAR -->
 				<form class="navbar-form navbar-right">

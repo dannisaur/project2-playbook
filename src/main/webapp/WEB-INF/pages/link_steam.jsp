@@ -14,7 +14,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="icon" href="../../favicon.ico">
-<title>Link Steam</title>
+<title>The Playbook - Link Steam</title>
 
 <!-- Bootstrap core CSS -->
 <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
@@ -39,6 +39,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+<link rel="stylesheet" href="resources/css/style1.css">
 <link rel="stylesheet" href="resources/css/style2.css">
 <link rel="stylesheet" href="resources/css/style3.css">
 
@@ -51,85 +52,101 @@
 </head>
 <body>
 
+	<!-- SITE NAVIGATION BAR -->
 	<nav class="navbar navbar-inverse navbar-fixed-top">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed"
-				data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-				aria-controls="navbar">
-				<span class="sr-only">Toggle navigation</span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="#">Project name</a>
+		<!-- NAV CONTAINER -->
+		<div class="container-fluid">
+			<!-- LOGO -->
+			<div class="!navbar-header">
+				<a class="navbar-brand" href="#">Playbook</a>
+			</div>
+			<!-- /.LOGO -->
+			<!-- NAV OPTIONS -->
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<!-- display user button if user signed in; otherwise display login button -->
+					<c:choose>
+						<c:when test="${not empty alsoUser}">
+							<!-- USER BUTTON -->
+						 	<li class="dropdown">
+		          				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+		          					<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+		          					${alsoUser.userName}
+		          					<span class="caret"></span>
+		          				</a>
+		          				<ul class="dropdown-menu">
+									<li><a href="account">Profile</a></li>
+		            				<li><a href="account/edit">Edit Account</a></li>
+		            				<li><a href="logout">Sign out</a></li>
+		          				</ul>
+		        			</li>
+        					<!-- /.USER BUTTON -->
+						</c:when>
+						<c:otherwise>
+							<!-- LOGIN BUTTON -->
+		          			<li>
+		          				<a href="login">Sign in</a>
+		          			</li>
+		         			<!-- /.LOGIN BUTTON -->
+						</c:otherwise>
+					</c:choose>
+				</ul>
+				<!-- USER SEARCH BAR -->
+				<form class="navbar-form navbar-right">
+					<input type="text" class="form-control" placeholder="Search users...">
+				</form>
+				<!-- /.USER SEARCH BAR -->
+			</div>
+			<!-- /.NAV OPTIONS -->
 		</div>
-		<div id="navbar" class="navbar-collapse collapse">
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">Dashboard</a></li>
-				<li><a href="#">Settings</a></li>
-				<li><a href="#">Profile</a></li>
-				<li><a href="#">Help</a></li>
-				<li class="active"><a href="edit">EDIT</a></li>
-				<li><a href="logout">LOGOUT</a></li>
-			</ul>
-			<form class="navbar-form navbar-right">
-				<input type="text" class="form-control" placeholder="Search...">
+		<!-- /.NAV CONTAINER -->
+	</nav>
+	<!-- /.SITE NAVIGATION BAR -->
+
+
+	<!-- SITE SIDEBAR -->
+	<div class="nav-side-menu">
+	    <div class="menu-list">
+	        <ul id="menu-content" class="menu-content">
+	            <li class="icon-button" data-toggle="tooltip" title="New Game Plan" data-placement="bottom"><a href="newgameplan" style="width: 50px; padding-top: 15px; padding-left: 15px"><img class="icon icon-square" src="resources/media/icon-square.png"></img></a></li><!-- NEW GAME PLAN -->
+	            <li class="icon-button" data-toggle="tooltip" title="View Game Plans" data-placement="bottom"><a href="gameplan" style="width: 50px; padding-top: 15px; padding-left: 15px"><img class="icon icon-triangle" src="resources/media/icon-triangle.png"></img></a></li><!-- VIEW GAME PLANS -->
+            	<li class="icon-button" data-toggle="tooltip" title="View Library" data-placement="bottom"><a href="library" style="width: 50px; padding-top: 15px; padding-left: 15px"><img class="icon icon-circle" src="resources/media/icon-circle.png"></img></a></li><!-- VIEW LIBRARY -->
+            	<li class="icon-button" data-toggle="tooltip" title="Edit Account" data-placement="bottom"><a href="account/edit" style="width: 50px; padding-top: 15px; padding-left: 15px"><img class="icon icon-x" src="resources/media/icon-x.png"></img></a></li><!-- EDIT ACCOUNT -->
+	        </ul>
+	    </div>
+	</div>
+	<!-- /.SITE SIDEBAR -->
+	
+	
+	<!-- MAIN HEADING -->
+	<div class="main-heading">
+		<h1 class="page-header">Link Your Steam Account</h1>
+		${message}
+		<div class="container">
+			<form action="link_steam" method="post"
+				class="form-horizontal">
+				<fieldset>
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="textinput">Enter
+							your Steam ID</label>
+						<div class="col-md-4">
+							<input id="textinput" name="steamId" type="text"
+								placeholder="Steam ID" class="form-control input-md" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="steamButton">Get</label>
+						<div class="col-md-4">
+							<button id="steamButton" name="steamButton"
+								class="btn btn-success">Save</button>
+						</div>
+					</div>
+				</fieldset>
 			</form>
 		</div>
 	</div>
-	</nav>
-
-
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-sm-3 col-md-2 sidebar">
-				<ul class="nav nav-sidebar">
-
-					<li><a href="newgameplan">New Plan</a></li>
-					<li><a href="account/edit">Edit Account</a></li>
-					<li class="active"><a href="library">View Library <span
-							class="sr-only">(current)</span></a></li>
-				</ul>
-				<ul class="nav nav-sidebar">
-					<li><a href="#">Game Plans</a></li>
-					<li><a href="#">#1</a></li>
-				</ul>
-			</div>
-			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<h1 class="page-header">Link Your Steam Account</h1>
-
-				${message}
-
-				<div class="container">
-					<form action="link_steam" method="post"
-						class="form-horizontal">
-						<fieldset>
-							<!-- Text input-->
-							<div class="form-group">
-								<label class="col-md-4 control-label" for="textinput">Enter
-									your Steam ID</label>
-								<div class="col-md-4">
-									<input id="textinput" name="steamId" type="text"
-										placeholder="Steam ID" class="form-control input-md" />
-								</div>
-							</div>
-							
-							
-							<div class="form-group">
-								<label class="col-md-4 control-label" for="steamButton">Get</label>
-								<div class="col-md-4">
-									<button id="steamButton" name="steamButton"
-										class="btn btn-success">Save</button>
-								</div>
-							</div>
-						</fieldset>
-					</form>
-
-				</div>
-
-			</div>
-		</div>
-	</div>
+	
 
 	<script>
 		$(document).ready(
@@ -229,6 +246,12 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
+	<script>
+		$(function () {
+			  $('[data-toggle="tooltip"]').tooltip()
+			})
+	</script>
 
 </body>
 

@@ -133,16 +133,6 @@ public class GameImpl implements Game{
 		this.pic = pic;
 	}
 
-	public final Set<GamePlanImpl> getPlans()
-	{
-		return plans;
-	}
-
-	public final void setPlans(Set<GamePlanImpl> plans)
-	{
-		this.plans = plans;
-	}
-
 	//	CONSTRUCTOR WITH FIELDS
 	public GameImpl(int gameLibID, String gameTitle, int steamGameID, int igdbID, String releaseDate,
 			String platform, String pic) {

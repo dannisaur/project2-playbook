@@ -56,36 +56,39 @@
 		<!-- NAV CONTAINER -->
 		<div class="container-fluid">
 			<!-- LOGO -->
-			<div class="">
-				<a class="navbar-brand" href="landing">Playbook</a>
+			<div class="!navbar-header">
+				<a class="navbar-brand" href="#">Playbook</a>
 			</div>
 			<!-- /.LOGO -->
 			<!-- NAV OPTIONS -->
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
 					<!-- display user button if user signed in; otherwise display login button -->
-					<% if (request.getSession().getAttribute("alsoUser") != null) { %>
-						<!-- USER BUTTON -->
-					 	<li class="dropdown">
-	          				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-	          					<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-	          					<%= ((UserImpl)request.getSession().getAttribute("alsoUser")).getUserName() %>
-	          					<span class="caret"></span>
-	          				</a>
-	          				<ul class="dropdown-menu">
-								<li><a href="account">Profile</a></li>
-	            				<li><a href="account/edit">Edit Account</a></li>
-	            				<li><a href="logout">Sign out</a></li>
-	          				</ul>
-	        			</li>
-        				<!-- /.USER BUTTON -->
-        			<% } else { %>
-        				<!-- LOGIN BUTTON -->
-	          			<li>
-	          				<a href="login">Sign in</a>
-	          			</li>
-	         			<!-- /.LOGIN BUTTON -->
-        			<% } %>
+					<c:choose>
+						<c:when test="${not empty alsoUser}">
+							<!-- USER BUTTON -->
+						 	<li class="dropdown">
+		          				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+		          					<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+		          					${alsoUser.userName}
+		          					<span class="caret"></span>
+		          				</a>
+		          				<ul class="dropdown-menu">
+									<li><a href="account">Profile</a></li>
+		            				<li><a href="account/edit">Edit Account</a></li>
+		            				<li><a href="logout">Sign out</a></li>
+		          				</ul>
+		        			</li>
+        					<!-- /.USER BUTTON -->
+						</c:when>
+						<c:otherwise>
+							<!-- LOGIN BUTTON -->
+		          			<li>
+		          				<a href="login">Sign in</a>
+		          			</li>
+		         			<!-- /.LOGIN BUTTON -->
+						</c:otherwise>
+					</c:choose>
 				</ul>
 				<!-- USER SEARCH BAR -->
 				<form class="navbar-form navbar-right">
@@ -105,7 +108,7 @@
 	    <div class="menu-list">
 	        <ul id="menu-content" class="menu-content">
 	            <li class="icon-button" data-toggle="tooltip" title="New Game Plan" data-placement="bottom"><a href="newgameplan" style="width: 50px; padding-top: 15px; padding-left: 15px"><img class="icon icon-square" src="resources/media/icon-square.png"></img></a></li><!-- NEW GAME PLAN -->
-	            <li class="icon-button" data-toggle="tooltip" title="View Game Plans" data-placement="bottom"><a href="gameplans" style="width: 50px; padding-top: 15px; padding-left: 15px"><img class="icon icon-triangle" src="resources/media/icon-triangle.png"></img></a></li><!-- VIEW GAME PLANS -->
+	            <li class="icon-button" data-toggle="tooltip" title="View Game Plans" data-placement="bottom"><a href="gameplan" style="width: 50px; padding-top: 15px; padding-left: 15px"><img class="icon icon-triangle" src="resources/media/icon-triangle.png"></img></a></li><!-- VIEW GAME PLANS -->
             	<li class="icon-button" data-toggle="tooltip" title="View Library" data-placement="bottom"><a href="library" style="width: 50px; padding-top: 15px; padding-left: 15px"><img class="icon icon-circle" src="resources/media/icon-circle.png"></img></a></li><!-- VIEW LIBRARY -->
             	<li class="icon-button" data-toggle="tooltip" title="Edit Account" data-placement="bottom"><a href="account/edit" style="width: 50px; padding-top: 15px; padding-left: 15px"><img class="icon icon-x" src="resources/media/icon-x.png"></img></a></li><!-- EDIT ACCOUNT -->
 	        </ul>
@@ -116,18 +119,29 @@
 
 	<!-- MAIN HEADING -->
 	<div class="main-heading">
-		<h1>${alsoUser.userName}</h1>
-		<h6>${alsoUser.firstName} ${alsoUser.lastName}</h6>
+		<div class="row">
+			<div class="col-md-1">
+				<span class="glyphicon glyphicon-user" aria-hidden="true" style="font-size:75px"></span>
+			</div>
+			<div class="col-md-11">
+				<h1>${alsoUser.userName}</h1>
+				<p class="user-name">${alsoUser.firstName} ${alsoUser.lastName}</p>
+			</div>
+		</div>
 		
-		<p>${alsoUser.desc}</p>
+		<p class="user-description">${alsoUser.desc}</p>
 	</div>
 	<!-- ./MAIN HEADING -->
 
 	<!-- SUB-HEADING -->
 	<div class="sub-heading">
-	
-		<h1>Recent Game Plan</h1>
-		<h1>Games</h1>
+		<section style="height: 150px">
+			<h1>Recent Game Plan</h1>
+		</section>
+		
+		<section style="height: 400px;">
+			<h1>Games</h1>
+		</section>
 	</div>
 	<!-- /.SUB-HEADING -->
 	
