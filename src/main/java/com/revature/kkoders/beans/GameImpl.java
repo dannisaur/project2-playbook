@@ -1,6 +1,7 @@
 package com.revature.kkoders.beans;
 
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -161,6 +162,14 @@ public class GameImpl implements Game{
 	@Override
 	public String toString() {
 		return gameTitle;
+	}
+
+	public Set<GamePlanImpl> getPlans() {
+		return plans;
+	}
+
+	public void setPlans(Set<GamePlanImpl> plans) {
+		this.plans = plans;
 	}
 
 }

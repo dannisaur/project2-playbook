@@ -96,11 +96,11 @@ public class GamePlanService {
 	 * Pulls the daily session for every user and every game plan.
 	 * 
 	 */
-
 	//@Scheduled(cron="59 59 23 * * *") //pulling daily sessions is scheduled for 11:59:59 PM every day.
 	@Scheduled(cron="0 */1 * * * *") //CURRENT TEST: run every 1 minute
 	public void pullDailySessions() {
 		System.out.println("RUNNING SCHEDULED TASK TO PULL DAILY SESSIONS:");//test statement.
+
 		gamePlanDAO.pullDailySessions();
 	}
 	// */

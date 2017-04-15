@@ -206,5 +206,4 @@ public class GamePlanImpl implements GamePlan, Serializable {
 		this.games = games;
 	}
 	
-	
 }

@@ -2,7 +2,6 @@ package com.revature.kkoders.dao;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Set;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -13,16 +12,10 @@ import org.springframework.stereotype.Component;
 
 import com.revature.kkoders.beans.DailySessionImpl;
 import com.revature.kkoders.beans.GameImpl;
+
 import java.util.List;
 import java.util.Set;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import com.revature.kkoders.beans.GameImpl;
 import com.revature.kkoders.beans.GamePlan;
 import com.revature.kkoders.beans.GamePlanImpl;
 import com.revature.kkoders.beans.UserImpl;
@@ -141,6 +134,7 @@ public class GamePlanImplDAOImpl implements GamePlanImplDAO {
 
 	}
 
+	@Override
 	public void pullDailySessions() {
 		Session session = HibernateUtil.getSession();
 		
