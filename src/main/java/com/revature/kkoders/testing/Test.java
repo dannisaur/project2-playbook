@@ -40,7 +40,8 @@ public class Test {
         GamePlanService gms = new GamePlanService();
         GamePlanImpl GMS = new GamePlanImpl();
         System.out.println("before putting info into the table");
-        gms.GamePlanSet(GMS);
+        //gms.GamePlanSet(GMS);
+        System.out.println(gms.GetPlansWithId(1250).toString());
     }
 
 }

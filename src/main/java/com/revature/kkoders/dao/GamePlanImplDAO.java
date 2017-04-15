@@ -1,11 +1,13 @@
 package com.revature.kkoders.dao;
 
+import java.util.List;
+
 import com.revature.kkoders.beans.GamePlan;
 import com.revature.kkoders.beans.GamePlanImpl;
 
 public interface GamePlanImplDAO {
 	
-	public GamePlanImpl getGamePlanById(int plan_id);
+	public List<GamePlanImpl> getGamePlanById(int user_id);
 	public void setTitleForForm(String plan_name, int un);
 	public void setStartDate(String sd, int un);
 	public void setEndDate(String ed, int un);

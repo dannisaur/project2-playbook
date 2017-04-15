@@ -2,9 +2,11 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>  
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>The Playbook App - Game Plan</title>
 
@@ -32,19 +34,18 @@
     <![endif]-->
 
 <link rel="stylesheet" href="resources/css/style2.css">
-
+<%@ page isELIgnored="false" %>
 
 </head>
 <body>
+
+	
 
 	<h3 align="center">This page is still under construction</h3>
 	<h4 align="center">Below are your game plans --> insert name of user in the session</h4>
 	<div align="center">
 	<!-- putting table below these lines in the center -->
 	</div>
-	
-	<div class="btn-toolbar">
-    <button class="btn btn-primary">New Game Plan</button>
     
     <!--  
     <button class="btn">Import</button>
@@ -110,78 +111,33 @@
 				</ul>
 			</div>
 		</div>
-<div class="well" align="center" >
+<div class="gameplan" align="center"  >
+<div class="btn-toolbar">
+    <button class="btn btn-primary" a>New Game Plan</button>
     <table class="table" align="center">
       <thead>
         <tr>
-          <th>#</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Username</th>
+         
+          <th>Title</th>
+          <th>Start Date</th>
+          <th>End date</th>
+          <th>Hour Per day</th>
+          
           <th style="width: 36px;"></th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>Mark</td>
-          <td>Tompson</td>
-          <td>the_mark7</td>
-          <td>
-              <a href="user.html"><i class="icon-pencil"></i></a>
-              <a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
-          </td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Ashley</td>
-          <td>Jacobs</td>
-          <td>ash11927</td>
-          <td>
-              <a href="user.html"><i class="icon-pencil"></i></a>
-              <a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
-          </td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>Audrey</td>
-          <td>Ann</td>
-          <td>audann84</td>
-          <td>
-              <a href="user.html"><i class="icon-pencil"></i></a>
-              <a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
-          </td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td>John</td>
-          <td>Robinson</td>
-          <td>jr5527</td>
-          <td>
-              <a href="user.html"><i class="icon-pencil"></i></a>
-              <a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
-          </td>
-        </tr>
-        <tr>
-          <td>5</td>
-          <td>Aaron</td>
-          <td>Butler</td>
-          <td>aaron_butler</td>
-          <td>
-              <a href="user.html"><i class="icon-pencil"></i></a>
-              <a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
-          </td>
-        </tr>
-        <tr>
-          <td>6</td>
-          <td>Chris</td>
-          <td>Albert</td>
-          <td>cab79</td>
-          <td>
-              <a href="user.html"><i class="icon-pencil"></i></a>
-              <a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
-          </td>
-        </tr>
+       
+        <c:forEach items="${gameplans}" var="Plans">
+        	<tr>
+        		
+        		<td><c:out value="${Plans.title}"></c:out>
+        		<td><c:out value="${Plans.startDate}"></c:out>
+        		<td><c:out value="${Plans.endDate}"></c:out>
+        		<td><c:out value="${Plans.hours}"></c:out>
+        		
+        	</tr>
+        </c:forEach>
       </tbody>
     </table>
 </div>

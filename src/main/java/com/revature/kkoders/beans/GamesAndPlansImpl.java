@@ -1,5 +1,6 @@
 package com.revature.kkoders.beans;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -13,8 +14,12 @@ import org.springframework.stereotype.Component;
 @Component
 @Entity
 @Table(name="GAME_AND_PLANS")
-public class GamesAndPlansImpl
+public class GamesAndPlansImpl implements Serializable 
 {
+	
+	
+	
+	
 	@Id
 	private long id;
 	
