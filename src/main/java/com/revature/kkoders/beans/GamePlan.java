@@ -16,9 +16,8 @@ public interface GamePlan {
 	
 	public void setEndDate(String endDate);
 	public String getEndDate();
-	
+
+	public void setHoursPerDay(double hours);
 	public double getHoursPerDay();
-	public void setHoursPerDay(double hoursPerDay);
-	
 
 }
