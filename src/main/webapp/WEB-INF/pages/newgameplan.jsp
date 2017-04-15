@@ -14,7 +14,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="icon" href="../../favicon.ico">
-<title>New Game Plan</title>
+<title>The Playbook - New Game Plan</title>
 
 <!-- Bootstrap core CSS -->
 <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
@@ -51,126 +51,151 @@
 </head>
 <body>
 
+	<!-- SITE NAVIGATION BAR -->
 	<nav class="navbar navbar-inverse navbar-fixed-top">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed"
-				data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-				aria-controls="navbar">
-				<span class="sr-only">Toggle navigation</span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="#">Project name</a>
-		</div>
-		<div id="navbar" class="navbar-collapse collapse">
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">Dashboard</a></li>
-				<li><a href="#">Settings</a></li>
-				<li><a href="#">Profile</a></li>
-				<li><a href="#">Help</a></li>
-				<li class="active"><a href="edit">EDIT</a></li>
-				<li><a href="../logout">LOGOUT</a></li>
-			</ul>
-			<form class="navbar-form navbar-right">
-				<input type="text" class="form-control" placeholder="Search...">
-			</form>
-		</div>
-	</div>
-	</nav>
-
-
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-sm-3 col-md-2 sidebar">
-				<ul class="nav nav-sidebar">
-					<li class="active"><a href="newgameplan"><span
-							class="sr-only">(current)</span>New Plan</a></li>
-					<li><a href="account/edit">Edit Account</a></li>
-					<li><a href="library">View Library</a></li>
-				</ul>
-				<ul class="nav nav-sidebar">
-					<li><a href="#">Game Plans</a></li>
-					<li><a href="#">#1</a></li>
-				</ul>
+		<!-- NAV CONTAINER -->
+		<div class="container-fluid">
+			<!-- LOGO -->
+			<div class="!navbar-header">
+				<a class="navbar-brand" href="#">Playbook</a>
 			</div>
-			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<h1 class="page-header">Let's make a productive use of your
+			<!-- /.LOGO -->
+			<!-- NAV OPTIONS -->
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<!-- display user button if user signed in; otherwise display login button -->
+					<c:choose>
+						<c:when test="${not empty alsoUser}">
+							<!-- USER BUTTON -->
+						 	<li class="dropdown">
+		          				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+		          					<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+		          					${alsoUser.userName}
+		          					<span class="caret"></span>
+		          				</a>
+		          				<ul class="dropdown-menu">
+									<li><a href="account">Profile</a></li>
+		            				<li><a href="account/edit">Edit Account</a></li>
+		            				<li><a href="logout">Sign out</a></li>
+		          				</ul>
+		        			</li>
+        					<!-- /.USER BUTTON -->
+						</c:when>
+						<c:otherwise>
+							<!-- LOGIN BUTTON -->
+		          			<li>
+		          				<a href="login">Sign in</a>
+		          			</li>
+		         			<!-- /.LOGIN BUTTON -->
+						</c:otherwise>
+					</c:choose>
+				</ul>
+				<!-- USER SEARCH BAR -->
+				<form class="navbar-form navbar-right">
+					<input type="text" class="form-control" placeholder="Search users...">
+				</form>
+				<!-- /.USER SEARCH BAR -->
+			</div>
+			<!-- /.NAV OPTIONS -->
+		</div>
+		<!-- /.NAV CONTAINER -->
+	</nav>
+	<!-- /.SITE NAVIGATION BAR -->
+	
+	
+	<!-- SITE SIDEBAR -->
+	<div class="nav-side-menu">
+	    <div class="menu-list">
+	        <ul id="menu-content" class="menu-content">
+	            <li class="icon-button" data-toggle="tooltip" title="New Game Plan" data-placement="bottom"><a href="newgameplan" style="width: 50px; padding-top: 15px; padding-left: 15px"><img class="icon icon-square" src="resources/media/icon-square.png"></img></a></li><!-- NEW GAME PLAN -->
+	            <li class="icon-button" data-toggle="tooltip" title="View Game Plans" data-placement="bottom"><a href="gameplan" style="width: 50px; padding-top: 15px; padding-left: 15px"><img class="icon icon-triangle" src="resources/media/icon-triangle.png"></img></a></li><!-- VIEW GAME PLANS -->
+            	<li class="icon-button" data-toggle="tooltip" title="View Library" data-placement="bottom"><a href="library" style="width: 50px; padding-top: 15px; padding-left: 15px"><img class="icon icon-circle" src="resources/media/icon-circle.png"></img></a></li><!-- VIEW LIBRARY -->
+            	<li class="icon-button" data-toggle="tooltip" title="Edit Account" data-placement="bottom"><a href="account/edit" style="width: 50px; padding-top: 15px; padding-left: 15px"><img class="icon icon-x" src="resources/media/icon-x.png"></img></a></li><!-- EDIT ACCOUNT -->
+	        </ul>
+	    </div>
+	</div>
+	<!-- /.SITE SIDEBAR -->
+
+
+	<!-- MAIN HEADING -->
+	<div class="main-heading">
+		<h1>Let's make a productive use of your
 					day.</h1>
 
+		<p>Fields marked with (*) are optional.</p>
+		<div class="container">
+			<form:form action="newgameplan" method="POST" modelAttribute="newGamePlan"
+				class="form-horizontal">
+				<fieldset>
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="textinput">Plan
+							Title *</label>
+						<div class="col-md-4">
+							<form:input id="textinput" path="title" type="text"
+								placeholder="Plan Title" class="form-control input-md" />
+						</div>
+					</div>
 
-				<p>Fields marked with (*) are optional.</p>
-				<div class="container">
-					<form:form action="newgameplan" method="POST" modelAttribute="newGamePlan"
-						class="form-horizontal">
-						<fieldset>
-							<!-- Text input-->
-							<div class="form-group">
-								<label class="col-md-4 control-label" for="textinput">Plan
-									Title *</label>
-								<div class="col-md-4">
-									<form:input id="textinput" path="title" type="text"
-										placeholder="Plan Title" class="form-control input-md" />
-								</div>
-							</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="textinput">Start
+							Date</label>
+						<div class="col-md-4">
+							<form:input id="textinput" path="startDate" type="text"
+								placeholder="mm-dd-yyyy" class="form-control input-md" />
+						</div>
+					</div>
 
-							<div class="form-group">
-								<label class="col-md-4 control-label" for="textinput">Start
-									Date</label>
-								<div class="col-md-4">
-									<form:input id="textinput" path="startDate" type="text"
-										placeholder="mm-dd-yyyy" class="form-control input-md" />
-								</div>
-							</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="textinput">End
+							Date</label>
+						<div class="col-md-4">
+							<form:input id="textinput" path="endDate" type="text"
+								placeholder="mm-dd-yyyy" class="form-control input-md" />
+						</div>
+					</div>
 
-							<div class="form-group">
-								<label class="col-md-4 control-label" for="textinput">End
-									Date</label>
-								<div class="col-md-4">
-									<form:input id="textinput" path="endDate" type="text"
-										placeholder="mm-dd-yyyy" class="form-control input-md" />
-								</div>
-							</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="textinput">Hours
+							Per Day</label>
+						<div class="col-md-4">
+							<form:input id="textinput" path="hoursPerDay"
+								placeholder="Hours" class="form-control input-md" />
+						</div>
+					</div>
 
-							<div class="form-group">
-								<label class="col-md-4 control-label" for="textinput">Hours
-									Per Day</label>
-								<div class="col-md-4">
-									<form:input id="textinput" path="hoursPerDay"
-										placeholder="Hours" class="form-control input-md" />
-								</div>
-							</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="textinput">Select
+							the games to be played: </label>
+						<div class="col-md-4">
+							<form:select class="form-control" size="10" id="gamesSelect" path="gamesInPlan">
+								<form:options items="${ games }" />
+							</form:select>
+						</div>
+					</div>
 
-							<div class="form-group">
-								<label class="col-md-4 control-label" for="textinput">Select
-									the games to be played: </label>
-								<div class="col-md-4">
-									<form:select class="form-control" size="10" id="gamesSelect" path="gamesInPlan">
-										<form:options items="${ games }" />
-									</form:select>
-								</div>
-							</div>
+					<!-- Button -->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="singlebutton">Save
+							Changes</label>
+						<div class="col-md-4">
+							<button id="singlebutton" name="singlebutton"
+								class="btn btn-success">Save</button>
+						</div>
+					</div>
 
-							<!-- Button -->
-							<div class="form-group">
-								<label class="col-md-4 control-label" for="singlebutton">Save
-									Changes</label>
-								<div class="col-md-4">
-									<button id="singlebutton" name="singlebutton"
-										class="btn btn-success">Save</button>
-								</div>
-							</div>
+				</fieldset>
+			</form:form>
 
-						</fieldset>
-					</form:form>
-
-				</div>
-
-
-
-			</div>
 		</div>
 	</div>
+	<!-- /.MAIN HEADING -->
+	
+	
+	<!-- SUB-HEADING -->
+	<div class="sub-heading" style="height: 250px;">
+	</div>
+	<!-- /.SUB-HEADING -->
 
 
 	<script
@@ -190,6 +215,12 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script>
+		$(function () {
+			  $('[data-toggle="tooltip"]').tooltip()
+			})
+	</script>
 
 </body>
 </html>

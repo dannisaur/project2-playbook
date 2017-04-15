@@ -23,6 +23,7 @@
 	href="http://fonts.googleapis.com/css?family=Source Code Pro">
 
 <link rel="stylesheet" href="resources/css/style1.css">
+<link rel="stylesheet" href="resources/css/style2.css">
 
 <style>
 body {
@@ -33,6 +34,59 @@ body {
 
 </head>
 <body>
+
+	<!-- SITE NAVIGATION BAR -->
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<!-- NAV CONTAINER -->
+		<div class="container-fluid">
+			<!-- LOGO -->
+			<div class="!navbar-header">
+				<a class="navbar-brand" href="#">Playbook</a>
+			</div>
+			<!-- /.LOGO -->
+			<!-- NAV OPTIONS -->
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<!-- display user button if user signed in; otherwise display login button -->
+					<c:choose>
+						<c:when test="${not empty alsoUser}">
+							<!-- USER BUTTON -->
+						 	<li class="dropdown">
+		          				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+		          					<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+		          					${alsoUser.userName}
+		          					<span class="caret"></span>
+		          				</a>
+		          				<ul class="dropdown-menu">
+									<li><a href="account">Profile</a></li>
+		            				<li><a href="account/edit">Edit Account</a></li>
+		            				<li><a href="logout">Sign out</a></li>
+		          				</ul>
+		        			</li>
+        					<!-- /.USER BUTTON -->
+						</c:when>
+						<c:otherwise>
+							<!-- LOGIN BUTTON -->
+		          			<li>
+		          				<a href="login">Sign in</a>
+		          			</li>
+		         			<!-- /.LOGIN BUTTON -->
+						</c:otherwise>
+					</c:choose>
+				</ul>
+				<!-- USER SEARCH BAR -->
+				<form class="navbar-form navbar-right">
+					<input type="text" class="form-control" placeholder="Search users...">
+				</form>
+				<!-- /.USER SEARCH BAR -->
+			</div>
+			<!-- /.NAV OPTIONS -->
+		</div>
+		<!-- /.NAV CONTAINER -->
+	</nav>
+	<!-- /.SITE NAVIGATION BAR -->
+	
+
 	<div class="col-md-4" id="loginPanel">
 		<c:if test="${errorMessage != null}">
 			<div class="alert alert-danger">${errorMessage}</div>
