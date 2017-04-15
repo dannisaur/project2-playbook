@@ -149,14 +149,13 @@ public class GamePlanImpl implements GamePlan, Serializable {
 		return this.endDate;
 	}
 
-	public void setHours(double hours) {
-		// TODO Auto-generated method stub
-		this.hoursPerDay = hours;
+
+	public double getHoursPerDay() {
+		return hoursPerDay;
 	}
 
-	public double getHours() {
-		// TODO Auto-generated method stub
-		return this.hoursPerDay;
+	public void setHoursPerDay(double hoursPerDay) {
+		this.hoursPerDay = hoursPerDay;
 	}
 
 	// CONSTRUCTOR WITH FIELDS
@@ -179,7 +178,7 @@ public class GamePlanImpl implements GamePlan, Serializable {
 	@Override
 	public String toString() {
 		return "GamePlanImpl [planID=" + planID + ", title=" + title + ", startDate=" + startDate + ", endDate="
-				+ endDate + ", hours=" + hours + ", user=" + user + "]";
+				+ endDate + ", hours=" + hoursPerDay + ", user=" + user + "]";
 	}
 	
 	
