@@ -41,6 +41,12 @@
 
 <link rel="stylesheet" href="resources/css/style1.css">
 <link rel="stylesheet" href="resources/css/style2.css">
+
+<link rel="stylesheet" type="text/css"
+	href="http://fonts.googleapis.com/css?family=Rambla">
+<link rel="stylesheet" type="text/css"
+	href="http://fonts.googleapis.com/css?family=Open Sans">
+	
 </head>
 
 <body>

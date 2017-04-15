@@ -50,7 +50,6 @@
 	background-color: #fff;
 	border-color: #ccc;
 }
-
 .image-preview-input input[type=file] {
 	position: absolute;
 	top: 0;
@@ -62,16 +61,21 @@
 	opacity: 0;
 	filter: alpha(opacity = 0);
 }
-
 .image-preview-input-title {
 	margin-left: 2px;
 }
+
 </style>
+
+<link rel="stylesheet" type="text/css"
+	href="http://fonts.googleapis.com/css?family=Rambla">
+<link rel="stylesheet" type="text/css"
+	href="http://fonts.googleapis.com/css?family=Open Sans">
+
+<%@ page isELIgnored="false"%>
 
 </head>
 <body>
-
-
 
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container-fluid">
@@ -106,10 +110,10 @@
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
-					<li><a href="#">New Plan</a></li>
-					<li class="active"><a href="#">Edit Account <span
+					<li><a href="../newgameplan">New Plan</a></li>
+					<li class="active"><a href="edit">Edit Account <span
 							class="sr-only">(current)</span></a></li>
-					<li><a href="#">View Library</a></li>
+					<li><a href="../library">View Library</a></li>
 				</ul>
 				<ul class="nav nav-sidebar">
 					<li><a href="#">Game Plans</a></li>
@@ -169,7 +173,6 @@
 								<div class="col-md-4">
 									<form:password id="passwordinput" path="currPw"
 										placeholder="current password" class="form-control input-md" />
-
 								</div>
 							</div> --%>
 
@@ -280,7 +283,6 @@
 				$('.image-preview').popover('hide');
 			});
 		});
-
 		$(function() {
 			// Create the close button
 			var closebtn = $('<button/>', {

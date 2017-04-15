@@ -10,17 +10,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.transaction.Transactional;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.web.context.WebApplicationContext;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -29,7 +23,7 @@ import org.springframework.stereotype.Component;
 @Entity
 //@Scope(value="prototype")
 @Table(name="USERS")
-public class UserImpl implements Serializable, User {
+public class UserImpl implements Serializable{
 	
 	/**
 	 * 
@@ -66,28 +60,21 @@ public class UserImpl implements Serializable, User {
 	@Column(name="STEAM_ID")
 	private String steamId;
 
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="GAME_LIBRARY",
-			joinColumns=@JoinColumn(name="USER_ID"),
-			inverseJoinColumns=@JoinColumn(name="GAME_ID"))
-	private List<GameImpl> gameLibrary;
+	@OneToMany(fetch=FetchType.EAGER, mappedBy ="pk.user")
+	private Set<UserGame> gameLibrary;
 	
 	
-	public List<GameImpl> getGameLib()
+	public Set<UserGame> getGameLib()
 	{	
 		return gameLibrary;
 	}
 	
-	public final void setGameLibrary(List<GameImpl> gameLibrary)
+	public final void setGameLibrary(Set<UserGame> gameLibrary)
 	{
 		this.gameLibrary = gameLibrary;
 	}
 	
 	
-	public final void addGameToLibrary(GameImpl game)
-	{
-		this.gameLibrary.add(game);
-	}
 	// END GETTING GAMES
 	
 	// ----------------------------------------------------------
@@ -95,13 +82,13 @@ public class UserImpl implements Serializable, User {
 	// THIS IS FOR SETTING AND GETTING GAMEPLANS
 	// ONE USER TO MANY GAME PLANS
 	@OneToMany(fetch=FetchType.EAGER, mappedBy = "user")
-	private Set<GamePlanImpl> gamePlans;
+	private List<GamePlanImpl> gamePlans;
 	
-	public void setGamePlans(Set<GamePlanImpl> newGamePlans){
+	public void setGamePlans(List<GamePlanImpl> newGamePlans){
 		this.gamePlans = newGamePlans;
 	}
 	
-	public Set<GamePlanImpl> getGamePlans(){
+	public List<GamePlanImpl> getGamePlans(){
 		return gamePlans;
 	}
 	
@@ -201,7 +188,7 @@ public class UserImpl implements Serializable, User {
 	
 	// CONSTRUCTOR WITH FIELDS
 	public UserImpl(int userID, String firstName, String lastName, String userName, String pw, String email,
-			String picURL, String desc, String steamId, List<GameImpl> gameLibrary, Set<GamePlanImpl> gamePlans) {
+			String picURL, String desc, String steamId, Set<UserGame> gameLibrary, List<GamePlanImpl> gamePlans) {
 		super();
 		this.userID = userID;
 		this.firstName = firstName;
@@ -219,13 +206,14 @@ public class UserImpl implements Serializable, User {
 	public UserImpl(){}
 
 	
-
-	// OVERRIDE TOSTRING
+	
+	// OVERRIDE TOSTRING , gamePlans=" + gamePlans +
 	@Override
 	public String toString() {
 		return "UserImpl [userID=" + userID + ", firstName=" + firstName + ", lastName=" + lastName + ", userName="
 				+ userName + ", pw=" + pw + ", email=" + email + ", picURL=" + picURL + ", desc=" + desc
-				+ ", GameLibrary=" + gameLibrary + ", gamePlans=" + gamePlans + "]";
+				+ ", GameLibrary=" + gameLibrary + "]";
 	}
+	
 	
 }

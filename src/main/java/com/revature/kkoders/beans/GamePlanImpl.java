@@ -1,5 +1,6 @@
 package com.revature.kkoders.beans;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -25,8 +26,15 @@ import org.springframework.stereotype.Component;
 @Component
 @Entity
 @Table(name="GAME_PLAN")
-public class GamePlanImpl implements GamePlan {
+public class GamePlanImpl implements GamePlan, Serializable {
 	
+	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(name="PLAN_ID")
 	@SequenceGenerator(name="PLANID_SEQ", sequenceName="PLANID_SEQ")
@@ -42,11 +50,30 @@ public class GamePlanImpl implements GamePlan {
 	private String endDate;
 	
 	@Column(name="CULMATIVE_HOURS_PERDAY")
-	private double hours;
+	private double hoursPerDay;
+	
+	@ManyToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinTable
+	(
+		name = "GAMES_AND_PLANS",
+		joinColumns = @JoinColumn(name="plan_id"),
+		inverseJoinColumns = @JoinColumn(name="game_id")
+	)
+	private Set<GameImpl> gamesInPlan;
+	
+	public final Set<GameImpl> getGamesInPlan()
+	{
+		return gamesInPlan;
+	}
+
+	public final void setGamesInPlan(Set<GameImpl> games)
+	{
+		this.gamesInPlan = games;
+	}
 	
 	// ----------------------------------------------------------
 	
-	// MANY GAME PLANS TO ONE USER
+	// MANY GAME PLANS TO ONE USER 
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="USER_ID")
 	private UserImpl user;
@@ -140,34 +167,35 @@ public class GamePlanImpl implements GamePlan {
 
 	public void setHoursPerDay(double hours) {
 		// TODO Auto-generated method stub
-		this.hours = hours;
+		this.hoursPerDay = hours;
 	}
 
 	public double getHoursPerDay() {
 		// TODO Auto-generated method stub
-		return this.hours;
+		return this.hoursPerDay;
 	}
 
 	// CONSTRUCTOR WITH FIELDS
-	public GamePlanImpl(int planID, String title, String startDate, String endDate, double hours, UserImpl user,
-			List<DailySessionImpl> dailySessions) {
+	public GamePlanImpl(int planID, String title, String startDate, String endDate, double hours,
+			Set<GameImpl> gamesInPlan, UserImpl user, List<DailySessionImpl> dailySessions) {
 		super();
 		this.planID = planID;
 		this.title = title;
 		this.startDate = startDate;
 		this.endDate = endDate;
-		this.hours = hours;
+		this.hoursPerDay = hours;
+		this.gamesInPlan = gamesInPlan;
 		this.user = user;
 		this.dailySessions = dailySessions;
 	}
 	
-	// NO ARGS CONSTRUCTOR
+	// NO ARGS CONSTRUCTOR ", dailySessions=" + dailySessions + 
 	public GamePlanImpl(){}
-
+	//
 	@Override
 	public String toString() {
 		return "GamePlanImpl [planID=" + planID + ", title=" + title + ", startDate=" + startDate + ", endDate="
-				+ endDate + ", hours=" + hours + ", user=" + user + ", dailySessions=" + dailySessions + "]";
+				+ endDate + ", hours=" + hoursPerDay + ", user=" + user + "]";
 	}
 
 	public Set<GameImpl> getGames() {
@@ -177,5 +205,6 @@ public class GamePlanImpl implements GamePlan {
 	public void setGames(Set<GameImpl> games) {
 		this.games = games;
 	}
+	
 	
 }

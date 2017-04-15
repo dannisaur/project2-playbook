@@ -98,6 +98,22 @@ public class UserImplDAOImpl implements UserImplDAO {
 
 	}
 
+	public void updateSteamIdByUsername(String steamId, String n) {
+		Session session = HibernateUtil.getSession();
+		String hql = "UPDATE UserImpl SET steamId =:steamId where userName =:userName";
+		Query query = session.createQuery(hql);
+
+		Transaction t = session.beginTransaction();
+
+		query.setParameter("steamId", steamId);
+		query.setParameter("userName", n);
+		query.executeUpdate();
+
+		t.commit();
+		session.close();
+
+	}
+	
 	@Override
 	public void SignUpUser(String fn, String ln, String un, String p, String em, String picurl, String d) {
 		Session session = HibernateUtil.getSession();

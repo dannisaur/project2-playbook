@@ -1,9 +1,15 @@
 package com.revature.kkoders.service;
 
+import java.util.List;
+
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import com.revature.kkoders.beans.GamePlanImpl;
 import com.revature.kkoders.dao.GamePlanImplDAOImpl;
+
+import com.revature.kkoders.beans.GamePlanImpl;
+import com.revature.kkoders.beans.UserImpl;
 
 @Component
 public class GamePlanService {
@@ -74,6 +80,16 @@ public class GamePlanService {
 		return complete;
 	}
 	
+	public void GamePlanSet(GamePlanImpl gm) {
+		gmpl.CreateGamePlan(gm);
+	}
+	
+	public List<GamePlanImpl> GetPlansWithId(int id) {
+		
+		
+		return gmpl.getGamePlanById(id);
+	}
+	
 	/**
 	 * Pulls the daily session for every user and every game plan.
 	 * 
@@ -85,6 +101,4 @@ public class GamePlanService {
 		gmpl.pullDailySessions();
 	}
 	//*/
-	
-
 }
