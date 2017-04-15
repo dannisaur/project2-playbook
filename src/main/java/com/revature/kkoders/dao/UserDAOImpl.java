@@ -9,10 +9,12 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.LogicalExpression;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Component;
 
 import com.revature.kkoders.beans.UserImpl;
 import com.revature.kkoders.util.HibernateUtil;
 
+@Component
 public class UserDAOImpl implements UserDAO {
 
     // since session.save will do both add and update
@@ -48,12 +50,12 @@ public class UserDAOImpl implements UserDAO {
         
         // we use a get method to eagerly fetch this object
         UserImpl user = (UserImpl) currSession.get(UserImpl.class, username);
-        
+        currSession.close();
         // then we return it
         return user;
     }
 
-    public ArrayList<UserImpl> getAllUsers() {
+    public List<UserImpl> getAllUsers() {
         // TODO Auto-generated method stub
         
         // we get the current session
@@ -61,8 +63,8 @@ public class UserDAOImpl implements UserDAO {
         
         // we make a criteria to list all the objects in the UserImpl class
         // save it to an ArrayList
-        ArrayList<UserImpl> allUsers = (ArrayList) currSession.createCriteria(UserImpl.class).list();
-        
+        List<UserImpl> allUsers =  currSession.createCriteria(UserImpl.class).list();
+        currSession.close();
         // return
         return allUsers;
     }
@@ -78,17 +80,22 @@ public class UserDAOImpl implements UserDAO {
      // To get records matching with AND conditions
         LogicalExpression andExp = Restrictions.and(chkName, chkPwd);
         cr.add(andExp);
+        System.out.println("here");
         
         List rs = cr.list();
-        if (rs.isEmpty() || rs.size() != 1)
+    
+        if (rs.isEmpty())
         {
+        	currSession.close();
         	return result;
         }
         for (Object x : rs)
         {
+        	System.out.println(((UserImpl)x).getUserName());
         	result = (UserImpl)x;
+        	System.out.println(result.getUserName());
         }
-        System.out.println(result);
+        currSession.close();
         return result;
 	}
 

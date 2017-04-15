@@ -22,8 +22,10 @@ public class AccountController {
 	 */
 	@RequestMapping(method=RequestMethod.GET)
 	public String doAccount(HttpSession session) {
-		//TODO: validate that user is logged in to display account page, otherwise send to login page.
+		System.out.println("GET request: /account");
 		
+		//TODO: validate that user is logged in to display account page, otherwise send to login page.
+		System.out.println("IN ACCOUNT");
 		return "account"; //TODO: only goto account if signed in. 
 	}
 
