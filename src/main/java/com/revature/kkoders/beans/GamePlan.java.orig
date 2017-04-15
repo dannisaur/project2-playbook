@@ -16,7 +16,28 @@ public interface GamePlan {
 	
 	public void setEndDate(String endDate);
 	public String getEndDate();
+<<<<<<< HEAD
+	
+||||||| merged common ancestors
+	
+<<<<<<<<< Temporary merge branch 1
+	public double getHoursPerDay();
+	public void setHoursPerDay(double hoursPerDay);
+||||||||| merged common ancestors
+	public void setHours(double hours);
+	public double getHours();
+=========
+=======
+
+>>>>>>> 132c828c8bf959ac5675b5eeb7e5d3fce8837af4
 	public void setHoursPerDay(double hours);
 	public double getHoursPerDay();
+<<<<<<< HEAD
+	
+||||||| merged common ancestors
+>>>>>>>>> Temporary merge branch 2
+	
+=======
+>>>>>>> 132c828c8bf959ac5675b5eeb7e5d3fce8837af4
 
 }

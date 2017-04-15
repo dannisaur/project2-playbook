@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.lukaspradel.steamapi.core.exception.SteamApiException;
-import com.revature.kkoders.beans.GameImpl;
-import com.revature.kkoders.beans.UserGame;
 import com.revature.kkoders.beans.UserImpl;
 import com.revature.kkoders.dao.SteamApiDAOImpl;
 import com.revature.kkoders.dao.UserDAOImpl;
@@ -28,9 +26,6 @@ public class UserService {
 	
 	@Autowired
 	GameLibService gameService;
-	
-	@Autowired
-	UserGame test;
 
 	public void addUser(UserImpl newUser) {
 
@@ -100,20 +95,44 @@ public class UserService {
 
 		return check;
 	}
+<<<<<<< HEAD
 
 	public UserImpl addSteamId(String steamId, UserImpl userInfo) {
 		userDAO.updateSteamIdByUsername(steamId, userInfo.getUserName());
 		userInfo.setSteamId(steamId);
+
 		try {
-			userInfo.setGameLibrary(steam.getGames(userInfo));
+			steam.getGames(userInfo);
 		} catch (SteamApiException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		userInfo.setGameLibrary(gameService.getUsersGame(userInfo));
-		
+		userInfo.setGameLibrary(gameService.getUsersGame(userInfo));
+
 		System.out.println("Steam ID added.");
 
 		return userInfo;
 	}
 }
+||||||| merged common ancestors
+}
+=======
+
+	public UserImpl addSteamId(String steamId, UserImpl userInfo) {
+		userDAO.updateSteamIdByUsername(steamId, userInfo.getUserName());
+		userInfo.setSteamId(steamId);
+
+		try {
+			steam.getGames(userInfo);
+		} catch (SteamApiException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		userInfo.setGameLibrary(gameService.getUsersGame(userInfo));
+
+		System.out.println("Steam ID added.");
+
+		return userInfo;
+	}
+}
+>>>>>>> a727eae6ebec63200cf01262d5233f72fa4cb28f
