@@ -3,8 +3,10 @@ package com.revature.kkoders.dao;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,6 +20,7 @@ import com.lukaspradel.steamapi.webapi.client.SteamWebApiClient;
 import com.lukaspradel.steamapi.webapi.request.GetOwnedGamesRequest;
 import com.lukaspradel.steamapi.webapi.request.builders.SteamWebApiRequestFactory;
 import com.revature.kkoders.beans.GameImpl;
+import com.revature.kkoders.beans.UserGame;
 import com.revature.kkoders.beans.UserImpl;
 import com.revature.kkoders.service.GameLibService;
 
@@ -33,9 +36,12 @@ public class SteamApiDAOImpl
 	@Autowired
 	GameImpl newGame;
 	
-	public List<GameImpl> getGames (UserImpl user) throws SteamApiException
+	@Autowired
+	UserGame userGame;
+	
+	public Set<UserGame> getGames (UserImpl user) throws SteamApiException
 	{
-		List<GameImpl> myGames = new ArrayList<>();
+		Set<UserGame> myGames = new HashSet<>();
         SteamWebApiClient client = new SteamWebApiClient.SteamWebApiClientBuilder("1702897AF9585B3AEDABDB2C44075317").build();
         
         Map<Integer,GameImpl> dbGames = gLDao.getAllGames();
@@ -56,6 +62,12 @@ public class SteamApiDAOImpl
         	{        		
         		System.out.println("ALREADY HERE ");
         		gLDao.addGameToUser(dbGames.get(x.getAppid()), user, hours.get(x.getAppid()));
+        		
+        		userGame.setUser(user);
+        		userGame.setGame(dbGames.get(x));
+        		userGame.setHours(hours.get(x.getAppid()));
+        		
+        		myGames.add(userGame);
         	}
         	else
         	{
@@ -89,6 +101,13 @@ public class SteamApiDAOImpl
        			}
        			else
        				newGame.setReleaseDate("N/A");
+       			
+       			userGame.setUser(user);
+        		userGame.setGame(newGame);
+        		userGame.setHours(hours.get(y));
+        		
+        		myGames.add(userGame);
+       			
        		} 
         	catch (com.github.goive.steamapi.exceptions.SteamApiException e)
         	{
@@ -96,7 +115,7 @@ public class SteamApiDAOImpl
         		//System.out.println("here");
        		}
        	}
-		return null;
+		return myGames;
 	}
 
 }

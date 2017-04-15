@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 //@Scope(value="prototype")
 @Entity
 @Table(name="GAME")
-public class GameImpl {
+public class GameImpl implements Game{
 	
 	@Id
 	@Column(name="GAME_ID")
