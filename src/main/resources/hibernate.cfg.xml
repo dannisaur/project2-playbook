@@ -5,17 +5,18 @@
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.connection.driver_class">oracle.jdbc.OracleDriver</property>
-        <property name="hibernate.connection.password">revature</property>
-        <property name="hibernate.connection.url">jdbc:oracle:thin:@oracle-bear.clqfkdmbotjv.us-east-1.rds.amazonaws.com:1521:ORCL</property>
-        <property name="hibernate.connection.username">jurczakn</property>
+        <property name="hibernate.connection.password">masterkoders</property>
+        <property name="hibernate.connection.url">jdbc:oracle:thin:@project-playbook.cytep8yn5pok.us-east-1.rds.amazonaws.com:1521:ORCL</property>
+        <property name="hibernate.connection.username">kawaii</property>
         <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
-        
-        <!-- <mapping resource="person.hbm.xml"/>     -->    
-        <mapping class="beans.HoneyPot"/>
-        <mapping class="beans.Cave" />
-        <mapping class="beans.Bear" />
-        
-<!--         <mapping class="cc.multivision.entity.Person"/>
- -->
+       <property name="hibernate.show_sql">true</property> 
+        <mapping class="com.revature.kkoders.beans.UserImpl"/>
+        <mapping class="com.revature.kkoders.beans.GamePlanImpl"/>
+        <mapping class="com.revature.kkoders.beans.GameImpl"/>
+        <mapping class="com.revature.kkoders.beans.DailySessionImpl"/>
+        <mapping class="com.revature.kkoders.logging.LogImpl"/>
+        <mapping class="com.revature.kkoders.logging.LogLevelImpl"/>
+        <mapping class="com.revature.kkoders.beans.UserGame"/>
+
     </session-factory>
 </hibernate-configuration>
