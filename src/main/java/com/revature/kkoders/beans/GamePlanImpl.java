@@ -19,6 +19,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.FetchMode;
+import org.hibernate.annotations.Fetch;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -44,7 +46,6 @@ public class GamePlanImpl implements GamePlan, Serializable {
 	
 	@Column(name="START_DATE")
 	private String startDate;
-	
 	@Column(name="END_DATE")
 	private String endDate;
 	
@@ -104,6 +105,21 @@ public class GamePlanImpl implements GamePlan, Serializable {
 	// END GETTING DAILY SESSIONS
 	
 	// ----------------------------------------------------------	
+	
+	//-----------------------------------------------------------
+	// MANY GAME PLANS TO MANY GAMES
+	
+	@ManyToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinTable(name="GAMES_AND_PLANS", joinColumns= {
+			@JoinColumn(name="PLAN_ID", nullable=false, updatable = false)
+			}, inverseJoinColumns= {
+				@JoinColumn(name="GAME_ID", nullable=false, updatable=false)
+			}
+	)
+	private Set<GameImpl> games;
+	
+	// END GETTING GAMES
+	//-----------------------------------------------------------
 	
 	public void setUser(UserImpl newUser){
 		user = newUser;
@@ -180,6 +196,14 @@ public class GamePlanImpl implements GamePlan, Serializable {
 	public String toString() {
 		return "GamePlanImpl [planID=" + planID + ", title=" + title + ", startDate=" + startDate + ", endDate="
 				+ endDate + ", hours=" + hoursPerDay + ", user=" + user + "]";
+	}
+
+	public Set<GameImpl> getGames() {
+		return games;
+	}
+
+	public void setGames(Set<GameImpl> games) {
+		this.games = games;
 	}
 	
 	
