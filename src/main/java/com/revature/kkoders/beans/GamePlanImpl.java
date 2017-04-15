@@ -157,7 +157,7 @@ public class GamePlanImpl implements GamePlan, Serializable {
 	public double getHoursPerDay() {
 		// TODO Auto-generated method stub
 		return this.hoursPerDay;
-
+	}
 
 	// CONSTRUCTOR WITH FIELDS
 	public GamePlanImpl(int planID, String title, String startDate, String endDate, double hours,
