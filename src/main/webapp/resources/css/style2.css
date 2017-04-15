@@ -28,10 +28,15 @@ h2 {
 /*
  * Global add-ons
  */
+ 
+.main-heading {
+	background-color: #323232;
+}
 
-.sub-header {
+.sub-heading {
   padding-bottom: 10px;
-  border-bottom: 1px solid #eee;
+  
+  background-color: #1C1C1C;
 }
 
 /*
@@ -88,15 +93,18 @@ h2 {
  * Main content
  */
 
-.main {
+.main-heading, .sub-heading {
   padding: 20px;
 }
 @media (min-width: 768px) {
-  .main {
-    padding-right: 40px;
-    padding-left: 40px;
+  .main-heading, .sub-heading {
+    padding-left: 140px;
   }
 }
+.container {
+	width: auto;
+}
+
 .main .page-header {
   margin-top: 0;
 }

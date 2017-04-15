@@ -1,5 +1,6 @@
 package com.revature.kkoders.beans;
 
+
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -8,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -47,6 +49,8 @@ public class GameImpl implements Game{
 	@OneToMany(fetch=FetchType.EAGER, mappedBy ="pk.game")
 	private Set<UserGame> owners;
 
+	@ManyToMany (fetch=FetchType.EAGER, mappedBy="games")
+	private Set<GamePlanImpl> plans;
 	
 	public final Set<UserGame> getOwners()
 	{
@@ -126,6 +130,16 @@ public class GameImpl implements Game{
 	public final void setPic(String pic)
 	{
 		this.pic = pic;
+	}
+
+	public final Set<GamePlanImpl> getPlans()
+	{
+		return plans;
+	}
+
+	public final void setPlans(Set<GamePlanImpl> plans)
+	{
+		this.plans = plans;
 	}
 
 	//	CONSTRUCTOR WITH FIELDS

@@ -96,13 +96,12 @@ public class GamePlanService {
 	 * Pulls the daily session for every user and every game plan.
 	 * 
 	 */
-	/// * TODO: Write code to pull daily sessions.
-	// @Scheduled(cron="59 59 23 * * *") //scheduled for 11:59:59 PM every day.
-	@Scheduled(cron = "0 0 12 * * *") // test: scheduled for noon.
-	// @Scheduled(fixedRate=2000)
-	public void pullDailySessions() {
-		// System.out.println("time");//test statement.
 
+	//@Scheduled(cron="59 59 23 * * *") //pulling daily sessions is scheduled for 11:59:59 PM every day.
+	@Scheduled(cron="0 */1 * * * *") //CURRENT TEST: run every 1 minute
+	public void pullDailySessions() {
+		System.out.println("RUNNING SCHEDULED TASK TO PULL DAILY SESSIONS:");//test statement.
+		gmpl.pullDailySessions();
 	}
 	// */
 }

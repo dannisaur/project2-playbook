@@ -1,5 +1,18 @@
 package com.revature.kkoders.dao;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Set;
+
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.revature.kkoders.beans.DailySessionImpl;
+import com.revature.kkoders.beans.GameImpl;
 import java.util.List;
 import java.util.Set;
 
@@ -21,6 +34,12 @@ public class GamePlanImplDAOImpl implements GamePlanImplDAO {
 	@Autowired
 	GamePlanImpl newGamePlan;
 
+  @AutoWired
+	SteamApiDAOImpl steamApiDao;
+	
+	@Autowired
+	DailySessionImpl dailySession;
+	
 	@Override
 	public List<GamePlanImpl> getGamePlanById(int user_id) {
 		Session session = HibernateUtil.getSession();
@@ -123,6 +142,68 @@ public class GamePlanImplDAOImpl implements GamePlanImplDAO {
 	}
 
 	@Override
+
+	public void pullDailySessions() {
+		Session session = HibernateUtil.getSession();
+		
+		//users = getUsers();
+		//foreach (gameplan of each user in users)
+		//	foreach (game in each gameplan)
+		//		SteamApi.getPlaytimeTotal()
+		//		compute dailyPlaytimeDifferential (today's playtimetotal - initial playtimetotal)
+		//		persist session with dailyplaytimedifferential, this gameplan of this user.
+		
+		System.out.println("GETTING GAMEPLANS");
+		Criteria gamePlansCr = session.createCriteria(GamePlanImpl.class);
+		List<GamePlanImpl> gamePlans = gamePlansCr.list();
+		System.out.println("GOT GAMEPLANS");
+		
+		for (GamePlanImpl gamePlan : gamePlans) {
+			System.out.println("GAMEPLAN: " + gamePlan.getTitle());
+			
+			System.out.println("GETTING GAMES IN PLAN");
+			Set<GameImpl> gamesInPlanSet = gamePlan.getGames();
+			List<GameImpl> gamesInPlan = new ArrayList<>(gamesInPlanSet);
+			System.out.println("GOT GAMES IN PLAN");
+			
+			System.out.println("GETTING USER IN PLAN");
+			UserImpl userOfGamePlan = gamePlan.getUserForGamePlan();
+			System.out.println("GOT USER IN PLAN");
+			
+			List<Integer> playtimesToday = null;
+			System.out.println("GETTING PLAYTIMES OF GAMES IN PLAN");
+			if (userOfGamePlan != null && gamesInPlan != null && !gamesInPlan.isEmpty()) {
+				playtimesToday = steamApiDao.getPlaytimes(userOfGamePlan, gamesInPlan);
+			}
+			else {
+				System.out.println("NO USER, OR NO GAMES IN PLAN");
+			}
+			System.out.println("GOT PLAYTIMES OF GAMES IN PLAN");
+			
+			System.out.println("USER: " + userOfGamePlan.getUserName());
+			for (int i = 0; i < gamesInPlan.size(); i++) {
+				int hours = playtimesToday.get(i) / 60;
+				
+				System.out.println("GAME: " + gamesInPlan.get(i).getGameTitle() + ". PLAYTIME (in hours): " + hours);
+				
+				// commit play session
+				Transaction transaction = session.beginTransaction();
+				
+				dailySession.setHours(hours);
+				dailySession.setGamePlanForDailySession(gamePlan);
+				
+				session.save(dailySession);
+				
+				transaction.commit();
+			}
+			
+			// TODO: get difference in times between played today and last session  
+
+		}
+		
+		session.close();
+  }
+
 	public void CreateGamePlan(String planName, String startDate, String endDate, double hours, Set<GameImpl> selectedGames, UserImpl user) {
 		Session session = HibernateUtil.getSession();
 		Transaction t = session.beginTransaction();
@@ -139,7 +220,6 @@ public class GamePlanImplDAOImpl implements GamePlanImplDAO {
 		System.out.println("saving info");
 		t.commit();
 		session.close();
-		
 	}
 
 }
