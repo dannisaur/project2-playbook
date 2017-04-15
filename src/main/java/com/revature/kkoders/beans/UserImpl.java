@@ -206,13 +206,14 @@ public class UserImpl implements Serializable{
 	public UserImpl(){}
 
 	
-
-	// OVERRIDE TOSTRING
+	
+	// OVERRIDE TOSTRING , gamePlans=" + gamePlans +
 	@Override
 	public String toString() {
 		return "UserImpl [userID=" + userID + ", firstName=" + firstName + ", lastName=" + lastName + ", userName="
 				+ userName + ", pw=" + pw + ", email=" + email + ", picURL=" + picURL + ", desc=" + desc
-				+ ", GameLibrary=" + gameLibrary + ", gamePlans=" + gamePlans + "]";
+				+ ", GameLibrary=" + gameLibrary + "]";
 	}
+	
 	
 }

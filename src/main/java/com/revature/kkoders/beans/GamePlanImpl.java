@@ -1,5 +1,6 @@
 package com.revature.kkoders.beans;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -23,8 +24,15 @@ import org.springframework.stereotype.Component;
 @Component
 @Entity
 @Table(name="GAME_PLAN")
-public class GamePlanImpl implements GamePlan {
+public class GamePlanImpl implements GamePlan, Serializable {
 	
+	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(name="PLAN_ID")
 	@SequenceGenerator(name="PLANID_SEQ", sequenceName="PLANID_SEQ")
@@ -64,7 +72,7 @@ public class GamePlanImpl implements GamePlan {
 	
 	// ----------------------------------------------------------
 	
-	// MANY GAME PLANS TO ONE USER
+	// MANY GAME PLANS TO ONE USER 
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="USER_ID")
 	private UserImpl user;
@@ -165,14 +173,14 @@ public class GamePlanImpl implements GamePlan {
 		this.dailySessions = dailySessions;
 	}
 	
-	// NO ARGS CONSTRUCTOR
+	// NO ARGS CONSTRUCTOR ", dailySessions=" + dailySessions + 
 	public GamePlanImpl(){}
-
+	//
 	@Override
 	public String toString() {
 		return "GamePlanImpl [planID=" + planID + ", title=" + title + ", startDate=" + startDate + ", endDate="
-				+ endDate + ", hours=" + hoursPerDay + ", gamesInPlan=" + gamesInPlan + ", user=" + user + ", dailySessions="
-				+ dailySessions + "]";
+				+ endDate + ", hours=" + hoursPerDay + ", user=" + user + "]";
 	}
+	
 	
 }

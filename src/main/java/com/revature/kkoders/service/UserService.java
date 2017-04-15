@@ -104,7 +104,6 @@ public class UserService {
 	public UserImpl addSteamId(String steamId, UserImpl userInfo) {
 		userDAO.updateSteamIdByUsername(steamId, userInfo.getUserName());
 		userInfo.setSteamId(steamId);
-
 		try {
 			userInfo.setGameLibrary(steam.getGames(userInfo));
 		} catch (SteamApiException e) {
