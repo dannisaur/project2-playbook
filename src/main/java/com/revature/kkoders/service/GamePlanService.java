@@ -1,9 +1,12 @@
 package com.revature.kkoders.service;
 
+import java.util.List;
+
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.revature.kkoders.dao.GamePlanImplDAOImpl;
+import com.revature.kkoders.beans.GamePlanImpl;
 import com.revature.kkoders.beans.UserImpl;
 
 
