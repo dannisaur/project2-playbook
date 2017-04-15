@@ -141,7 +141,6 @@
 							alert("passwords do not match!")
 						}
 					});
-
 					$(document).on('click', '#close-preview', function() {
 						$('.image-preview').popover('hide');
 						// Hover befor close the preview
@@ -151,7 +150,6 @@
 							$('.image-preview').popover('hide');
 						});
 					});
-
 					$(function() {
 						// Create the close button
 						var closebtn = $('<button/>', {
@@ -210,7 +208,6 @@
 									reader.readAsDataURL(file);
 								});
 					});
-
 				});
 	</script>
 
@@ -234,4 +231,5 @@
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </body>
+
 </html>
