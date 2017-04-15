@@ -141,7 +141,7 @@
 	<!-- what does this do??  safe to delete?
 	<div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	    <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Ã—</button>
 	        <h3 id="myModalLabel">Delete Confirmation</h3>
 	    </div>
 	    <div class="modal-body">

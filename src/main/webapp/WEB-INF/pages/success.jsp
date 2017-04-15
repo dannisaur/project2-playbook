@@ -105,7 +105,7 @@
 						signing up. Please check your email for details about your
 						registration. Click the button below to return to the main page and
 						log in.</p>
-					<a href="login" class="btn btn-success btn-block btn-lg">     Log in     </a> <br>
+					<a href="login" class="btn btn-success btn-block btn-lg"> Â  Â  Log in Â  Â  </a> <br>
 					<br>
 				</div>
 			</div>
