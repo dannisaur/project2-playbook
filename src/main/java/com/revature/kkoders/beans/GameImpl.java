@@ -163,12 +163,4 @@ public class GameImpl implements Game{
 		return gameTitle;
 	}
 
-	public Set<GamePlanImpl> getPlans() {
-		return plans;
-	}
-
-	public void setPlans(Set<GamePlanImpl> plans) {
-		this.plans = plans;
-	}
-
 }
