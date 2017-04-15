@@ -113,7 +113,7 @@
 		</div>
 <div class="gameplan" align="center"  >
 <div class="btn-toolbar">
-    <button class="btn btn-primary" a>New Game Plan</button>
+    <button class="btn btn-primary" onClick="location.href='newgameplan'">New Game Plan</button>
     <table class="table" align="center">
       <thead>
         <tr>
