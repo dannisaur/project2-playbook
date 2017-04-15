@@ -80,8 +80,10 @@ public class UserDAOImpl implements UserDAO {
      // To get records matching with AND conditions
         LogicalExpression andExp = Restrictions.and(chkName, chkPwd);
         cr.add(andExp);
+        System.out.println("here");
         
         List rs = cr.list();
+    
         if (rs.isEmpty())
         {
         	currSession.close();

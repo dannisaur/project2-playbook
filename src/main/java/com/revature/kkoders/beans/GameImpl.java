@@ -1,5 +1,6 @@
 package com.revature.kkoders.beans;
 
+
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -48,8 +49,8 @@ public class GameImpl implements Game{
 	@OneToMany(fetch=FetchType.EAGER, mappedBy ="pk.game")
 	private Set<UserGame> owners;
 
-	@ManyToMany(mappedBy = "gamesInPlan")
-	public Set<GamePlanImpl> plans;
+	@ManyToMany (fetch=FetchType.EAGER, mappedBy="games")
+	private Set<GamePlanImpl> plans;
 	
 	public final Set<UserGame> getOwners()
 	{
@@ -160,6 +161,14 @@ public class GameImpl implements Game{
 	@Override
 	public String toString() {
 		return gameTitle;
+	}
+
+	public Set<GamePlanImpl> getPlans() {
+		return plans;
+	}
+
+	public void setPlans(Set<GamePlanImpl> plans) {
+		this.plans = plans;
 	}
 
 }
