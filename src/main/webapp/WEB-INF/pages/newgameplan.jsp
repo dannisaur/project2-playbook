@@ -101,7 +101,7 @@
 
 				<p>Fields marked with (*) are optional.</p>
 				<div class="container">
-					<form:form action="edit" method="POST" modelAttribute="newGamePlan"
+					<form:form action="newgameplan" method="POST" modelAttribute="newGamePlan"
 						class="form-horizontal">
 						<fieldset>
 							<!-- Text input-->
@@ -145,8 +145,7 @@
 								<label class="col-md-4 control-label" for="textinput">Select
 									the games to be played: </label>
 								<div class="col-md-4">
-									<form:select class="form-control" size="10" id="gamesSelect"
-										multiple="true" path="gamesInPlan">
+									<form:select class="form-control" size="10" id="gamesSelect" path="gamesInPlan">
 										<form:options items="${ games }" />
 									</form:select>
 								</div>
