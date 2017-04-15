@@ -101,7 +101,7 @@ public class GamePlanService {
 	@Scheduled(cron="0 */1 * * * *") //CURRENT TEST: run every 1 minute
 	public void pullDailySessions() {
 		System.out.println("RUNNING SCHEDULED TASK TO PULL DAILY SESSIONS:");//test statement.
-		gmpl.pullDailySessions();
+		gamePlanDAO.pullDailySessions();
 	}
 	// */
 }

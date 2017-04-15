@@ -34,7 +34,7 @@ public class GamePlanImplDAOImpl implements GamePlanImplDAO {
 	@Autowired
 	GamePlanImpl newGamePlan;
 
-  @AutoWired
+  @Autowired
 	SteamApiDAOImpl steamApiDao;
 	
 	@Autowired
@@ -140,8 +140,6 @@ public class GamePlanImplDAOImpl implements GamePlanImplDAO {
 		session.close();
 
 	}
-
-	@Override
 
 	public void pullDailySessions() {
 		Session session = HibernateUtil.getSession();
