@@ -1,6 +1,8 @@
 package com.revature.kkoders.controllers;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.lukaspradel.steamapi.core.exception.SteamApiException;
 import com.revature.kkoders.beans.GameImpl;
+import com.revature.kkoders.beans.UserGame;
 import com.revature.kkoders.beans.UserImpl;
 import com.revature.kkoders.dao.SteamApiDAOImpl;
 import com.revature.kkoders.service.UserService;
@@ -25,9 +28,6 @@ public class LinkSteamController {
 
 	@Autowired
 	UserImpl currUser;
-
-	@Autowired
-	GameImpl allGames;
 	
 	@Autowired
 	UserService service;
@@ -53,7 +53,7 @@ public class LinkSteamController {
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView linkSteam(HttpServletRequest request, HttpSession session) {
 
-		ModelAndView model = new ModelAndView("/library");
+		ModelAndView model = new ModelAndView("/link_steam");
 		
 		String id = request.getParameter("steamId");
 		
@@ -62,10 +62,15 @@ public class LinkSteamController {
 		// calling the add steam id method in the user service
 		currUser = service.addSteamId(id, currUser);
 		session.removeAttribute("alsoUser");
-		session.setAttribute("alsoUser", currUser);
-
-		model.addObject("games", currUser.getGameLib());
-
+		session.setAttribute("alsoUser", currUser
+		
+		Set<GameImpl> allGames = new HashSet<>();
+		
+		for (UserGame x : currUser.getGameLib()){
+			allGames.add(x.getGame());
+		}
+		
+		model.addObject("games", allGames);
 		System.out.println("Printing steam id: " + currUser.getSteamId());
 		
 		return model;
