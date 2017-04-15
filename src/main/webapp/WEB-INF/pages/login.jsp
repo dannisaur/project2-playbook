@@ -46,11 +46,11 @@ body {
 				<form:form action="login" method="POST" commandName="user">
 					<fieldset>
 						<div class="form-group">
-							<form:input class="form-control" path="userName"
+							<form:input class="form-control input-lg" path="userName"
 								placeholder="Username" />
 						</div>
 						<div class="form-group">
-							<form:password class="form-control" path="pw"
+							<form:password class="form-control input-lg" path="pw"
 								placeholder="Password" />
 						</div>
 						<input class="btn btn-success btn-block btn-lg" type="submit"
@@ -60,7 +60,7 @@ body {
 
 				<br>
 				<p>
-					New User? <a href="signup">Sign Up Here.</a>
+					<a href="signup">New User? Sign Up Here.</a>
 				</p>
 			</div>
 		</div>

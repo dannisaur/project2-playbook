@@ -36,6 +36,12 @@
     <![endif]-->
 
 <link rel="stylesheet" href="resources/css/style2.css">
+
+<link rel="stylesheet" type="text/css"
+	href="http://fonts.googleapis.com/css?family=Rambla">
+<link rel="stylesheet" type="text/css"
+	href="http://fonts.googleapis.com/css?family=Open Sans">
+	
 </head>
 
 <body>
@@ -87,10 +93,9 @@
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
-					<li class="active"><a href="#">New Plan <span
-							class="sr-only">(current)</span></a></li>
+					<li><a href="newgameplan">New Plan</a></li>
 					<li><a href="account/edit">Edit Account</a></li>
-					<li><a href="#">View Library</a></li>
+					<li><a href="library">View Library</a></li>
 				</ul>
 				<ul class="nav nav-sidebar">
 					<li><a href="gameplan">Game Plans</a></li>

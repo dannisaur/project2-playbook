@@ -56,14 +56,15 @@ public class LogAspect {
 			message = "ERROR: " + serviceMethod.getSignature() + ". THROW MESSAGE: " + t.getMessage(); //do error log if exception/error thrown; log which service method threw an exception.
 			logInfo = false;
 		}
-		
-		//System.out.println(logMessage); //TODO: commit to DB.
+
+		message = message.substring(0, message.length() > 299 ? 299 : message.length());
+
 		if (logInfo) {
-			//logger.info(message);
+			logger.info(message); //commit to DB
 			System.out.println(message);
 		}
 		else {
-			//logger.error(message);
+			logger.error(message); //commit to DB
 			System.out.println(message);
 		}
 		

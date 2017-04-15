@@ -2,10 +2,13 @@ package com.revature.kkoders.dao;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.github.goive.steamapi.SteamApi;
@@ -17,6 +20,7 @@ import com.lukaspradel.steamapi.webapi.client.SteamWebApiClient;
 import com.lukaspradel.steamapi.webapi.request.GetOwnedGamesRequest;
 import com.lukaspradel.steamapi.webapi.request.builders.SteamWebApiRequestFactory;
 import com.revature.kkoders.beans.GameImpl;
+import com.revature.kkoders.beans.UserGame;
 import com.revature.kkoders.beans.UserImpl;
 import com.revature.kkoders.service.GameLibService;
 
@@ -27,25 +31,49 @@ public class SteamApiDAOImpl
 	GameLibService gameLibService;
 	
 	@Autowired
+	GameLibraryDaoImpl gLDao;
+	
+	@Autowired
 	GameImpl newGame;
 	
-	public List<GameImpl> getGames (UserImpl user) throws SteamApiException
+	@Autowired
+	UserGame userGame;
+	
+	public Set<UserGame> getGames (UserImpl user) throws SteamApiException
 	{
-		List<GameImpl> myGames = new ArrayList<>();
+		Set<UserGame> myGames = new HashSet<>();
         SteamWebApiClient client = new SteamWebApiClient.SteamWebApiClientBuilder("1702897AF9585B3AEDABDB2C44075317").build();
+        
+        Map<Integer,GameImpl> dbGames = gLDao.getAllGames();
+        Map<Integer,Integer> hours =  new HashMap<>();
         
         //GET ALL THE GAMES BUT ONLY ID
         GetOwnedGamesRequest req = SteamWebApiRequestFactory.createGetOwnedGamesRequest(user.getSteamId());
         GetOwnedGames games =client.<GetOwnedGames> processRequest(req);
         List<Integer> gameids = new ArrayList<Integer>();
         
+        System.out.println("HERERERERRERRER");
         //GET THE GAME IDS FROM STEAM
         for (Game x :games.getResponse().getGames())
         {
-        //	System.out.println(x.getAppid());
-        	gameids.add(x.getAppid());
+        	hours.put(x.getAppid(), x.getPlaytimeForever()/60);
+        	System.out.println(x.getPlaytimeForever());
+        	if(dbGames.containsKey(x.getAppid()))
+        	{        		
+        		System.out.println("ALREADY HERE ");
+        		gLDao.addGameToUser(dbGames.get(x.getAppid()), user, hours.get(x.getAppid()));
+        		
+        		userGame.setUser(user);
+        		userGame.setGame(dbGames.get(x));
+        		userGame.setHours(hours.get(x.getAppid()));
+        		
+        		myGames.add(userGame);
+        	}
+        	else
+        	{
+        		gameids.add(x.getAppid());
+        	}
         }
-        
         //CHANGED IT TO EU BECAUSE THE API CAN ONLY HANDLE EU DATE FORMATS
         SteamApi steamApi = new SteamApi("EU");
 
@@ -63,15 +91,23 @@ public class SteamApiDAOImpl
         		newGame.setGameTitle(name);
         		newGame.setPlatform("PC");
         		newGame.setSteamGameID(y);
+        		newGame.setPic(steamApp.getHeaderImage());
        			if (date !=null)
        			{
        				String[] todate = date.toString().split(" ");
        				String crrctDate = todate[1]+" "+ todate[2] +", "+ todate[todate.length-1];
        				newGame.setReleaseDate(crrctDate);
-     				gameLibService.addGame(user, name, y, 0, todate[1]+" "+ todate[2] +", "+ todate[todate.length-1], "PC");
+     				gameLibService.addGame(user, name, y, 0, todate[1]+" "+ todate[2] +", "+ todate[todate.length-1], "PC", steamApp.getHeaderImage(), hours.get(y));
        			}
        			else
        				newGame.setReleaseDate("N/A");
+       			
+       			userGame.setUser(user);
+        		userGame.setGame(newGame);
+        		userGame.setHours(hours.get(y));
+        		
+        		myGames.add(userGame);
+       			
        		} 
         	catch (com.github.goive.steamapi.exceptions.SteamApiException e)
         	{
@@ -79,7 +115,7 @@ public class SteamApiDAOImpl
         		//System.out.println("here");
        		}
        	}
-		return null;
+		return myGames;
 	}
 
 }

@@ -43,6 +43,7 @@ public class GameImplDAOImpl implements GameImplDAO {
 
 		session.getTransaction();
 		t.commit();
+		System.out.println("CREATING GAME");
 		session.close();
 	}
 

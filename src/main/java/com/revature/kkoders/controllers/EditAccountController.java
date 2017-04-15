@@ -19,6 +19,9 @@ public class EditAccountController {
 
 	@Autowired
 	UserImpl currUser;
+	
+	@Autowired
+	UserImpl updated;
 
 	@Autowired
 	UserImplDAOImpl userdao;
@@ -43,7 +46,6 @@ public class EditAccountController {
 		currUser = (UserImpl) session.getAttribute("alsoUser");
 
 		updatedUser = currUser;
-		System.out.println(updatedUser.getPw());
 
 		return new ModelAndView("account/edit_account", "updatedUser", updatedUser); 
 	}
@@ -53,9 +55,10 @@ public class EditAccountController {
 
 		currUser = (UserImpl) session.getAttribute("alsoUser");
 		
-		System.out.println(updatedUser.getPw());
-		System.out.println(currUser.getPw());
-		service.updateUser(currUser, updatedUser);
+		updated = service.updateUser(currUser, updatedUser);
+		
+		session.removeAttribute("alsoUser");
+		session.setAttribute("alsoUser", updated);
 
 		return "account/edit_account";
 	}

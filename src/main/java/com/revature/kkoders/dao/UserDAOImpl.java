@@ -82,22 +82,18 @@ public class UserDAOImpl implements UserDAO {
         cr.add(andExp);
         
         List rs = cr.list();
-        if (rs.isEmpty() )
+        if (rs.isEmpty())
         {
-        	System.out.println("here");
         	currSession.close();
         	return result;
         }
-        	System.out.println("here too");
         for (Object x : rs)
         {
+        	System.out.println(((UserImpl)x).getUserName());
         	result = (UserImpl)x;
         	System.out.println(result.getUserName());
         }
-        System.out.println("-------------");
-        
         currSession.close();
-        System.out.println(result.getUserName()+ "=======================");
         return result;
 	}
 

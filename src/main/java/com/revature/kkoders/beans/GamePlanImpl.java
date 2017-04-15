@@ -2,6 +2,7 @@ package com.revature.kkoders.beans;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -46,7 +49,26 @@ public class GamePlanImpl implements GamePlan, Serializable {
 	private String endDate;
 	
 	@Column(name="CULMATIVE_HOURS_PERDAY")
-	private double hours;
+	private double hoursPerDay;
+	
+	@ManyToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinTable
+	(
+		name = "GAMES_AND_PLANS",
+		joinColumns = @JoinColumn(name="plan_id"),
+		inverseJoinColumns = @JoinColumn(name="game_id")
+	)
+	private Set<GameImpl> gamesInPlan;
+	
+	public final Set<GameImpl> getGamesInPlan()
+	{
+		return gamesInPlan;
+	}
+
+	public final void setGamesInPlan(Set<GameImpl> games)
+	{
+		this.gamesInPlan = games;
+	}
 	
 	// ----------------------------------------------------------
 	
@@ -129,23 +151,24 @@ public class GamePlanImpl implements GamePlan, Serializable {
 
 	public void setHours(double hours) {
 		// TODO Auto-generated method stub
-		this.hours = hours;
+		this.hoursPerDay = hours;
 	}
 
 	public double getHours() {
 		// TODO Auto-generated method stub
-		return this.hours;
+		return this.hoursPerDay;
 	}
 
 	// CONSTRUCTOR WITH FIELDS
-	public GamePlanImpl(int planID, String title, String startDate, String endDate, double hours, UserImpl user,
-			List<DailySessionImpl> dailySessions) {
+	public GamePlanImpl(int planID, String title, String startDate, String endDate, double hours,
+			Set<GameImpl> gamesInPlan, UserImpl user, List<DailySessionImpl> dailySessions) {
 		super();
 		this.planID = planID;
 		this.title = title;
 		this.startDate = startDate;
 		this.endDate = endDate;
-		this.hours = hours;
+		this.hoursPerDay = hours;
+		this.gamesInPlan = gamesInPlan;
 		this.user = user;
 		this.dailySessions = dailySessions;
 	}

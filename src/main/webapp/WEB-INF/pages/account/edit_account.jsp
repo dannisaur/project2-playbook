@@ -50,7 +50,6 @@
 	background-color: #fff;
 	border-color: #ccc;
 }
-
 .image-preview-input input[type=file] {
 	position: absolute;
 	top: 0;
@@ -62,40 +61,42 @@
 	opacity: 0;
 	filter: alpha(opacity = 0);
 }
-
 .image-preview-input-title {
 	margin-left: 2px;
 }
+
 </style>
+
+<link rel="stylesheet" type="text/css"
+	href="http://fonts.googleapis.com/css?family=Rambla">
+<link rel="stylesheet" type="text/css"
+	href="http://fonts.googleapis.com/css?family=Open Sans">
+
+<%@ page isELIgnored="false"%>
 
 </head>
 <body>
 
-
-
 	<nav class="navbar navbar-inverse navbar-fixed-top">
-
 	<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-					aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<!-- <a class="navbar-brand" href="<%--<%= request.getSession().getServletContext().getContextPath() %>--%>">Playbook</a>-->
-				<!-- <a class="navbar-brand" href="landing">Playbook</a>-->
-				<form action="landing" method="POST"><button class="navbar-brand btn btn-link" type="submit" value="landing">Playbook</button></form>
-			</div>
-			<div id="navbar" class="navbar-collapse collapse">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#">Dashboard</a></li>
-					<li><a href="#">Settings</a></li>
-					<li><a href="#">Profile</a></li>
-					<li><a href="#">Help</a></li>
-					<li class="active"><a href="edit">EDIT</a></li>
-					<li><a href="../logout">LOGOUT</a></li>
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+				aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">Project name</a>
+		</div>
+		<div id="navbar" class="navbar-collapse collapse">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#">Dashboard</a></li>
+				<li><a href="#">Settings</a></li>
+				<li><a href="#">Profile</a></li>
+				<li><a href="#">Help</a></li>
+				<li class="active"><a href="edit">EDIT</a></li>
+				<li><a href="../logout">LOGOUT</a></li>
 			</ul>
 			<form class="navbar-form navbar-right">
 				<input type="text" class="form-control" placeholder="Search...">
@@ -109,10 +110,10 @@
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
-					<li><a href="#">New Plan</a></li>
-					<li class="active"><a href="#">Edit Account <span
+					<li><a href="../newgameplan">New Plan</a></li>
+					<li class="active"><a href="edit">Edit Account <span
 							class="sr-only">(current)</span></a></li>
-					<li><a href="#">View Library</a></li>
+					<li><a href="../library">View Library</a></li>
 				</ul>
 				<ul class="nav nav-sidebar">
 					<li><a href="#">Game Plans</a></li>
@@ -172,7 +173,6 @@
 								<div class="col-md-4">
 									<form:password id="passwordinput" path="currPw"
 										placeholder="current password" class="form-control input-md" />
-
 								</div>
 							</div> --%>
 
@@ -180,7 +180,7 @@
 								<label class="col-md-4 control-label" for="passwordinput">New
 									password</label>
 								<div class="col-md-4">
-									<form:password id="passwordinput" path="pw"
+									<form:password id="password" path="pw"
 										placeholder="new password" class="form-control input-md" />
 
 								</div>
@@ -265,6 +265,15 @@
 	</div>
 
 	<script>
+	$(document).ready(function(){
+		var pw = $('#password');
+		var confirm = $('#validatePw');
+		$('#validatePw').blur(function(){
+			if (confirm != pw){
+				alert("passwords do not match!")
+			}
+		});
+	
 		$(document).on('click', '#close-preview', function() {
 			$('.image-preview').popover('hide');
 			// Hover befor close the preview
@@ -274,7 +283,6 @@
 				$('.image-preview').popover('hide');
 			});
 		});
-
 		$(function() {
 			// Create the close button
 			var closebtn = $('<button/>', {
@@ -322,6 +330,8 @@
 						reader.readAsDataURL(file);
 					});
 		});
+		
+	});
 	</script>
 
 

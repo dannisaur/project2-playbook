@@ -1,6 +1,6 @@
 package com.revature.kkoders.beans;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,18 +8,17 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
-@Scope(value="prototype")
+//@Scope(value="prototype")
 @Entity
 @Table(name="GAME")
-public class GameImpl implements Game {
+public class GameImpl implements Game{
 	
 	@Id
 	@Column(name="GAME_ID")
@@ -42,16 +41,19 @@ public class GameImpl implements Game {
 	@Column(name="PLATFORM_NAME")
 	private String platform;
 	
-	@ManyToMany (fetch=FetchType.EAGER, mappedBy="gameLibrary")
-	private List<UserImpl> owners;
+	@Column(name="PICTURE")
+	private String pic;
+	
+	@OneToMany(fetch=FetchType.EAGER, mappedBy ="pk.game")
+	private Set<UserGame> owners;
 
 	
-	public final List<UserImpl> getOwners()
+	public final Set<UserGame> getOwners()
 	{
 		return owners;
 	}
 
-	public final void setOwners(List<UserImpl> owners)
+	public final void setOwners(Set<UserGame> owners)
 	{
 		this.owners = owners;
 	}
@@ -116,9 +118,19 @@ public class GameImpl implements Game {
 		return this.platform;
 	}
 
+	public final String getPic()
+	{
+		return pic;
+	}
+
+	public final void setPic(String pic)
+	{
+		this.pic = pic;
+	}
+
 	//	CONSTRUCTOR WITH FIELDS
 	public GameImpl(int gameLibID, String gameTitle, int steamGameID, int igdbID, String releaseDate,
-			String platform) {
+			String platform, String pic) {
 		super();
 		this.gameLibID = gameLibID;
 		this.gameTitle = gameTitle;
@@ -126,6 +138,7 @@ public class GameImpl implements Game {
 		this.igdbID = igdbID;
 		this.releaseDate = releaseDate;
 		this.platform = platform;
+		this.pic = pic;
 	}
 	
 	// NO ARGS CONSTRUCTOR
@@ -133,8 +146,7 @@ public class GameImpl implements Game {
 
 	@Override
 	public String toString() {
-		return "GameLibraryImpl [gameLibID=" + gameLibID + ", gameTitle=" + gameTitle + ", steamGameID=" + steamGameID
-				+ ", igdbID=" + igdbID + ", releaseDate=" + releaseDate + ", platform=" + platform + "]";
+		return gameTitle;
 	}
 
 }

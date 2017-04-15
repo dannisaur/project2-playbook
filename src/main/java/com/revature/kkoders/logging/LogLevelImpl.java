@@ -1,6 +1,7 @@
 package com.revature.kkoders.logging;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,7 +28,6 @@ public class LogLevelImpl implements LogLevel, Serializable {
 	@Column(name="LEVEL_ID")
 	@SequenceGenerator(name="LOGLEVELID_SEQ", sequenceName="LOGLEVELID_SEQ")
 	@GeneratedValue(generator="LOGLEVELID_SEQ", strategy=GenerationType.SEQUENCE)
-	//@OneToMany(mappedBy="level")
 	private Integer levelID;
 	
 	@Column(name="LOG_LEVEL")
@@ -57,6 +57,12 @@ public class LogLevelImpl implements LogLevel, Serializable {
 
 	public void setLevel(String level) {
 		this.level = level;
+	}
+
+	@Override
+	public String toString() {
+		//return "LogLevelImpl [levelID=" + levelID + ", level=" + level + ", logs=" + logs + "]";
+		return "LogLevelImpl [levelID=" + levelID + ", level=" + level + "]";
 	}
 
 }
