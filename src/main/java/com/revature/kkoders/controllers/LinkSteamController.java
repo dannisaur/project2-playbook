@@ -62,7 +62,7 @@ public class LinkSteamController {
 		// calling the add steam id method in the user service
 		currUser = service.addSteamId(id, currUser);
 		session.removeAttribute("alsoUser");
-		session.setAttribute("alsoUser", currUser
+		session.setAttribute("alsoUser", currUser);
 		
 		Set<GameImpl> allGames = new HashSet<>();
 		
