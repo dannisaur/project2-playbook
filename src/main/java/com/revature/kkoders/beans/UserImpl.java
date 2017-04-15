@@ -84,11 +84,11 @@ public class UserImpl implements Serializable{
 	@OneToMany(fetch=FetchType.EAGER, mappedBy = "user")
 	private Set<GamePlanImpl> gamePlans;
 	
-	public void setGamePlans(Set<GamePlanImpl> newGamePlans){
+	public void setGamePlans(List<GamePlanImpl> newGamePlans){
 		this.gamePlans = newGamePlans;
 	}
 	
-	public Set<GamePlanImpl> getGamePlans(){
+	public List<GamePlanImpl> getGamePlans(){
 		return gamePlans;
 	}
 	
