@@ -84,11 +84,11 @@ public class UserImpl implements Serializable{
 	@OneToMany(fetch=FetchType.EAGER, mappedBy = "user")
 	private List<GamePlanImpl> gamePlans;
 	
-	public void setGamePlans(List<GamePlanImpl> newGamePlans){
+	public void setGamePlans(Set<GamePlanImpl> newGamePlans){
 		this.gamePlans = newGamePlans;
 	}
 	
-	public List<GamePlanImpl> getGamePlans(){
+	public Set<GamePlanImpl> getGamePlans(){
 		return gamePlans;
 	}
 	
@@ -206,13 +206,14 @@ public class UserImpl implements Serializable{
 	public UserImpl(){}
 
 	
-
-	// OVERRIDE TOSTRING
+	
+	// OVERRIDE TOSTRING , gamePlans=" + gamePlans +
 	@Override
 	public String toString() {
 		return "UserImpl [userID=" + userID + ", firstName=" + firstName + ", lastName=" + lastName + ", userName="
 				+ userName + ", pw=" + pw + ", email=" + email + ", picURL=" + picURL + ", desc=" + desc
-				+ ", GameLibrary=" + gameLibrary + ", gamePlans=" + gamePlans + "]";
+				+ ", GameLibrary=" + gameLibrary + "]";
 	}
+	
 	
 }
