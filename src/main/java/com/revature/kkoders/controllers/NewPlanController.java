@@ -17,6 +17,7 @@ import com.revature.kkoders.beans.GameImpl;
 import com.revature.kkoders.beans.GamePlanImpl;
 import com.revature.kkoders.beans.UserGame;
 import com.revature.kkoders.beans.UserImpl;
+import com.revature.kkoders.service.GamePlanService;
 
 @Controller
 @RequestMapping(value = { "/newgameplan" })
@@ -25,9 +26,13 @@ public class NewPlanController {
 	@Autowired
 	UserImpl currUser;
 	
-	/*@Autowired
-	GameImpl game;*/
-	
+	@Autowired
+	GamePlanService GPS;
+
+	/*
+	 * @Autowired GameImpl game;
+	 */
+
 	@RequestMapping(method = RequestMethod.GET)
 	public String viewNewPlan(@ModelAttribute("newGamePlan") GamePlanImpl gamePlan, ModelMap mm, HttpSession session) {
 		// TODO: validate that user is logged in to display edit account page,
@@ -36,27 +41,26 @@ public class NewPlanController {
 		currUser = (UserImpl) session.getAttribute("alsoUser");
 		Set<UserGame> allGames = currUser.getGameLib();
 		List<GameImpl> usersGames = new ArrayList<>();
-		for (UserGame x : allGames)
-		{
+		for (UserGame x : allGames) {
 			usersGames.add(x.getGame());
 		}
 		mm.addAttribute("currUser", currUser);
 		mm.addAttribute("games", usersGames);
 
-		return "/newgameplan"; 
+		return "/newgameplan";
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String submitNewPlan(@ModelAttribute("newGamePlan") GamePlanImpl gamePlan, ModelMap mm, HttpSession session) {
+	public String submitNewPlan(@ModelAttribute("newGamePlan") GamePlanImpl gamePlan, ModelMap mm,
+			HttpSession session) {
 		// TODO: validate that user is logged in to display edit account page,
 		// otherwise send to login page.
 
-//		currUser = (UserImpl) session.getAttribute("alsoUser");
-//		List<GameImpl> usersGames = currUser.getGameLib();
-//		mm.addAttribute("currUser", currUser);
-//		mm.addAttribute("games", usersGames);
+		UserImpl user = (UserImpl) session.getAttribute("alsoUser");
 
-		return "/newgameplan"; 
+		GPS.GamePlanSet(gamePlan, user);
+
+		return "/account";
 	}
 
 }

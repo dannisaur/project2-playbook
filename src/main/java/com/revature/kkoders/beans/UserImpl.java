@@ -82,13 +82,13 @@ public class UserImpl implements Serializable{
 	// THIS IS FOR SETTING AND GETTING GAMEPLANS
 	// ONE USER TO MANY GAME PLANS
 	@OneToMany(fetch=FetchType.EAGER, mappedBy = "user")
-	private List<GamePlanImpl> gamePlans;
+	private Set<GamePlanImpl> gamePlans;
 	
-	public void setGamePlans(List<GamePlanImpl> newGamePlans){
+	public void setGamePlans(Set<GamePlanImpl> newGamePlans){
 		this.gamePlans = newGamePlans;
 	}
 	
-	public List<GamePlanImpl> getGamePlans(){
+	public Set<GamePlanImpl> getGamePlans(){
 		return gamePlans;
 	}
 	
@@ -188,7 +188,7 @@ public class UserImpl implements Serializable{
 	
 	// CONSTRUCTOR WITH FIELDS
 	public UserImpl(int userID, String firstName, String lastName, String userName, String pw, String email,
-			String picURL, String desc, String steamId, Set<UserGame> gameLibrary, List<GamePlanImpl> gamePlans) {
+			String picURL, String desc, String steamId, Set<UserGame> gameLibrary, Set<GamePlanImpl> gamePlans) {
 		super();
 		this.userID = userID;
 		this.firstName = firstName;
