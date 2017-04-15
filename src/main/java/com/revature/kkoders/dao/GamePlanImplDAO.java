@@ -10,7 +10,11 @@ public interface GamePlanImplDAO {
 	public void setEndDate(String ed, int un);
 	public void ChangeEndDate(String c_ed, int un);
 	public void setHoursByUser(double uh, int un);
-	
+	/**
+	 * Saves the time spent playing for the day by each user for each of their game plans.
+	 * 
+	 */
+	public void pullDailySessions();
 	
 
 }

@@ -109,6 +109,7 @@ public class LoginController {
 			// session.setAttribute("alsoUser", user);
 			modelMap.addAttribute("user", userService.getUserInfoByUserName(user));
 			session.setAttribute("alsoUser", userService.getUserInfoByUserName(user));
+			
 			// NEW VIEW
 			return "redirect:/account"; // the user has successfully logged in,
 										// so take them to main account page.

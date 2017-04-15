@@ -1,4 +1,8 @@
-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ page isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.revature.kkoders.beans.UserImpl" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,239 +39,92 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+<link rel="stylesheet" href="resources/css/style1.css">
 <link rel="stylesheet" href="resources/css/style2.css">
 </head>
 
 <body>
 
+	<!-- SITE NAVIGATION BAR -->
 	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<!-- NAV CONTAINER -->
 		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-					aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">Playbook</a>
+			<!-- LOGO -->
+			<div class="">
+				<a class="navbar-brand" href="landing">Playbook</a>
 			</div>
+			<!-- /.LOGO -->
+			<!-- NAV OPTIONS -->
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#">Dashboard</a></li>
-					<li><a href="#">Settings</a></li>
-					<li><a href="#">Profile</a></li>
-					<li><a href="#">Help</a></li>
-					<li><a href="account/edit">EDIT</a></li>
-					<li><a href="logout">LOGOUT</a></li>
-				 	
-				 	<li class="dropdown">
-          				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-          					<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-          					UserOptions 
-          					<span class="caret"></span>
-          				</a>
-          				<ul class="dropdown-menu">
-							<li><a href="#">Profile</a></li>
-            				<li><a href="account/edit">Edit Account</a></li>
-            				<li><a href="logout">Logout</a></li>
-          				</ul>
-        			</li>
-        			
-        			
+					<!-- display user button if user signed in; otherwise display login button -->
+					<% if (request.getSession().getAttribute("alsoUser") != null) { %>
+						<!-- USER BUTTON -->
+					 	<li class="dropdown">
+	          				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+	          					<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+	          					<%= ((UserImpl)request.getSession().getAttribute("alsoUser")).getUserName() %>
+	          					<span class="caret"></span>
+	          				</a>
+	          				<ul class="dropdown-menu">
+								<li><a href="account">Profile</a></li>
+	            				<li><a href="account/edit">Edit Account</a></li>
+	            				<li><a href="logout">Sign out</a></li>
+	          				</ul>
+	        			</li>
+        				<!-- /.USER BUTTON -->
+        			<% } else { %>
+        				<!-- LOGIN BUTTON -->
+	          			<li>
+	          				<a href="login">Sign in</a>
+	          			</li>
+	         			<!-- /.LOGIN BUTTON -->
+        			<% } %>
 				</ul>
+				<!-- USER SEARCH BAR -->
 				<form class="navbar-form navbar-right">
-					<input type="text" class="form-control" placeholder="Search...">
+					<input type="text" class="form-control" placeholder="Search users...">
 				</form>
+				<!-- /.USER SEARCH BAR -->
 			</div>
+			<!-- /.NAV OPTIONS -->
 		</div>
+		<!-- /.NAV CONTAINER -->
 	</nav>
-
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-sm-3 col-md-2 sidebar">
-				<ul class="nav nav-sidebar">
-					<li class="active"><a href="#">New Plan <span
-							class="sr-only">(current)</span></a></li>
-					<li><a href="account/edit">Edit Account</a></li>
-					<li><a href="#">View Library</a></li>
-				</ul>
-				<ul class="nav nav-sidebar">
-					<li><a href="#">Game Plans</a></li>
-					<li><a href="#">#1</a></li>
-				</ul>
-			</div>
-			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<h1 class="page-header">Dashboard</h1>
-
-				<div class="row placeholders">
-					<div class="col-xs-6 col-sm-3 placeholder">
-						<img
-							src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
-							width="200" height="200" class="img-responsive"
-							alt="Generic placeholder thumbnail">
-						<h4>Label</h4>
-						<span class="text-muted">Something else</span>
-					</div>
-					<div class="col-xs-6 col-sm-3 placeholder">
-						<img
-							src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
-							width="200" height="200" class="img-responsive"
-							alt="Generic placeholder thumbnail">
-						<h4>Label</h4>
-						<span class="text-muted">Something else</span>
-					</div>
-					<div class="col-xs-6 col-sm-3 placeholder">
-						<img
-							src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
-							width="200" height="200" class="img-responsive"
-							alt="Generic placeholder thumbnail">
-						<h4>Label</h4>
-						<span class="text-muted">Something else</span>
-					</div>
-					<div class="col-xs-6 col-sm-3 placeholder">
-						<img
-							src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
-							width="200" height="200" class="img-responsive"
-							alt="Generic placeholder thumbnail">
-						<h4>Label</h4>
-						<span class="text-muted">Something else</span>
-					</div>
-				</div>
-
-				<h2 class="sub-header">Section title</h2>
-				<div class="table-responsive">
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th>#</th>
-								<th>Header</th>
-								<th>Header</th>
-								<th>Header</th>
-								<th>Header</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>1,001</td>
-								<td>Lorem</td>
-								<td>ipsum</td>
-								<td>dolor</td>
-								<td>sit</td>
-							</tr>
-							<tr>
-								<td>1,002</td>
-								<td>amet</td>
-								<td>consectetur</td>
-								<td>adipiscing</td>
-								<td>elit</td>
-							</tr>
-							<tr>
-								<td>1,003</td>
-								<td>Integer</td>
-								<td>nec</td>
-								<td>odio</td>
-								<td>Praesent</td>
-							</tr>
-							<tr>
-								<td>1,003</td>
-								<td>libero</td>
-								<td>Sed</td>
-								<td>cursus</td>
-								<td>ante</td>
-							</tr>
-							<tr>
-								<td>1,004</td>
-								<td>dapibus</td>
-								<td>diam</td>
-								<td>Sed</td>
-								<td>nisi</td>
-							</tr>
-							<tr>
-								<td>1,005</td>
-								<td>Nulla</td>
-								<td>quis</td>
-								<td>sem</td>
-								<td>at</td>
-							</tr>
-							<tr>
-								<td>1,006</td>
-								<td>nibh</td>
-								<td>elementum</td>
-								<td>imperdiet</td>
-								<td>Duis</td>
-							</tr>
-							<tr>
-								<td>1,007</td>
-								<td>sagittis</td>
-								<td>ipsum</td>
-								<td>Praesent</td>
-								<td>mauris</td>
-							</tr>
-							<tr>
-								<td>1,008</td>
-								<td>Fusce</td>
-								<td>nec</td>
-								<td>tellus</td>
-								<td>sed</td>
-							</tr>
-							<tr>
-								<td>1,009</td>
-								<td>augue</td>
-								<td>semper</td>
-								<td>porta</td>
-								<td>Mauris</td>
-							</tr>
-							<tr>
-								<td>1,010</td>
-								<td>massa</td>
-								<td>Vestibulum</td>
-								<td>lacinia</td>
-								<td>arcu</td>
-							</tr>
-							<tr>
-								<td>1,011</td>
-								<td>eget</td>
-								<td>nulla</td>
-								<td>Class</td>
-								<td>aptent</td>
-							</tr>
-							<tr>
-								<td>1,012</td>
-								<td>taciti</td>
-								<td>sociosqu</td>
-								<td>ad</td>
-								<td>litora</td>
-							</tr>
-							<tr>
-								<td>1,013</td>
-								<td>torquent</td>
-								<td>per</td>
-								<td>conubia</td>
-								<td>nostra</td>
-							</tr>
-							<tr>
-								<td>1,014</td>
-								<td>per</td>
-								<td>inceptos</td>
-								<td>himenaeos</td>
-								<td>Curabitur</td>
-							</tr>
-							<tr>
-								<td>1,015</td>
-								<td>sodales</td>
-								<td>ligula</td>
-								<td>in</td>
-								<td>libero</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
+	<!-- /.SITE NAVIGATION BAR -->
+	
+	
+	<!-- SITE SIDEBAR -->
+	<div class="nav-side-menu">
+	    <div class="menu-list">
+	        <ul id="menu-content" class="menu-content">
+	            <li class="icon-button" data-toggle="tooltip" title="New Game Plan" data-placement="bottom"><a href="newgameplan" style="width: 50px; padding-top: 15px; padding-left: 15px"><img class="icon icon-square" src="resources/media/icon-square.png"></img></a></li><!-- NEW GAME PLAN -->
+	            <li class="icon-button" data-toggle="tooltip" title="View Game Plans" data-placement="bottom"><a href="gameplans" style="width: 50px; padding-top: 15px; padding-left: 15px"><img class="icon icon-triangle" src="resources/media/icon-triangle.png"></img></a></li><!-- VIEW GAME PLANS -->
+            	<li class="icon-button" data-toggle="tooltip" title="View Library" data-placement="bottom"><a href="library" style="width: 50px; padding-top: 15px; padding-left: 15px"><img class="icon icon-circle" src="resources/media/icon-circle.png"></img></a></li><!-- VIEW LIBRARY -->
+            	<li class="icon-button" data-toggle="tooltip" title="Edit Account" data-placement="bottom"><a href="account/edit" style="width: 50px; padding-top: 15px; padding-left: 15px"><img class="icon icon-x" src="resources/media/icon-x.png"></img></a></li><!-- EDIT ACCOUNT -->
+	        </ul>
+	    </div>
 	</div>
+	<!-- /.SITE SIDEBAR -->
+	
 
+	<!-- MAIN HEADING -->
+	<div class="main-heading">
+		<h1>${alsoUser.userName}</h1>
+		<h6>${alsoUser.firstName} ${alsoUser.lastName}</h6>
+		
+		<p>${alsoUser.desc}</p>
+	</div>
+	<!-- ./MAIN HEADING -->
 
+	<!-- SUB-HEADING -->
+	<div class="sub-heading">
+	
+		<h1>Recent Game Plan</h1>
+		<h1>Games</h1>
+	</div>
+	<!-- /.SUB-HEADING -->
+	
 
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -282,5 +139,12 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
+	<script>
+		$(function () {
+			  $('[data-toggle="tooltip"]').tooltip()
+			})
+	</script>
+
 </body>
 </html>

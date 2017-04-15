@@ -1,6 +1,7 @@
 package com.revature.kkoders.beans;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -45,6 +46,8 @@ public class GameImpl implements Game {
 	@ManyToMany (fetch=FetchType.EAGER, mappedBy="gameLibrary")
 	private List<UserImpl> owners;
 
+	@ManyToMany (fetch=FetchType.EAGER, mappedBy="games")
+	private Set<GamePlanImpl> plans;
 	
 	public final List<UserImpl> getOwners()
 	{
@@ -135,6 +138,14 @@ public class GameImpl implements Game {
 	public String toString() {
 		return "GameLibraryImpl [gameLibID=" + gameLibID + ", gameTitle=" + gameTitle + ", steamGameID=" + steamGameID
 				+ ", igdbID=" + igdbID + ", releaseDate=" + releaseDate + ", platform=" + platform + "]";
+	}
+
+	public Set<GamePlanImpl> getPlans() {
+		return plans;
+	}
+
+	public void setPlans(Set<GamePlanImpl> plans) {
+		this.plans = plans;
 	}
 
 }

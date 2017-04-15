@@ -1,6 +1,7 @@
 package com.revature.kkoders.beans;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,11 +11,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.FetchMode;
+import org.hibernate.annotations.Fetch;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -33,7 +38,6 @@ public class GamePlanImpl implements GamePlan {
 	
 	@Column(name="START_DATE")
 	private String startDate;
-	
 	@Column(name="END_DATE")
 	private String endDate;
 	
@@ -74,6 +78,21 @@ public class GamePlanImpl implements GamePlan {
 	// END GETTING DAILY SESSIONS
 	
 	// ----------------------------------------------------------	
+	
+	//-----------------------------------------------------------
+	// MANY GAME PLANS TO MANY GAMES
+	
+	@ManyToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinTable(name="GAMES_AND_PLANS", joinColumns= {
+			@JoinColumn(name="PLAN_ID", nullable=false, updatable = false)
+			}, inverseJoinColumns= {
+				@JoinColumn(name="GAME_ID", nullable=false, updatable=false)
+			}
+	)
+	private Set<GameImpl> games;
+	
+	// END GETTING GAMES
+	//-----------------------------------------------------------
 	
 	public void setUser(UserImpl newUser){
 		user = newUser;
@@ -149,6 +168,14 @@ public class GamePlanImpl implements GamePlan {
 	public String toString() {
 		return "GamePlanImpl [planID=" + planID + ", title=" + title + ", startDate=" + startDate + ", endDate="
 				+ endDate + ", hours=" + hours + ", user=" + user + ", dailySessions=" + dailySessions + "]";
+	}
+
+	public Set<GameImpl> getGames() {
+		return games;
+	}
+
+	public void setGames(Set<GameImpl> games) {
+		this.games = games;
 	}
 	
 }

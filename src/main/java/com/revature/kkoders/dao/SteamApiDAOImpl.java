@@ -3,6 +3,7 @@ package com.revature.kkoders.dao;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -80,6 +81,49 @@ public class SteamApiDAOImpl
        		}
        	}
 		return null;
+	}
+
+	/**
+	 * Gets the total playtimes a given user has for each given game.
+	 * 
+	 * The given games should be games the user owns.
+	 * 
+	 * @param user
+	 * @param gamesInPlan
+	 * @return the total playtimes the user has for each given game
+	 * @throws SteamApiException
+	 */
+	public List<Integer> getPlaytimes(UserImpl user, List<GameImpl> gamesInPlan) {
+		
+		SteamWebApiClient client = new SteamWebApiClient.SteamWebApiClientBuilder("1702897AF9585B3AEDABDB2C44075317").build();
+        
+        //GET ALL THE GAMES THE USER HAS (BUT ONLY ID), for comparison against the given games
+        GetOwnedGamesRequest req = SteamWebApiRequestFactory.createGetOwnedGamesRequest(user.getSteamId());
+        GetOwnedGames gamesOwnedRequest = null;
+		try {
+			gamesOwnedRequest = client.<GetOwnedGames> processRequest(req);
+		} catch (SteamApiException e) {
+			System.err.println("EXCEPTION GETTING GAMES OWNED BY USER");
+			e.printStackTrace();
+		}
+        
+        List<Integer> playtimes = new ArrayList<Integer>();
+        
+        //GET THE GAME PLAYTIMES FROM STEAM (GET PLAYTIME ONLY IF GAME IS ONE OF THE GIVEN GAMES)
+        List<Game> gamesOwned = gamesOwnedRequest.getResponse().getGames();
+        
+        for (int i = 0; i < gamesOwned.size(); i++) {
+        	Game steamGame = gamesOwned.get(i);
+        	
+        	// get playtime only if the current game is one of the given games
+        	for (GameImpl playbookGame : gamesInPlan) {
+        		if (steamGame.getAppid() == playbookGame.getSteamGameID()) {
+        			playtimes.add(steamGame.getPlaytimeForever());
+        		}
+        	}
+        }
+		
+		return playtimes;
 	}
 
 }
