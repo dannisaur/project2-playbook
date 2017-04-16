@@ -20,6 +20,7 @@ import com.revature.kkoders.beans.GameImpl;
 import com.revature.kkoders.beans.UserGame;
 import com.revature.kkoders.beans.UserImpl;
 import com.revature.kkoders.dao.SteamApiDAOImpl;
+import com.revature.kkoders.service.GameLibService;
 import com.revature.kkoders.service.UserService;
 
 @Controller
@@ -34,6 +35,9 @@ public class LinkSteamController {
 
 	@Autowired
 	SteamApiDAOImpl steamAPI;
+	
+	@Autowired
+	GameLibService GameService;
 	
 	
 	@RequestMapping(method = RequestMethod.GET)
@@ -53,7 +57,7 @@ public class LinkSteamController {
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView linkSteam(HttpServletRequest request, HttpSession session) {
 
-		ModelAndView model = new ModelAndView("/link_steam");
+		ModelAndView model = new ModelAndView("/library");
 		
 		String id = request.getParameter("steamId");
 		
@@ -68,8 +72,14 @@ public class LinkSteamController {
 		
 		Set<GameImpl> allGames = new HashSet<>();
 		
-		for (UserGame x : currUser.getGameLib()){
-			allGames.add(x.getGame());
+	//	for (UserGame x : currUser.getGameLib()){
+	//		System.out.println(x.getGame().getGameTitle());
+	//		allGames.add(x.getGame());
+	//	}
+		for(GameImpl y : GameService.getUsersGame(currUser))
+		{
+			allGames.add(y);
+			System.out.println(y.getGameTitle());
 		}
 		
 		model.addObject("games", allGames);

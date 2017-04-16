@@ -169,7 +169,12 @@
 							the games to be played: </label>
 						<div class="col-md-4">
 							<form:select class="form-control" size="10" id="gamesSelect" path="gamesInPlan">
-								<form:options items="${ games }" />
+								<!--<form:options items="${ games }" /> -->
+								 <c:forEach var="item" items="${games }" varStatus="i">
+                                    <option value="${item.getSteamGameID()}"> <c:out value="${ item.getGameTitle()}"/> </option>
+                                  
+                           		</c:forEach>
+								
 							</form:select>
 						</div>
 					</div>
@@ -179,8 +184,9 @@
 						<label class="col-md-4 control-label" for="singlebutton">Save
 							Changes</label>
 						<div class="col-md-4">
-							<button id="singlebutton" name="singlebutton"
-								class="btn btn-success">Save</button>
+							<!--  <button id="singlebutton" name="singlebutton"
+								class="btn btn-success">Save</button> -->
+								<input class="btn btn-success" type="submit" name="Save" />
 						</div>
 					</div>
 

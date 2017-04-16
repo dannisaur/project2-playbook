@@ -1,7 +1,7 @@
 package com.revature.kkoders.service;
 
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class GameLibService
 	static GameLibraryDaoImpl gLDao = new GameLibraryDaoImpl();
 	static GameImplDAOImpl gameDao= new GameImplDAOImpl();
 	
-	public List<GameImpl> getUsersGame(UserImpl me)
+	public Set<GameImpl> getUsersGame(UserImpl me)
 	{
 		return gLDao.getGamesByUser(me);
 	}

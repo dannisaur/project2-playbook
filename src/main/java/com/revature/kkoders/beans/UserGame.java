@@ -12,10 +12,12 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Entity
 @Component
+@Scope(value="prototype")
 @Table(name="GAME_LIBRARY")
 @AssociationOverrides({
 	@AssociationOverride(name="pk.user",

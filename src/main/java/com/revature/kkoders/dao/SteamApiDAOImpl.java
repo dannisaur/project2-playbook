@@ -10,6 +10,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.WebApplicationContext;
 
 import com.github.goive.steamapi.SteamApi;
 import com.github.goive.steamapi.data.SteamApp;
@@ -36,11 +37,15 @@ public class SteamApiDAOImpl
 	@Autowired
 	GameImpl newGame;
 	
-	@Autowired
-	UserGame userGame;
+	 @Autowired
+ 	 private WebApplicationContext context;
+	
+	//@Autowired
+	//UserGame userGame;
 	
 	public Set<UserGame> getGames (UserImpl user) throws SteamApiException
 	{
+		UserGame userGame= (UserGame)context.getBean("userGame");
 		Set<UserGame> myGames = new HashSet<>();
         SteamWebApiClient client = new SteamWebApiClient.SteamWebApiClientBuilder("1702897AF9585B3AEDABDB2C44075317").build();
         
@@ -52,7 +57,6 @@ public class SteamApiDAOImpl
         GetOwnedGames games =client.<GetOwnedGames> processRequest(req);
         List<Integer> gameids = new ArrayList<Integer>();
         
-        System.out.println("HERERERERRERRER");
         //GET THE GAME IDS FROM STEAM
         for (Game x :games.getResponse().getGames())
         {
@@ -60,7 +64,6 @@ public class SteamApiDAOImpl
         	System.out.println(x.getPlaytimeForever());
         	if(dbGames.containsKey(x.getAppid()))
         	{        		
-        		System.out.println("ALREADY HERE ");
         		gLDao.addGameToUser(dbGames.get(x.getAppid()), user, hours.get(x.getAppid()));
         		
         		userGame.setUser(user);
@@ -115,6 +118,7 @@ public class SteamApiDAOImpl
         		//System.out.println("here");
        		}
        	}
+        System.out.println(myGames.size()+"----------------------------------------------------------------------------------------------------");
 		return myGames;
 	}
 

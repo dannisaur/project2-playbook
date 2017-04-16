@@ -1,7 +1,6 @@
 package com.revature.kkoders.beans;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -15,13 +14,14 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.transaction.Transactional;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
 //@Scope(value=WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS) 
 @Transactional
 @Entity
-//@Scope(value="prototype")
+@Scope(value="prototype")
 @Table(name="USERS")
 public class UserImpl implements Serializable{
 	

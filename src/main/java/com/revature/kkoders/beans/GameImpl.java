@@ -1,7 +1,6 @@
 package com.revature.kkoders.beans;
 
 
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -15,10 +14,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
-//@Scope(value="prototype")
+@Scope(value="prototype")
 @Entity
 @Table(name="GAME")
 public class GameImpl implements Game{

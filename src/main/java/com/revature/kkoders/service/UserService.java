@@ -106,6 +106,7 @@ public class UserService {
 		userInfo.setSteamId(steamId);
 		try {
 			userInfo.setGameLibrary(steam.getGames(userInfo));
+			System.out.println(userInfo.getGameLib().size() +":===================================================================================================");
 		} catch (SteamApiException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

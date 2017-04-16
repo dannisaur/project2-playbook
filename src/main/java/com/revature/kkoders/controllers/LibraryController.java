@@ -41,10 +41,16 @@ public class LibraryController {
 		currUser = (UserImpl) session.getAttribute("alsoUser");
 		Set<UserGame> allGamesJoint = currUser.getGameLib();
 		List<GameImpl> allGames = new ArrayList<>();
-		for (UserGame x : allGamesJoint)
+		//for (UserGame x : allGamesJoint)
+		//{
+		//	allGames.add(x.getGame());
+		//}
+		//=========================================================
+		for ( GameImpl x: gameLibService.getUsersGame(currUser))
 		{
-			allGames.add(x.getGame());
+			allGames.add(x);
 		}
+		//=========================================================
 
 		System.out.println(allGames.isEmpty());
 
